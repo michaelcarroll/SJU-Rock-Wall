@@ -39,8 +39,9 @@ class GameViewController: UIViewController {
         scnView.autoenablesDefaultLighting = true
     }
     func setupScene() {
-        scnScene = SCNScene()
+        scnScene = SCNScene(named: "rockWall.scn")
         scnView.scene = scnScene
+        scnView.backgroundColor = UIColor.white
     }
     
     func setupCamera() {
@@ -51,12 +52,12 @@ class GameViewController: UIViewController {
         // 3
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 10)
         // 4
-        scnScene.rootNode.addChildNode(cameraNode)
+        //scnScene.rootNode.addChildNode(cameraNode)
     }
     
     func spawnShape() {
         // 1
-        var geometry:SCNGeometry
+        /*var geometry:SCNGeometry
         // 2
         switch ShapeType.random() {
         case .Box:
@@ -69,9 +70,9 @@ class GameViewController: UIViewController {
             // 3
             geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
         }
-        // 4
+         //
         let geometryNode = SCNNode(geometry: geometry)
         // 5
-        scnScene.rootNode.addChildNode(geometryNode)
+        scnScene.rootNode.addChildNode(geometryNode)*/
     }
 }

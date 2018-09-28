@@ -12,13 +12,13 @@ import Foundation
 public enum ShapeType:Int {
     
     case Box = 0
-    case Sphere
-    case Pyramid
-    case Torus
-    case Capsule
-    case Cylinder
-    case Cone
-    case Tube
+    case Sphere = 1
+    case Pyramid = 2
+    case Torus = 3
+    case Capsule = 4
+    case Cylinder = 5
+    case Cone = 6
+    case Tube = 7
     
     // 2
     static func random() -> ShapeType {
