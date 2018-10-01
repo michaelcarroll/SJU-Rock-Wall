@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
     var scnView: SCNView!
     var scnScene: SCNScene!
     var cameraNode: SCNNode!
+    var sphere1: SCNNode!
+    var sphere2: SCNNode!
+    var sphere3: SCNNode!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,46 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         spawnShape()
+        // retrieve the sphere1 node
+        sphere1 = scnScene.rootNode.childNode(withName: "sphere1", recursively: true)!
+        // retrieve the shpere2 node
+        sphere2 = scnScene.rootNode.childNode(withName: "sphere2", recursively: true)!
+        // retrieve the shpere3 node
+        sphere3 = scnScene.rootNode.childNode(withName: "sphere3", recursively: true)!
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        scnView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc
+    func handleTap(_ gestureRecognie: UIGestureRecognizer){
+        let p = gestureRecognie.location(in: scnView)
+        let hitResults = scnView.hitTest(p, options: [:])
+        
+        if hitResults.count>0 {
+            let result = hitResults[0]
+            if(result.node == sphere1){
+                sphere1.geometry!.firstMaterial!.emission.contents = UIColor.red
+            }
+            else if(result.node == sphere2){
+                // Un-share the geometry by copying
+                sphere2.geometry = sphere1.geometry!.copy() as? SCNGeometry
+                // Un-share the material, too
+                sphere2.geometry?.firstMaterial = sphere1.geometry?.firstMaterial!.copy() as? SCNMaterial
+                // Now, we can change node's material without changing parent and other childs:
+                sphere2.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            }
+            else if(result.node == sphere3){
+                sphere3.geometry = sphere1.geometry!.copy() as? SCNGeometry
+                // Un-share the material, too
+                sphere3.geometry?.firstMaterial = sphere1.geometry?.firstMaterial!.copy() as? SCNMaterial
+                // Now, we can change node's material without changing parent and other childs:
+                sphere3.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            }
+            else{
+                //do nothing
+            }
+
+        }
     }
     
     func shouldAutorotate() -> Bool {

@@ -18,6 +18,7 @@
 		FE7CD1692159ACB800777664 /* SJU_Rock_WallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1682159ACB800777664 /* SJU_Rock_WallTests.swift */; };
 		FE7CD1742159ACB800777664 /* SJU_Rock_WallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1732159ACB800777664 /* SJU_Rock_WallUITests.swift */; };
 		FE7CD1832159B35400777664 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1822159B35400777664 /* ShapeType.swift */; };
+		FED8A8F12162843E00A91B20 /* Wedgewall.metal in Sources */ = {isa = PBXBuildFile; fileRef = FED8A8F02162843E00A91B20 /* Wedgewall.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		FE7CD1732159ACB800777664 /* SJU_Rock_WallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SJU_Rock_WallUITests.swift; sourceTree = "<group>"; };
 		FE7CD1752159ACB800777664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE7CD1822159B35400777664 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
+		FED8A8F02162843E00A91B20 /* Wedgewall.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Wedgewall.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				FE7CD15C2159ACB800777664 /* LaunchScreen.storyboard */,
 				FE7CD15F2159ACB800777664 /* Info.plist */,
 				FE7CD1822159B35400777664 /* ShapeType.swift */,
+				FED8A8F02162843E00A91B20 /* Wedgewall.metal */,
 			);
 			path = "SJU-Rock-Wall";
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED8A8F12162843E00A91B20 /* Wedgewall.metal in Sources */,
 				FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */,
 				FE7CD1832159B35400777664 /* ShapeType.swift in Sources */,
 				FE7CD1522159ACB700777664 /* AppDelegate.swift in Sources */,
