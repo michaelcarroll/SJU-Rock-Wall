@@ -11,6 +11,7 @@
 		32050840215E9799000B63AF /* iS_makeitdouble.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3205083F215E9799000B63AF /* iS_makeitdouble.jpg */; };
 		32261168215C54880041EE81 /* rockWall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 32261167215C54880041EE81 /* rockWall.scn */; };
 		666396032162FB2300474CBF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666396022162FB2300474CBF /* LoginViewController.swift */; };
+		66FA5115216443B70064EDAE /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA5114216443B70064EDAE /* CreateAccountViewController.swift */; };
 		FE7CD1522159ACB700777664 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1512159ACB700777664 /* AppDelegate.swift */; };
 		FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1552159ACB700777664 /* GameViewController.swift */; };
 		FE7CD1592159ACB700777664 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE7CD1572159ACB700777664 /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		3205083F215E9799000B63AF /* iS_makeitdouble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iS_makeitdouble.jpg; path = Assets.xcassets/iS_makeitdouble.jpg; sourceTree = "<group>"; };
 		32261167215C54880041EE81 /* rockWall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = rockWall.scn; path = Assets.xcassets/rockWall.scn; sourceTree = "<group>"; };
 		666396022162FB2300474CBF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		66FA5114216443B70064EDAE /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		FE7CD14E2159ACB700777664 /* SJU-Rock-Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SJU-Rock-Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7CD1512159ACB700777664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE7CD1552159ACB700777664 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				FE7CD1552159ACB700777664 /* GameViewController.swift */,
 				FE7CD1572159ACB700777664 /* Main.storyboard */,
 				666396022162FB2300474CBF /* LoginViewController.swift */,
+				66FA5114216443B70064EDAE /* CreateAccountViewController.swift */,
 				FE7CD15A2159ACB800777664 /* Assets.xcassets */,
 				32261167215C54880041EE81 /* rockWall.scn */,
 				3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */,
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66FA5115216443B70064EDAE /* CreateAccountViewController.swift in Sources */,
 				FED8A8F12162843E00A91B20 /* Wedgewall.metal in Sources */,
 				FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */,
 				FE7CD1832159B35400777664 /* ShapeType.swift in Sources */,
