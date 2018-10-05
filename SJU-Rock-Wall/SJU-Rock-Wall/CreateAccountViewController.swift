@@ -55,6 +55,23 @@ class CreateAccountViewController: UIViewController {
                 if let responseJSON = responseJSON as? [String: Any] {
                     print(responseJSON)
 
+                    let error = responseJSON["error"] as! Int
+                    if (error == 0) {
+                        let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                            self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
+                        }))
+                        
+                        self.present(createAccountAlert, animated: true, completion: nil)
+                    }
+                    else if (error == 3) {
+                        let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        
+                        self.present(createAccountAlert, animated: true, completion: nil)
+                    }
                 }
             }
             

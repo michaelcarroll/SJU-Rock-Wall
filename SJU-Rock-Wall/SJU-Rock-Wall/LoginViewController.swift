@@ -46,6 +46,7 @@ class LoginViewController: UIViewController {
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 print(responseJSON)
+                
                 let error = responseJSON["error"] as! Int
                 let username = responseJSON["message"] as! String
                 if (error == 0) {
@@ -54,9 +55,9 @@ class LoginViewController: UIViewController {
                     DispatchQueue.main.async {
                         let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertControllerStyle.alert)
 
-//                        loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
-//                            self.performSegue(withIdentifier:"Home", sender: nil)
-//                        }))
+                       loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                            self.performSegue(withIdentifier:"LoggedInSegue", sender: nil)
+                        }))
                         
                         self.present(loginAlert, animated: true, completion: nil)
                     }
