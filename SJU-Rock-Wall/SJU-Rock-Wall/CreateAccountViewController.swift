@@ -39,7 +39,7 @@ class CreateAccountViewController: UIViewController {
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
             // create post request
-            let url = URL(string: "http://152.65.36.198/createUser.php")!
+            let url = URL(string: "http://152.65.36.72/createUser.php")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             

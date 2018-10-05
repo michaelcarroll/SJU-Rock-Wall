@@ -119,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqH-jD-c65" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="-478"/>
+            <point key="canvasLocation" x="-218" y="-478"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="NKf-re-djJ">
@@ -225,7 +225,7 @@
         <!--Home-->
         <scene sceneID="Hkb-H1-aKL">
             <objects>
-                <viewController storyboardIdentifier="Home" title="Home" id="3gK-n8-lQT" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" title="Home" id="3gK-n8-lQT" customClass="HomeViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b00-x1-utJ" userLabel="Home">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -237,6 +237,13 @@
                                     <navigationItem title="Home" id="s1V-Qr-gku"/>
                                 </items>
                             </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZU-Tg-eg2">
+                                <rect key="frame" x="67" y="83" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <accessibility key="accessibilityConfiguration" label="Home"/>
@@ -249,7 +256,13 @@
                                 <segue destination="SAp-MR-YUb" kind="show" id="Mfc-XG-9uK"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YhP-vU-7fI"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="newRouteButton" destination="YhP-vU-7fI" id="y3F-Nh-xYj"/>
+                        <outlet property="userButton" destination="3g3-6L-tNq" id="2Lr-ha-VHz"/>
+                        <outlet property="welcomeText" destination="yZU-Tg-eg2" id="8CG-Df-Jsd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PO9-ao-75K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         // create post request
-        let url = URL(string: "http://152.65.36.198/login.php")!
+        let url = URL(string: "http://152.65.36.72/login.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -47,11 +47,17 @@ class LoginViewController: UIViewController {
             if let responseJSON = responseJSON as? [String: Any] {
                 print(responseJSON)
                 let error = responseJSON["error"] as! Int
+                let username = responseJSON["message"] as! String
                 if (error == 0) {
+                    UserDefaults.standard.set(username, forKey: "username")
+
                     DispatchQueue.main.async {
                         let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertControllerStyle.alert)
 
-                        loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//                        loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+//                            self.performSegue(withIdentifier:"Home", sender: nil)
+//                        }))
+                        
                         self.present(loginAlert, animated: true, completion: nil)
                     }
                 }
