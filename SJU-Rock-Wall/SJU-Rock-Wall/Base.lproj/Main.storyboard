@@ -43,10 +43,10 @@
             </objects>
             <point key="canvasLocation" x="-1007" y="257"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Member Tabbed Controller-->
         <scene sceneID="ZTZ-bS-7TU">
             <objects>
-                <tabBarController storyboardIdentifier="MemberTabBarController" id="3MZ-mn-xT8" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MemberTabBarController" title="Member Tabbed Controller" id="3MZ-mn-xT8" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wnB-h2-DDc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="-1807" y="-1207"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Guest Tabbed Controller-->
         <scene sceneID="NKf-re-djJ">
             <objects>
-                <tabBarController id="Hht-87-PrG" sceneMemberID="viewController">
+                <tabBarController title="Guest Tabbed Controller" id="Hht-87-PrG" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TOZ-1x-Rml">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -322,10 +322,10 @@
             </objects>
             <point key="canvasLocation" x="-954.39999999999998" y="-1974.0629685157423"/>
         </scene>
-        <!--MemberHome-->
+        <!--Routes-->
         <scene sceneID="wkl-HC-Hdh">
             <objects>
-                <viewController storyboardIdentifier="Routes" title="MemberHome" id="3XA-oI-m6Z" customClass="RoutesViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Routes" title="Routes" id="3XA-oI-m6Z" customClass="RoutesViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YIM-UY-AB3" userLabel="Home">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,17 +335,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Routes" id="48H-fM-Yds">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="CqC-yl-kQi"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="CqC-yl-kQi">
+                                            <connections>
+                                                <segue destination="T2B-7j-oE7" kind="presentation" id="Hq8-RM-miJ"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DEd-jS-8xK">
-                                <rect key="frame" x="16" y="83" width="343" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A9O-e7-T3y">
                                 <rect key="frame" x="0.0" y="119" width="375" height="499"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -357,13 +354,69 @@
                         <viewLayoutGuide key="safeArea" id="STW-hW-BlI"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="mostViewed" id="q6d-mw-wdC"/>
-                    <connections>
-                        <outlet property="welcomeText" destination="DEd-jS-8xK" id="71n-e1-V3m"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAh-xX-agu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-111.2" y="-1974.0629685157423"/>
+        </scene>
+        <!--Create Route-->
+        <scene sceneID="ljP-IT-TQH">
+            <objects>
+                <viewController storyboardIdentifier="Create Route" title="Create Route" id="T2B-7j-oE7" customClass="CreateRouteViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s49-S7-gir" userLabel="Home">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pm3-8n-0WG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="New Route" id="HIM-Cy-4mu">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="nPh-eF-ULC">
+                                            <connections>
+                                                <action selector="doneButtonPress:" destination="T2B-7j-oE7" id="8wp-zO-L8D"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name of route" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gE9-cx-niT" userLabel="routeName">
+                                <rect key="frame" x="16" y="88" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Difficulty" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Eh-CP-Z6Y" userLabel="routeDifficulty">
+                                <rect key="frame" x="16" y="126" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Description" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N04-dF-04q" userLabel="routeDescription">
+                                <rect key="frame" x="16" y="164" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration" label="Home"/>
+                        <viewLayoutGuide key="safeArea" id="wTX-43-ONs"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="MHL-hq-20K"/>
+                    <connections>
+                        <outlet property="doneButton" destination="nPh-eF-ULC" id="i6l-NK-iqe"/>
+                        <outlet property="routeDescription" destination="N04-dF-04q" id="vYp-nC-NuU"/>
+                        <outlet property="routeDifficulty" destination="0Eh-CP-Z6Y" id="Ug3-cj-niP"/>
+                        <outlet property="routeName" destination="gE9-cx-niT" id="Rqe-bl-dE1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4hV-30-9fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-111.2" y="-2721.5892053973016"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
