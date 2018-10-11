@@ -451,13 +451,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6H622C27VK;
+				DEVELOPMENT_TEAM = 2S7B3MHJRB;
 				INFOPLIST_FILE = "SJU-Rock-Wall/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "CSCI330.SJU-Rock-Wall";
+				PRODUCT_BUNDLE_IDENTIFIER = "SJU-Rock-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -469,13 +469,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6H622C27VK;
+				DEVELOPMENT_TEAM = 2S7B3MHJRB;
 				INFOPLIST_FILE = "SJU-Rock-Wall/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "CSCI330.SJU-Rock-Wall";
+				PRODUCT_BUNDLE_IDENTIFIER = "SJU-Rock-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
