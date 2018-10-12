@@ -19,7 +19,7 @@ Open /SJU-Rock-Wall/SJU-Rock-Wall/SJU-Rock-Wall.xcodeproj
 
 Xcode will likely throw errors regarding signing, to fix this follow these steps:
 
-1. Click on the SJU-Rock-Wall file in the left project navigator side bar
+1. Click on the SJU-Rock-Wall file in the Project Navigator side bar on the left.
 
 <img width="274" alt="screen shot 2018-10-11 at 7 29 38 pm" src="https://user-images.githubusercontent.com/20750745/46841299-a0b2fb80-cd8c-11e8-8bee-5f027cfba810.png">
  
