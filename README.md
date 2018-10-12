@@ -27,7 +27,8 @@ Xcode will likely throw errors regarding signing, to fix this follow these steps
 
 <img width="668" alt="screen shot 2018-10-11 at 7 30 59 pm" src="https://user-images.githubusercontent.com/20750745/46841306-a4df1900-cd8c-11e8-9de3-63c3319805a0.png">
 
-3. Expand the "Identity" section and change the "Budnle Identifier" to SJU-Rock-Wall-Sprint1, or anything unique. 
+3. Expand the "Identity" section and change the "Bundle Identifier" from "SJU-Rock-Wall" to "SJU-Rock-Wall-Sprint1", or anything unique. 
+
+<img width="635" alt="screen shot 2018-10-11 at 7 29 53 pm" src="https://user-images.githubusercontent.com/20750745/46841304-a3155580-cd8c-11e8-8d22-d999a864b7e5.png">
 
 At this point, you should be able to run the application by clicking the play button. The app will launch in an iPhone simulator.
-
