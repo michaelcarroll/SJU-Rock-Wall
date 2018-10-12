@@ -22,10 +22,12 @@ Xcode will likely throw errors regarding signing, to fix this follow these steps
 1. Click on the SJU-Rock-Wall file in the left project navigator side bar
 
 <img width="274" alt="screen shot 2018-10-11 at 7 29 38 pm" src="https://user-images.githubusercontent.com/20750745/46841299-a0b2fb80-cd8c-11e8-8bee-5f027cfba810.png">
+ 
 
 2. Expand the "Singing" section and change the "Team" to your Apple ID. If you aren't already logged into Xcode, click "Add an Account..."
 
 <img width="668" alt="screen shot 2018-10-11 at 7 30 59 pm" src="https://user-images.githubusercontent.com/20750745/46841306-a4df1900-cd8c-11e8-9de3-63c3319805a0.png">
+ 
 
 3. Expand the "Identity" section and change the "Bundle Identifier" from "SJU-Rock-Wall" to "SJU-Rock-Wall-Sprint1", or anything unique. 
 
