@@ -1,5 +1,5 @@
 # SJU-Rock-Wall
-SJU Rock Wall is an iOS application for the rock climbing wall at [Saint John's University](https://csbsju.edu/). It's purpose is to enhance rock climbers' experience at the rock wall. 
+SJU Rock Wall is an iOS application for the rock climbing wall at [Saint John's University](https://csbsju.edu/). It's purpose is to enhance rock climbers' experiences when using the rock climbing wall.
 
 The rock wall at Saint John’s is a popular hangout for many students. Located in the Warner
 Palaestra building, the rock wall frequently sees more than 100 people a week. Additionally, there is a
