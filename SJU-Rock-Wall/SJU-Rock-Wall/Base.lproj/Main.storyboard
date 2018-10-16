@@ -372,7 +372,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="New Route" id="HIM-Cy-4mu">
-                                        <barButtonItem key="rightBarButtonItem" title="Done" id="nPh-eF-ULC">
+                                        <barButtonItem key="rightBarButtonItem" title="Create" id="nPh-eF-ULC">
                                             <connections>
                                                 <action selector="doneButtonPress:" destination="T2B-7j-oE7" id="8wp-zO-L8D"/>
                                             </connections>

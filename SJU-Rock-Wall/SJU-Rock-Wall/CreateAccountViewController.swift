@@ -39,7 +39,7 @@ class CreateAccountViewController: UIViewController {
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
             // create post request
-            let url = URL(string: "http://152.65.36.72/createUser.php")!
+            let url = URL(string: "http://152.65.37.147/createUser.php")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             
@@ -57,20 +57,24 @@ class CreateAccountViewController: UIViewController {
 
                     let error = responseJSON["error"] as! Int
                     if (error == 0) {
-                        let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                        DispatchQueue.main.async {
+                            let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertControllerStyle.alert)
                         
-                        createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                            createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
                             self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
-                        }))
+                            }))
                         
-                        self.present(createAccountAlert, animated: true, completion: nil)
+                            self.present(createAccountAlert, animated: true, completion: nil)
+                        }
                     }
                     else if (error == 3) {
-                        let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                        DispatchQueue.main.async {
+                            let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
                         
-                        createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         
-                        self.present(createAccountAlert, animated: true, completion: nil)
+                            self.present(createAccountAlert, animated: true, completion: nil)
+                        }
                     }
                 }
             }

@@ -36,7 +36,7 @@ class CreateRouteViewController: UIViewController {
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         // create post request
-        let url = URL(string: "http://152.65.37.180/createRoute.php")!
+        let url = URL(string: "http://152.65.37.147/createRoute.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -51,6 +51,26 @@ class CreateRouteViewController: UIViewController {
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 print(responseJSON)
+                
+                let error = responseJSON["error"] as! Int
+                if (error == 0) {
+                    DispatchQueue.main.async {
+                        let createRouteAlert = UIAlertController(title: "Success", message: "Route created successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    
+                        self.present(createRouteAlert, animated: true, completion: nil)
+                    }
+                }
+                else if (error == 3) {
+                    DispatchQueue.main.async {
+                        let createRouteAlert = UIAlertController(title: "Error", message: "Route not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    
+                        self.present(createRouteAlert, animated: true, completion: nil)
+                    }
+                }
             }
         }
         
