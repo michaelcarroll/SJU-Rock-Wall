@@ -16,6 +16,7 @@
 		9B21B23021670752006B29EF /* MemberHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B21B22F21670752006B29EF /* MemberHomeViewController.swift */; };
 		9B21B23221671045006B29EF /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B21B23121671045006B29EF /* RoutesViewController.swift */; };
 		9B28463121671CA60009ACD4 /* CreateRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */; };
+		FE0B09F7217EBE0E0015F624 /* State.scn in Resources */ = {isa = PBXBuildFile; fileRef = FE0B09F6217EBE0E0015F624 /* State.scn */; };
 		FE7CD1522159ACB700777664 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1512159ACB700777664 /* AppDelegate.swift */; };
 		FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1552159ACB700777664 /* GameViewController.swift */; };
 		FE7CD1592159ACB700777664 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE7CD1572159ACB700777664 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		9B21B22F21670752006B29EF /* MemberHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberHomeViewController.swift; sourceTree = "<group>"; };
 		9B21B23121671045006B29EF /* RoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewController.swift; sourceTree = "<group>"; };
 		9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRouteViewController.swift; sourceTree = "<group>"; };
+		FE0B09F6217EBE0E0015F624 /* State.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = State.scn; sourceTree = "<group>"; };
 		FE7CD14E2159ACB700777664 /* SJU-Rock-Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SJU-Rock-Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7CD1512159ACB700777664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE7CD1552159ACB700777664 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				66FA5114216443B70064EDAE /* CreateAccountViewController.swift */,
 				9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */,
 				FE7CD15A2159ACB800777664 /* Assets.xcassets */,
+				FE0B09F6217EBE0E0015F624 /* State.scn */,
 				32261167215C54880041EE81 /* rockWall.scn */,
 				3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */,
 				3205083F215E9799000B63AF /* iS_makeitdouble.jpg */,
@@ -267,6 +270,7 @@
 				32261168215C54880041EE81 /* rockWall.scn in Resources */,
 				32050840215E9799000B63AF /* iS_makeitdouble.jpg in Resources */,
 				FE7CD15B2159ACB800777664 /* Assets.xcassets in Resources */,
+				FE0B09F7217EBE0E0015F624 /* State.scn in Resources */,
 				FE7CD1592159ACB700777664 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,13 +479,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2S7B3MHJRB;
+				DEVELOPMENT_TEAM = 6H622C27VK;
 				INFOPLIST_FILE = "SJU-Rock-Wall/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "SJU-Rock-Wall";
+				PRODUCT_BUNDLE_IDENTIFIER = "SJU-Rock-Wall-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,13 +497,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2S7B3MHJRB;
+				DEVELOPMENT_TEAM = 6H622C27VK;
 				INFOPLIST_FILE = "SJU-Rock-Wall/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "SJU-Rock-Wall";
+				PRODUCT_BUNDLE_IDENTIFIER = "SJU-Rock-Wall-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

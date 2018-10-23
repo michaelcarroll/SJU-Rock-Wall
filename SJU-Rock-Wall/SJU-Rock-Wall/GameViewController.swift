@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
     var maxHeightRatioXDown: Float = 0.02
     var maxHeightRatioXUp: Float = 0.4
 
+
     //HANDLE PINCH CAMERA
     var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
     var lastFingersNumber = 0
@@ -39,7 +40,6 @@ class GameViewController: UIViewController {
         setupView()
         setupScene()
         setupCamera()
-        spawnShape()
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
@@ -155,7 +155,7 @@ class GameViewController: UIViewController {
         return true
     }
     func setupView() {
-        scnView = self.view as! SCNView
+        scnView = self.view as? SCNView
         // 1
         scnView.showsStatistics = true
         // 2
@@ -192,24 +192,12 @@ class GameViewController: UIViewController {
 
     }
     
-    func spawnShape() {
-        // 1
-        /*var geometry:SCNGeometry
-        // 2
-        switch ShapeType.random() {
-        case .Box:
-            geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 1.0)
-        case .Sphere:
-            geometry = SCNSphere(radius: 0.5)
-        case .Pyramid:
-            geometry = SCNPyramid(width: 1.0, height: 1.0, length: 1.0)
-        default:
-            // 3
-            geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
+    @IBAction func submitButton(_ sender: UIButton) {
+        let scnurl = NSURL.fileURL(withPath: "Assets.xcassets/rockWall.scn")
+
+        if(scnScene.write(to: scnurl, options: nil, delegate: nil, progressHandler: nil)){
+            print("tis success")
         }
-         //
-        let geometryNode = SCNNode(geometry: geometry)
-        // 5
-        scnScene.rootNode.addChildNode(geometryNode)*/
+        print("This button work")
     }
 }

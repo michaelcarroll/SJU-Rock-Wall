@@ -31,13 +31,22 @@
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController storyboardIdentifier="Graphics" title="Graphics" id="BV1-FR-VrT" customClass="GameViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
-                    <sceneKitView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                    <sceneKitView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="rockWall.scn" id="8Bu-Og-OhA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </sceneKitView>
                     <tabBarItem key="tabBarItem" title="Metal" id="jwM-4X-ejJ"/>
-                    <navigationItem key="navigationItem" id="bvV-9h-dr8"/>
+                    <navigationItem key="navigationItem" id="bvV-9h-dr8">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdy-sq-KcP">
+                            <rect key="frame" x="164.5" y="7" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="submitButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="unN-B5-MNW"/>
+                            </connections>
+                        </button>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
@@ -422,6 +431,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="we2-CG-Bxd"/>
         <segue reference="gcV-6F-Cxq"/>
-        <segue reference="q7a-qb-pyn"/>
+        <segue reference="Sqa-xQ-tlg"/>
     </inferredMetricsTieBreakers>
 </document>
