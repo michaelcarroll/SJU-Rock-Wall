@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3205083E215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */; };
 		32050840215E9799000B63AF /* iS_makeitdouble.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3205083F215E9799000B63AF /* iS_makeitdouble.jpg */; };
-		32261168215C54880041EE81 /* rockWall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 32261167215C54880041EE81 /* rockWall.scn */; };
 		662C072F2166E45600559225 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662C072E2166E45600559225 /* HomeViewController.swift */; };
 		666396032162FB2300474CBF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666396022162FB2300474CBF /* LoginViewController.swift */; };
 		66FA5115216443B70064EDAE /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA5114216443B70064EDAE /* CreateAccountViewController.swift */; };
@@ -48,7 +47,6 @@
 /* Begin PBXFileReference section */
 		3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "portland-concrete-effect-vinyl-flooring-grey.jpg"; path = "Assets.xcassets/portland-concrete-effect-vinyl-flooring-grey.jpg"; sourceTree = "<group>"; };
 		3205083F215E9799000B63AF /* iS_makeitdouble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iS_makeitdouble.jpg; path = Assets.xcassets/iS_makeitdouble.jpg; sourceTree = "<group>"; };
-		32261167215C54880041EE81 /* rockWall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = rockWall.scn; path = Assets.xcassets/rockWall.scn; sourceTree = "<group>"; };
 		662C072E2166E45600559225 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		666396022162FB2300474CBF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		66FA5114216443B70064EDAE /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 				9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */,
 				FE7CD15A2159ACB800777664 /* Assets.xcassets */,
 				FE0B09F6217EBE0E0015F624 /* State.scn */,
-				32261167215C54880041EE81 /* rockWall.scn */,
 				3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */,
 				3205083F215E9799000B63AF /* iS_makeitdouble.jpg */,
 				FE7CD15C2159ACB800777664 /* LaunchScreen.storyboard */,
@@ -267,7 +264,6 @@
 			files = (
 				FE7CD15E2159ACB800777664 /* LaunchScreen.storyboard in Resources */,
 				3205083E215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg in Resources */,
-				32261168215C54880041EE81 /* rockWall.scn in Resources */,
 				32050840215E9799000B63AF /* iS_makeitdouble.jpg in Resources */,
 				FE7CD15B2159ACB800777664 /* Assets.xcassets in Resources */,
 				FE0B09F7217EBE0E0015F624 /* State.scn in Resources */,
