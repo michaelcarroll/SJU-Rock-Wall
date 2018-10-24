@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         // create post request
-        let url = URL(string: "http://152.65.37.147/login.php")!
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
