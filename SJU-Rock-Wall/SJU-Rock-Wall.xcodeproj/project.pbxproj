@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3205083E215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */; };
 		32050840215E9799000B63AF /* iS_makeitdouble.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3205083F215E9799000B63AF /* iS_makeitdouble.jpg */; };
-		32261168215C54880041EE81 /* rockWall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 32261167215C54880041EE81 /* rockWall.scn */; };
+		324B8848217FFD6F0071A600 /* rockWall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 324B8847217FFD6F0071A600 /* rockWall.scn */; };
 		FE7CD1522159ACB700777664 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1512159ACB700777664 /* AppDelegate.swift */; };
 		FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1552159ACB700777664 /* GameViewController.swift */; };
 		FE7CD1592159ACB700777664 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE7CD1572159ACB700777664 /* Main.storyboard */; };
@@ -41,7 +41,7 @@
 /* Begin PBXFileReference section */
 		3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "portland-concrete-effect-vinyl-flooring-grey.jpg"; path = "Assets.xcassets/portland-concrete-effect-vinyl-flooring-grey.jpg"; sourceTree = "<group>"; };
 		3205083F215E9799000B63AF /* iS_makeitdouble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = iS_makeitdouble.jpg; path = Assets.xcassets/iS_makeitdouble.jpg; sourceTree = "<group>"; };
-		32261167215C54880041EE81 /* rockWall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = rockWall.scn; path = Assets.xcassets/rockWall.scn; sourceTree = "<group>"; };
+		324B8847217FFD6F0071A600 /* rockWall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = rockWall.scn; path = ../../../../Downloads/rockWall.scn; sourceTree = "<group>"; };
 		FE7CD14E2159ACB700777664 /* SJU-Rock-Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SJU-Rock-Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7CD1512159ACB700777664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE7CD1552159ACB700777664 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				FE7CD1552159ACB700777664 /* GameViewController.swift */,
 				FE7CD1572159ACB700777664 /* Main.storyboard */,
 				FE7CD15A2159ACB800777664 /* Assets.xcassets */,
-				32261167215C54880041EE81 /* rockWall.scn */,
+				324B8847217FFD6F0071A600 /* rockWall.scn */,
 				3205083D215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg */,
 				3205083F215E9799000B63AF /* iS_makeitdouble.jpg */,
 				FE7CD15C2159ACB800777664 /* LaunchScreen.storyboard */,
@@ -246,10 +246,10 @@
 			files = (
 				FE7CD15E2159ACB800777664 /* LaunchScreen.storyboard in Resources */,
 				3205083E215E9794000B63AF /* portland-concrete-effect-vinyl-flooring-grey.jpg in Resources */,
-				32261168215C54880041EE81 /* rockWall.scn in Resources */,
 				32050840215E9799000B63AF /* iS_makeitdouble.jpg in Resources */,
 				FE7CD15B2159ACB800777664 /* Assets.xcassets in Resources */,
 				FE7CD1592159ACB700777664 /* Main.storyboard in Resources */,
+				324B8848217FFD6F0071A600 /* rockWall.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
