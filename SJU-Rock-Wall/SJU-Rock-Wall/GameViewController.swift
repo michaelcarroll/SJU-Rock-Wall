@@ -193,7 +193,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
-        let scnurl = NSURL.fileURL(withPath: "Assets.xcassets/rockWall.scn")
+        let scnurl = NSURL.fileURL(withPath: "State.scn")
 
         if(scnScene.write(to: scnurl, options: nil, delegate: nil, progressHandler: nil)){
             print("tis success")
