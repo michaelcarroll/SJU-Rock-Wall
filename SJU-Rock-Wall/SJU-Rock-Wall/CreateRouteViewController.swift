@@ -11,7 +11,7 @@ import UIKit
 
 class CreateRouteViewController: UIViewController {
     
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var submitButton: UIBarButtonItem!
     @IBOutlet weak var routeName: UITextField!
     @IBOutlet weak var routeDifficulty: UITextField!
     @IBOutlet weak var routeDescription: UITextField!
@@ -26,7 +26,7 @@ class CreateRouteViewController: UIViewController {
         }
     }
     
-    @IBAction func doneButtonPress(_ sender: Any) {
+    @IBAction func submitButtonPress(_ sender: Any) {
         let name = routeName.text
         let difficulty = routeDifficulty.text
         let description = routeDescription.text

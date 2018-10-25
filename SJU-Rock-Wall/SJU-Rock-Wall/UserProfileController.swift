@@ -15,12 +15,13 @@ class UserProfileController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-        
-        
-        
-        
-        
-        
+    
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    
+    @IBAction func logoutButtonPress(_ sender: Any) {
+        UserDefaults.standard.set(nil, forKey: "uid")
+        self.performSegue(withIdentifier:"LoggedOutSegue", sender: nil)
+    }
 
     /**
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RoutesViewController: UIViewController {
+class RoutesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

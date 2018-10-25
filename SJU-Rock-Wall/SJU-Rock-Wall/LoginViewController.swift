@@ -48,9 +48,10 @@ class LoginViewController: UIViewController {
                 print(responseJSON)
                 
                 let error = responseJSON["error"] as! Int
-                let username = responseJSON["message"] as! String
+                
                 if (error == 0) {
-                    UserDefaults.standard.set(username, forKey: "username")
+                    let uid = responseJSON["message"] as! Int
+                    UserDefaults.standard.set(uid, forKey: "uid")
 
                     DispatchQueue.main.async {
                         let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertControllerStyle.alert)
@@ -63,6 +64,7 @@ class LoginViewController: UIViewController {
                     }
                 }
                 else if (error == 3) {
+                    let message = responseJSON["message"] as! String
                     DispatchQueue.main.async { // use this or it gets mad for not changing UI element on main thread
                         let loginAlert = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: UIAlertControllerStyle.alert)
                         
