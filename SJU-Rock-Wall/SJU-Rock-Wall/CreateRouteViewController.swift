@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SceneKit
 
 class CreateRouteViewController: UIViewController {
     
@@ -15,12 +16,15 @@ class CreateRouteViewController: UIViewController {
     @IBOutlet weak var routeName: UITextField!
     @IBOutlet weak var routeDifficulty: UITextField!
     @IBOutlet weak var routeDescription: UITextField!
+    private var sceneFile: SCNScene!
+    private var serialScene: String!
     
     private var username: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         username = UserDefaults.standard.string(forKey: "username")
+        sceneFile = SCNScene(named: "SerialTest.scn")
         if (username != nil) {
             // something
         }

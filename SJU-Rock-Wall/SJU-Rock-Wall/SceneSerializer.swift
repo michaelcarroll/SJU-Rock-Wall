@@ -9,30 +9,32 @@
 import Foundation
 import SceneKit
 
-class SerializeScene{
+class SceneSerializer{
 
-    var ourScene: SCNScene
-    var filePath: String {
+    private var theScene: SCNScene
+    
+    private var filePath: String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-        
-        print("this is the url path in the documentDirectory \(String(describing: url))")
-        
         return (url!.appendingPathComponent("Scene").path)
     }
     
-    
-    private func saveScene(theScene: SCNScene){
-        NSKeyedArchiver.archiveRootObject(theScene, toFile: filePath)
+    public func getFilePath() -> String{
+        return filePath
     }
     
-    private func loadScene(){
+    public func serializeScene() -> Bool {
+        return NSKeyedArchiver.archiveRootObject(theScene, toFile: filePath)
+    }
+    
+    public func unserializeScene() -> SCNScene {
         if let loadedScene = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? SCNScene{
-            ourScene = loadedScene
+            theScene = loadedScene
         }
+        return theScene
     }
     
-    init(){
-        
+    init(scene: SCNScene){
+        theScene = scene
     }
 }

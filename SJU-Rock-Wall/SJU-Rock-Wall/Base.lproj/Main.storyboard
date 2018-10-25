@@ -38,7 +38,7 @@
                     <tabBarItem key="tabBarItem" title="Metal" id="jwM-4X-ejJ"/>
                     <navigationItem key="navigationItem" id="bvV-9h-dr8">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdy-sq-KcP">
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdy-sq-KcP">
                             <rect key="frame" x="164.5" y="7" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Button"/>
@@ -430,7 +430,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="we2-CG-Bxd"/>
-        <segue reference="gcV-6F-Cxq"/>
+        <segue reference="6tS-4T-SYu"/>
         <segue reference="Sqa-xQ-tlg"/>
     </inferredMetricsTieBreakers>
 </document>
