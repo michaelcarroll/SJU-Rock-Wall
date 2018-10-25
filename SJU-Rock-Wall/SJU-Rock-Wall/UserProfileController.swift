@@ -1,31 +1,36 @@
 //
-//  CreateAccountViewController.swift
+//  UserProfileController.swift
 //  SJU-Rock-Wall
 //
-//  Created by Kalsow, Brandan D on 10/1/18.
+//  Created by Kalsow, Brandan D on 10/24/18.
 //  Copyright © 2018 Tran, Anh B. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class CreateAccountViewController: UIViewController {
+class UserProfileController: UIViewController {
     @IBOutlet weak var fNameField: UITextField!
     @IBOutlet weak var lNameField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var confirmPasswordField: UITextField!
-    
-    
-    @IBAction func buttonPressed(_ sender: Any)
+        
+        
+        
+        
+        
+        
+
+    /**
+
     {
         let fName = fNameField.text
         let lName = lNameField.text
         let username = usernameField.text
         let email = emailField.text
         let password = passwordField.text
-        let confirmPassword = confirmPasswordField.text
+       
         
         if(password != confirmPassword) {
             let passwordMatchAlert = UIAlertController(title: "Error", message: "Passwords don't match. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
@@ -39,7 +44,7 @@ class CreateAccountViewController: UIViewController {
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
             // create post request
-            let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+            let url = URL(string: "http://sjurockwall.atwebpages.com/getUser.php")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             
@@ -54,33 +59,34 @@ class CreateAccountViewController: UIViewController {
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJSON = responseJSON as? [String: Any] {
                     print(responseJSON)
-
+                    
                     let error = responseJSON["error"] as! Int
                     if (error == 0) {
                         DispatchQueue.main.async {
                             let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertControllerStyle.alert)
-                        
+                            
                             createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
-                            self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
+                                self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
                             }))
-                        
+                            
                             self.present(createAccountAlert, animated: true, completion: nil)
                         }
                     }
                     else if (error == 3) {
                         DispatchQueue.main.async {
                             let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
-                        
+                            
                             createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        
+                            
                             self.present(createAccountAlert, animated: true, completion: nil)
                         }
-                    }
+                    }s
                 }
             }
             
             task.resume()
         }
     }
+ */
 }
 
