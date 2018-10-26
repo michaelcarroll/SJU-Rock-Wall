@@ -546,7 +546,7 @@
         <!--Routes-->
         <scene sceneID="ADC-Uj-PsP">
             <objects>
-                <tableViewController id="VSe-tU-kEN" customClass="RoutesViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VSe-tU-kEN" customClass="RoutesTableViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X9Y-ff-8aW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -573,10 +573,28 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="DpI-VH-kJS" kind="show" id="oMA-oN-RHB"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3K-VZ-ZkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="778" y="-1974"/>
+        </scene>
+        <!--View Route View Controller-->
+        <scene sceneID="QiQ-S2-uEc">
+            <objects>
+                <viewController id="DpI-VH-kJS" customClass="ViewRouteViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8ci-kJ-cg1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="O2Y-an-PNt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYM-29-0Yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1714" y="-1969"/>
         </scene>
         <!--Routes-->
         <scene sceneID="Heu-Qp-WC8">
@@ -649,7 +667,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="600" height="600"/>
+        <image name="climbingClub" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="boS-76-aO4"/>
