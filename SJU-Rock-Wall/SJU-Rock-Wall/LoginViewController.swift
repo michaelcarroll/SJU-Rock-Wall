@@ -64,7 +64,6 @@ class LoginViewController: UIViewController {
                     }
                 }
                 else if (error == 3) {
-                    let message = responseJSON["message"] as! String
                     DispatchQueue.main.async { // use this or it gets mad for not changing UI element on main thread
                         let loginAlert = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: UIAlertControllerStyle.alert)
                         

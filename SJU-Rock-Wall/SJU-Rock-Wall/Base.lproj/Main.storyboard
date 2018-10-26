@@ -667,10 +667,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="300" height="300"/>
+        <image name="climbingClub" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="boS-76-aO4"/>
+        <segue reference="we2-CG-Bxd"/>
         <segue reference="6tS-4T-SYu"/>
     </inferredMetricsTieBreakers>
 </document>
