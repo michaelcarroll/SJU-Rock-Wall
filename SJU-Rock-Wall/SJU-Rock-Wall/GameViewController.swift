@@ -18,6 +18,8 @@ class GameViewController: UIViewController {
     var wall: SCNNode!
     var wedge: SCNNode!
     var text: SCNNode!
+    var sphere: SCNNode!
+    var radius: CGFloat!
     var camera: SCNCamera!
     //HANDLE PAN CAMERA
     var lastWidthRatio: Float = 0
@@ -46,12 +48,14 @@ class GameViewController: UIViewController {
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
         // retrieve the text node
         text = scnScene.rootNode.childNode(withName: "text", recursively: true)!
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        //retrieve a sphere
+        sphere = scnScene.rootNode.childNode(withName: "sphere1", recursively: true)
+        radius = (sphere.geometry as? SCNSphere)?.radius
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameViewController.handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
         
         // add a tap gesture recognizer
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(GameViewController.handlePan(_:)))
         scnView.addGestureRecognizer(panGesture)
         
         // add a pinch gesture recognizer
@@ -63,28 +67,18 @@ class GameViewController: UIViewController {
     func handleTap(_ gestureRecognize: UIGestureRecognizer)
     {
         let p = gestureRecognize.location(in: scnView)
-        let hitResults = scnView.hitTest(p, options: [:])
-        
+        //let hitResults = scnView.hitTest(p, options: nil)
+        let hitResults = self.nodesNearPoint(container: scnScene, point: p, maxDist: 0.5)
+        print(hitResults.count)
         if hitResults.count > 0 {
             let result = hitResults[0]
-            
-            if(result.node.name != "wedge")
+            if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
             {
-                if(result.node.name != "wall")
-                {
-                    if(result.node.name != "text")
-                    {
-                        if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.black
-                        }
-                    
-                        else
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.red
-                        }
-                    }
-                }
+                result.geometry!.firstMaterial!.emission.contents = UIColor.black
+            }
+            else
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.red
             }
         }
     }
@@ -117,8 +111,8 @@ class GameViewController: UIViewController {
                 WidthRatio = maxWidthRatioLeft
             }
             
-            self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
-            self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * HeightRatio
+            self.cameraOrbit.eulerAngles.y = Float(-5 * Double.pi) * WidthRatio
+            self.cameraOrbit.eulerAngles.x = Float(-2 * Double.pi) * HeightRatio
             
             //for final check on fingers number
             lastFingersNumber = fingersNeededToPan
@@ -193,11 +187,45 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
-        let scnurl = NSURL.fileURL(withPath: "State.scn")
-
+        let scnurl = URL(fileURLWithPath: "Assets.xcassets/rockWall.scn")
+        if(scnurl.isFileURL){
+            print("is URL")
+        }
+        let test = (try? scnurl.checkResourceIsReachable()) ?? false
+        
+        if(test){
+            print("pass")
+        }
+        if(scnurl.hasDirectoryPath){
+            print("has path")
+        }
         if(scnScene.write(to: scnurl, options: nil, delegate: nil, progressHandler: nil)){
             print("tis success")
         }
         print("This button work")
+        var state = UIImage()
+        state  =  scnView.snapshot()
+        let jpgData = UIImageJPEGRepresentation(state, 0.8)
+        print(jpgData!)
     }
+    
+    func nodesNearPoint(container: SCNScene, point: CGPoint, maxDist: CGFloat) -> [SCNNode] {
+        var array = [SCNNode]()
+        let pointWithDepth = SCNVector3Make(Float(point.x), Float(point.y), 0)
+        let worldPoint = scnView.unprojectPoint(pointWithDepth)
+        for node in container.rootNode.childNodes {
+                if node.geometry is SCNSphere{
+                    let dx = worldPoint.x - node.position.x
+                    let dy = worldPoint.y - node.position.y
+                
+                    let distance = (dx*dx + dy*dy).squareRoot()
+                    print(distance)
+                    if (CGFloat(distance) <= maxDist){
+                        array.append(node)
+                    }
+                }
+        }
+        return array
+    }
+    
 }
