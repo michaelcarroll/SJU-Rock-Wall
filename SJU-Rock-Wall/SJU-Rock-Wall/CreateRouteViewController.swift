@@ -16,15 +16,17 @@ class CreateRouteViewController: UIViewController {
     @IBOutlet weak var routeName: UITextField!
     @IBOutlet weak var routeDifficulty: UITextField!
     @IBOutlet weak var routeDescription: UITextField!
-    private var sceneFile: SCNScene!
-    private var serialScene: String!
+    private var sceneFile: SCNScene! = SCNScene(named: "SerialTest.scn")
+    private var serialScene: Data!
     
     private var username: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         username = UserDefaults.standard.string(forKey: "username")
-        sceneFile = SCNScene(named: "SerialTest.scn")
+        let serializer = SceneSerializer.init(scene: sceneFile)
+        serialScene = serializer.serializeScene()
+        
         if (username != nil) {
             // something
         }

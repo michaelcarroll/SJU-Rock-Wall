@@ -45,7 +45,7 @@ class GameViewController: UIViewController {
         // retrieve the wedge node
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
         // retrieve the text node
-        text = scnScene.rootNode.childNode(withName: "text", recursively: true)!
+//        text = scnScene.rootNode.childNode(withName: "text", recursively: true)!
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)

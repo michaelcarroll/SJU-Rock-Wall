@@ -9,31 +9,23 @@
 import Foundation
 import SceneKit
 
-class SceneSerializer{
-
+class SceneSerializer {
     private var theScene: SCNScene
     
-    private var filePath: String {
-        let manager = FileManager.default
-        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-        return (url!.appendingPathComponent("Scene").path)
+    // function to serialize a .scn file
+    public func serializeScene() -> Data {
+        return  NSKeyedArchiver.archivedData(withRootObject: theScene)
     }
     
-    public func getFilePath() -> String{
-        return filePath
-    }
-    
-    public func serializeScene() -> Bool {
-        return NSKeyedArchiver.archiveRootObject(theScene, toFile: filePath)
-    }
-    
-    public func unserializeScene() -> SCNScene {
-        if let loadedScene = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? SCNScene{
+    // function to unserialize a data file back into a .scn
+    public func unserializeScene(serialScene: Data) -> SCNScene {
+        if let loadedScene = NSKeyedUnarchiver.unarchiveObject(with: serialScene) as? SCNScene{
             theScene = loadedScene
         }
         return theScene
     }
     
+    // initialize the SceneSerializer class by passing it a .scn file
     init(scene: SCNScene){
         theScene = scene
     }
