@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SceneKit
 
 class CreateRouteViewController: UIViewController {
     
@@ -15,12 +16,26 @@ class CreateRouteViewController: UIViewController {
     @IBOutlet weak var routeName: UITextField!
     @IBOutlet weak var routeDifficulty: UITextField!
     @IBOutlet weak var routeDescription: UITextField!
+    private var sceneFile: SCNScene!
+    private var serialScene: String!
     
     private var username: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         username = UserDefaults.standard.string(forKey: "username")
+        
+        sceneFile = SCNScene(named: "SerialTest.scn")
+        
+        print(sceneFile)
+        
+        let serializer = SceneSerializer.init(scene: sceneFile)
+        serialScene = serializer.serializeScene()
+        print(serialScene)
+        
+        let unserialized = serializer.unserializeScene(serialScene: serialScene)
+        print(unserialized)
+        
         if (username != nil) {
             // something
         }
@@ -30,7 +45,7 @@ class CreateRouteViewController: UIViewController {
         let name = routeName.text
         let difficulty = routeDifficulty.text
         let description = routeDescription.text
-        
+
         let json: [String: Any] = ["username": username!, "name": name!, "difficulty" : difficulty!, "description": description!]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)

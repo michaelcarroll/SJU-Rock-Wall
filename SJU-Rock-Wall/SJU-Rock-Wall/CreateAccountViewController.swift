@@ -26,7 +26,7 @@ class CreateAccountViewController: UIViewController {
         let email = emailField.text
         let password = passwordField.text
         let confirmPassword = confirmPasswordField.text
-        
+
         if(password != confirmPassword) {
             let passwordMatchAlert = UIAlertController(title: "Error", message: "Passwords don't match. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
             
