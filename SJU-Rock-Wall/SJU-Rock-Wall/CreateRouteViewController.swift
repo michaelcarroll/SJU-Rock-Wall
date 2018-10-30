@@ -19,11 +19,11 @@ class CreateRouteViewController: UIViewController {
     private var sceneFile: SCNScene!
     private var serialScene: String!
     
-    private var username: Any?
+    private var uid: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        username = UserDefaults.standard.string(forKey: "username")
+        uid = UserDefaults.standard.string(forKey: "uid")
         
         sceneFile = SCNScene(named: "SerialTest.scn")
         
@@ -36,7 +36,7 @@ class CreateRouteViewController: UIViewController {
         let unserialized = serializer.unserializeScene(serialScene: serialScene)
         print(unserialized)
         
-        if (username != nil) {
+        if (uid != nil) {
             // something
         }
     }
@@ -46,12 +46,12 @@ class CreateRouteViewController: UIViewController {
         let difficulty = routeDifficulty.text
         let description = routeDescription.text
 
-        let json: [String: Any] = ["username": username!, "name": name!, "difficulty" : difficulty!, "description": description!]
+        let json: [String: Any] = ["uid": uid!, "name": name!, "difficulty" : difficulty!, "description": description!, "wallState" : "NULL"]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         // create post request
-        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -72,7 +72,9 @@ class CreateRouteViewController: UIViewController {
                     DispatchQueue.main.async {
                         let createRouteAlert = UIAlertController(title: "Success", message: "Route created successfully.", preferredStyle: UIAlertControllerStyle.alert)
                     
-                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
                     
                         self.present(createRouteAlert, animated: true, completion: nil)
                     }

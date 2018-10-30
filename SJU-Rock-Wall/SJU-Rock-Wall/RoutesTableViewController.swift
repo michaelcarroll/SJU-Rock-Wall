@@ -8,48 +8,45 @@
 
 import UIKit
 
-struct JSONResponse: Codable {
-    let error: Int
-    let message: [Message]
-}
-
-struct Message: Codable {
-    let rid: Int
-    let username, name: String
-}
-
 class RoutesTableViewController: UITableViewController {
+    struct JSONResponse: Codable {
+        let error: Int
+        let message: [Message]
+    }
+    
+    struct Message: Codable {
+        let rid: Int
+        let username, name: String
+    }
+    
     var routeNames = [String]()
+    var routeArrayOfDictionary = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let json = """
-//{
-//    "error": 0,
-//    "message": [
-//        {
-//            "rid": 17,
-//            "username": "mmm",
-//            "name": "test"
-//        },
-//        {
-//            "rid": 12,
-//            "username": "1234",
-//            "name": "death sentence"
-//        }
-//    ]
-//}
-//"""
-//        let data = try! JSONDecoder().decode(JSONResponse.self, from: json.data(using: .utf8)!)
-//        print(data)
-//        var iterator = data.message.makeIterator()
-//        while let route = iterator.next() {
-//            self.routeNames.append(route.name)
-//        }
+        //self.downloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.downloadData()
+    }
+
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        self.downloadData()
+        sender.endRefreshing()
+    }
+    
+    func downloadData() {
+        // reset arrays to empty
+        routeNames = [String]()
+        routeArrayOfDictionary = [Message]()
         
         guard let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php") else {return}
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let dataResponse = data,
                 error == nil else {
                     print(error?.localizedDescription ?? "Response Error")
@@ -64,8 +61,10 @@ class RoutesTableViewController: UITableViewController {
                     self.routeNames.append(route.name)
                 }
                 
+                self.routeArrayOfDictionary = model.message
+                
                 DispatchQueue.main.async {
-                    self.tableView.reloadData() // Add this line and it should work
+                    self.tableView.reloadData();
                 }
                 
             } catch let parsingError {
@@ -73,31 +72,6 @@ class RoutesTableViewController: UITableViewController {
             }
         }
         task.resume()
-        
-        
-//        let jsonUrlString = "http://sjurockwall.atwebpages.com/getRoutes.php"
-//        guard let url = URL(string: jsonUrlString) else {return}
-//        URLSession.shared.dataTask(with: url) { (data, response, err) in
-//            //check error
-//            //check response status 200 ok
-//            guard let data = data else {return}
-//
-//            do {
-//                let jSONResponse = try? newJSONDecoder().decode(JSONResponse.self, from: jsonData)
-//                var iterator = json.message.makeIterator()
-//                while let route = iterator.next() {
-//                    self.routeNames.append(route.name)
-//                }
-//            } catch let jsonErr {
-//                print("Error serializing json:", jsonErr)
-//            }
-//        }.resume()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -161,11 +135,19 @@ class RoutesTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
+        guard segue.identifier == "cellSelected" else {return}
         var descScene = segue.destination as! ViewRouteViewController
         // Pass the selected object to the new view controller.
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let selectedRoute = routeNames[indexPath.row]
-            descScene.test = selectedRoute
+            
+            var iterator = routeArrayOfDictionary.makeIterator()
+            while let route = iterator.next() {
+                if (route.name == selectedRoute) {
+                    descScene.selectedRoute = route.rid
+                }
+            }
+
         }
 
     }
