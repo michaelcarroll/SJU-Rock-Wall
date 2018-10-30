@@ -10,7 +10,7 @@ import UIKit
 
 struct Response: Decodable {
     var error: Int?
-    var message:[Dictionary<String, String>]?
+    var message:[[String: String]]?
 }
 
 class RoutesTableViewController: UITableViewController {
@@ -48,10 +48,10 @@ class RoutesTableViewController: UITableViewController {
             do {
                 let json = try JSONDecoder().decode(Response.self, from: data)
                 let routeNames: String
-                var jsonIterator = json.message!.makeIterator()
-                let variable : Dictionary<String, String>
-                while variable = jsonIterator.next() {
+                if let value = json.message?[0]["name"]{
+                    print(value)
                 }
+                
             } catch let jsonErr {
                 print("Error serializing json:", jsonErr)
             }
