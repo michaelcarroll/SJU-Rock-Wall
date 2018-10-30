@@ -577,6 +577,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="X9Y-ff-8aW" id="zg9-mq-nEX"/>
                         <segue destination="DpI-VH-kJS" kind="show" id="oMA-oN-RHB"/>
                     </connections>
                 </tableViewController>
@@ -682,7 +683,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="300" height="300"/>
+        <image name="climbingClub" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ecY-oJ-Hcf"/>

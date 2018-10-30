@@ -8,55 +8,91 @@
 
 import UIKit
 
-struct Response: Decodable {
-    var error: Int?
-    var message:[[String: String]]?
+struct JSONResponse: Codable {
+    let error: Int
+    let message: [Message]
+}
+
+struct Message: Codable {
+    let rid: Int
+    let username, name: String
 }
 
 class RoutesTableViewController: UITableViewController {
+    var routeNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-//        // create post request
-//        let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php")!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else {
-//                print(error?.localizedDescription ?? "No data")
-//                return
-//            }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            if let responseJSON = responseJSON as? [String: Any] {
-//                print(responseJSON)
-//
-//                let routes = responseJSON["message"] as! NSArray
-//            }
-//        }
-//
-//        task.resume()
         
-        let jsonUrlString = "http://sjurockwall.atwebpages.com/getRoutes.php"
-        guard let url = URL(string: jsonUrlString) else {return}
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            //check error
-            //check response status 200 ok
-            guard let data = data else {return}
-
+//        let json = """
+//{
+//    "error": 0,
+//    "message": [
+//        {
+//            "rid": 17,
+//            "username": "mmm",
+//            "name": "test"
+//        },
+//        {
+//            "rid": 12,
+//            "username": "1234",
+//            "name": "death sentence"
+//        }
+//    ]
+//}
+//"""
+//        let data = try! JSONDecoder().decode(JSONResponse.self, from: json.data(using: .utf8)!)
+//        print(data)
+//        var iterator = data.message.makeIterator()
+//        while let route = iterator.next() {
+//            self.routeNames.append(route.name)
+//        }
+        
+        guard let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php") else {return}
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let dataResponse = data,
+                error == nil else {
+                    print(error?.localizedDescription ?? "Response Error")
+                    return }
             do {
-                let json = try JSONDecoder().decode(Response.self, from: data)
-                let routeNames: String
-                if let value = json.message?[0]["name"]{
-                    print(value)
+                //here dataResponse received from a network request
+                let model = try JSONDecoder().decode(JSONResponse.self, from: dataResponse) //Decode JSON Response Data
+                print(model)
+                
+                var iterator = model.message.makeIterator()
+                while let route = iterator.next() {
+                    self.routeNames.append(route.name)
                 }
                 
-            } catch let jsonErr {
-                print("Error serializing json:", jsonErr)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData() // Add this line and it should work
+                }
+                
+            } catch let parsingError {
+                print("Error", parsingError)
             }
-            }.resume()
-
+        }
+        task.resume()
+        
+        
+//        let jsonUrlString = "http://sjurockwall.atwebpages.com/getRoutes.php"
+//        guard let url = URL(string: jsonUrlString) else {return}
+//        URLSession.shared.dataTask(with: url) { (data, response, err) in
+//            //check error
+//            //check response status 200 ok
+//            guard let data = data else {return}
+//
+//            do {
+//                let jSONResponse = try? newJSONDecoder().decode(JSONResponse.self, from: jsonData)
+//                var iterator = json.message.makeIterator()
+//                while let route = iterator.next() {
+//                    self.routeNames.append(route.name)
+//                }
+//            } catch let jsonErr {
+//                print("Error serializing json:", jsonErr)
+//            }
+//        }.resume()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -73,13 +109,13 @@ class RoutesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return routes.count
+        return routeNames.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        let currentString = routes[indexPath.row].name
+        let currentString = routeNames[indexPath.row]
         cell.textLabel?.text = currentString
 
         return cell
@@ -128,7 +164,7 @@ class RoutesTableViewController: UITableViewController {
         var descScene = segue.destination as! ViewRouteViewController
         // Pass the selected object to the new view controller.
         if let indexPath = self.tableView.indexPathForSelectedRow {
-            let selectedRoute = routes[indexPath.row].name
+            let selectedRoute = routeNames[indexPath.row]
             descScene.test = selectedRoute
         }
 
