@@ -552,13 +552,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Cdg-yl-Rfn">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="Cdg-yl-Rfn">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cdg-yl-Rfn" id="cK7-Zb-mUA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="DpI-VH-kJS" kind="show" id="ecY-oJ-Hcf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -588,9 +591,21 @@
                     <view key="view" contentMode="scaleToFill" id="8ci-kJ-cg1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Qsl-WJ-Ad3" userLabel="selectedRoute">
+                                <rect key="frame" x="16" y="78" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="O2Y-an-PNt"/>
                     </view>
+                    <connections>
+                        <outlet property="selectedRoute" destination="Qsl-WJ-Ad3" id="LLz-oe-2Td"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYM-29-0Yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -667,9 +682,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="600" height="600"/>
+        <image name="climbingClub" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ecY-oJ-Hcf"/>
         <segue reference="we2-CG-Bxd"/>
         <segue reference="6tS-4T-SYu"/>
     </inferredMetricsTieBreakers>

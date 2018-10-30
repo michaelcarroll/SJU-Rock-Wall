@@ -8,12 +8,54 @@
 
 import UIKit
 
+struct Response: Decodable {
+    var error: Int?
+    var message:[Dictionary<String, String>]?
+}
+
 class RoutesTableViewController: UITableViewController {
     
-    var test = [String]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+//        // create post request
+//        let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php")!
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else {
+//                print(error?.localizedDescription ?? "No data")
+//                return
+//            }
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            if let responseJSON = responseJSON as? [String: Any] {
+//                print(responseJSON)
+//
+//                let routes = responseJSON["message"] as! NSArray
+//            }
+//        }
+//
+//        task.resume()
+        
+        let jsonUrlString = "http://sjurockwall.atwebpages.com/getRoutes.php"
+        guard let url = URL(string: jsonUrlString) else {return}
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            //check error
+            //check response status 200 ok
+            guard let data = data else {return}
+
+            do {
+                let json = try JSONDecoder().decode(Response.self, from: data)
+                let routeNames: String
+                var jsonIterator = json.message!.makeIterator()
+                let variable : Dictionary<String, String>
+                while variable = jsonIterator.next() {
+                }
+            } catch let jsonErr {
+                print("Error serializing json:", jsonErr)
+            }
+            }.resume()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -26,23 +68,22 @@ class RoutesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return routes.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
+        let currentString = routes[indexPath.row].name
+        cell.textLabel?.text = currentString
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -79,14 +120,17 @@ class RoutesTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
+        var descScene = segue.destination as! ViewRouteViewController
         // Pass the selected object to the new view controller.
-    }
-    */
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let selectedRoute = routes[indexPath.row].name
+            descScene.test = selectedRoute
+        }
 
+    }
 }

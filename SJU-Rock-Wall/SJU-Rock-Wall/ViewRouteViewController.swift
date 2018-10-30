@@ -10,6 +10,15 @@ import Foundation
 import UIKit
 
 class ViewRouteViewController: UIViewController {
+    @IBOutlet weak var selectedRoute: UITextView!
+    var test : String?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if (test != nil){
+            selectedRoute.text = test
+        }
+        
+    }
 }
 
