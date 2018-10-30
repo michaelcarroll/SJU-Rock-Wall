@@ -22,25 +22,11 @@ class UserProfileController: UIViewController {
         UserDefaults.standard.set(nil, forKey: "uid")
         self.performSegue(withIdentifier:"LoggedOutSegue", sender: nil)
     }
-
-    /**
-
-    {
-        let fName = fNameField.text
-        let lName = lNameField.text
-        let username = usernameField.text
-        let email = emailField.text
-        let password = passwordField.text
        
         
-        if(password != confirmPassword) {
-            let passwordMatchAlert = UIAlertController(title: "Error", message: "Passwords don't match. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
-            
-            passwordMatchAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(passwordMatchAlert, animated: true, completion: nil)
-        }
-        else {
-            let json: [String: Any] = ["fName": fName!, "lName": lName!, "username": username!, "email": email!, "password": password!]
+
+    
+    let json: [String: Any] = ["id": UserDefaults.standard.string(forKey: "uid")]
             
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             
@@ -81,13 +67,13 @@ class UserProfileController: UIViewController {
                             
                             self.present(createAccountAlert, animated: true, completion: nil)
                         }
-                    }s
+                    }
                 }
             }
             
             task.resume()
         }
-    }
- */
-}
+
+ 
+
 
