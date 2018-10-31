@@ -16,9 +16,9 @@ class MemberHomeViewController: UIViewController {
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            let uid = UserDefaults.standard.string(forKey: "uid")
-            if (uid != nil) {
-                welcomeText.text = ("Welcome " + uid! + "\n\n This is the home screen. News will probably be here some day.")
+            let fName = UserDefaults.standard.string(forKey: "fName")
+            if (fName != nil) {
+                welcomeText.text = ("Welcome " + fName! + ".\n\nThis is the home screen. News will probably be here some day.")
             }
         }
     }

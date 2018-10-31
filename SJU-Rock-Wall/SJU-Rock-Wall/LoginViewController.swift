@@ -15,14 +15,18 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBAction func keyboardReturnButtonPressed(_ sender: Any) {
+        self.loginButtonPressed(self)
+    }
+    
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email = emailField.text
         let password = passwordField.text
         
         if (email == nil || password == nil) {
-            let loginAlert = UIAlertController(title: "Error", message: "Both username and password required.", preferredStyle: UIAlertControllerStyle.alert)
+            let loginAlert = UIAlertController(title: "Error", message: "Both username and password required.", preferredStyle: UIAlertController.Style.alert)
             
-            loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(loginAlert, animated: true, completion: nil)
         }
         
@@ -51,12 +55,15 @@ class LoginViewController: UIViewController {
                 
                 if (error == 0) {
                     let uid = responseJSON["message"] as! Int
+                    
+                    // set defaults
                     UserDefaults.standard.set(uid, forKey: "uid")
+                    self.setDefaults(uid: uid)
 
                     DispatchQueue.main.async {
-                        let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                        let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertController.Style.alert)
 
-                       loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                       loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
                             self.performSegue(withIdentifier:"LoggedInSegue", sender: nil)
                         }))
                         
@@ -65,9 +72,9 @@ class LoginViewController: UIViewController {
                 }
                 else if (error == 3) {
                     DispatchQueue.main.async { // use this or it gets mad for not changing UI element on main thread
-                        let loginAlert = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: UIAlertControllerStyle.alert)
+                        let loginAlert = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: UIAlertController.Style.alert)
                         
-                        loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                         self.present(loginAlert, animated: true, completion: nil)
                     }
                 }
@@ -76,6 +83,54 @@ class LoginViewController: UIViewController {
         
         
         task.resume()    }
+    
+    func setDefaults(uid: Int) {
+        
+        struct JSONResponse: Codable {
+            let error: Int
+            let message: Message
+        }
+        
+        struct Message: Codable {
+            let email: String
+            let username: String
+            let fName: String
+            let lName: String
+        }
+        
+        let json: [String: Any] = ["id": uid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/getUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let dataResponse = data,
+                error == nil else {
+                    print(error?.localizedDescription ?? "Response Error")
+                    return }
+            do {
+                //here dataResponse received from a network request
+                let response = try JSONDecoder().decode(JSONResponse.self, from: dataResponse) //Decode JSON Response Data
+                
+                UserDefaults.standard.set(response.message.email, forKey: "email")
+                UserDefaults.standard.set(response.message.username, forKey: "username")
+                UserDefaults.standard.set(response.message.fName, forKey: "fName")
+                UserDefaults.standard.set(response.message.lName, forKey: "lName")
+                
+            } catch let parsingError {
+                print("Error", parsingError)
+                print("Raw JSON String: \(String(describing: String(data: dataResponse, encoding: .utf8)))")
+            }
+        }
+        task.resume()
+    }
     
 }
 

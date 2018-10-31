@@ -28,9 +28,9 @@ class CreateAccountViewController: UIViewController {
         let confirmPassword = confirmPasswordField.text
 
         if(password != confirmPassword) {
-            let passwordMatchAlert = UIAlertController(title: "Error", message: "Passwords don't match. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+            let passwordMatchAlert = UIAlertController(title: "Error", message: "Passwords don't match. Please try again.", preferredStyle: UIAlertController.Style.alert)
             
-            passwordMatchAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            passwordMatchAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(passwordMatchAlert, animated: true, completion: nil)
         }
         else {
@@ -58,9 +58,9 @@ class CreateAccountViewController: UIViewController {
                     let error = responseJSON["error"] as! Int
                     if (error == 0) {
                         DispatchQueue.main.async {
-                            let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                            let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertController.Style.alert)
                         
-                            createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                            createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
                             self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
                             }))
                         
@@ -69,9 +69,9 @@ class CreateAccountViewController: UIViewController {
                     }
                     else if (error == 3) {
                         DispatchQueue.main.async {
-                            let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                            let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertController.Style.alert)
                         
-                            createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                         
                             self.present(createAccountAlert, animated: true, completion: nil)
                         }

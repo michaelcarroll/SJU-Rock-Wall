@@ -24,21 +24,22 @@ class RoutesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.downloadData()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(self.downloadData), for: UIControl.Event.valueChanged)
+        self.refreshControl = refreshControl
+        
+        self.downloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.downloadData()
-    }
-
-    @IBAction func refresh(_ sender: UIRefreshControl) {
-        self.downloadData()
-        sender.endRefreshing()
+        //self.downloadData() commented out because index sometimes goes out of range if you switch tabs quickly...
     }
     
-    func downloadData() {
+    @objc func downloadData() {
         // reset arrays to empty
+        
         routeNames = [String]()
         routeArrayOfDictionary = [Message]()
         
@@ -65,10 +66,12 @@ class RoutesTableViewController: UITableViewController {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData();
+                    self.refreshControl?.endRefreshing()
                 }
                 
             } catch let parsingError {
                 print("Error", parsingError)
+                print("Raw JSON String: \(String(describing: String(data: dataResponse, encoding: .utf8)))")
             }
         }
         task.resume()

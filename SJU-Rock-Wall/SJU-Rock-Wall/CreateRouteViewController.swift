@@ -70,9 +70,9 @@ class CreateRouteViewController: UIViewController {
                 let error = responseJSON["error"] as! Int
                 if (error == 0) {
                     DispatchQueue.main.async {
-                        let createRouteAlert = UIAlertController(title: "Success", message: "Route created successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                        let createRouteAlert = UIAlertController(title: "Success", message: "Route created successfully.", preferredStyle: UIAlertController.Style.alert)
                     
-                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
                             self.navigationController?.popViewController(animated: true)
                         }))
                     
@@ -81,9 +81,9 @@ class CreateRouteViewController: UIViewController {
                 }
                 else if (error == 3) {
                     DispatchQueue.main.async {
-                        let createRouteAlert = UIAlertController(title: "Error", message: "Route not created. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                        let createRouteAlert = UIAlertController(title: "Error", message: "Route not created. Please try again.", preferredStyle: UIAlertController.Style.alert)
                     
-                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        createRouteAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                     
                         self.present(createRouteAlert, animated: true, completion: nil)
                     }

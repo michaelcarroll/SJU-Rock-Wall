@@ -14,8 +14,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let uid = UserDefaults.standard.string(forKey: "uid")
+        if (uid != nil) {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MemberTabBarController")
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
+        
+//        var userLoggedIn = false
+//
+//        let uid = UserDefaults.standard.string(forKey: "uid")
+//        if (uid != nil) {
+//            userLoggedIn = true
+//        }
+//
+//        if (userLoggedIn){
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            var homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "MemberHome") as!
+//            HomeViewController
+//            window!.rootViewController = homeViewController
+//        }
         return true
     }
 
