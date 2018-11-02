@@ -9,7 +9,7 @@ they push people to take risks in a safe environment. One way climbing club does
 routes, either vertical or horizontal, at a wide array of difficulties to challenge all levels of climbers. The
 wall is home to competitive and casual climbers alike.
 
-## How to build and run sprint 1 of SJU-Rock-Wall
+## How to build and run sprint 2 of SJU-Rock-Wall
 Clone the repository onto a Mac with Xcode installed
 
     $ git clone https://github.com/michaelcarroll/SJU-Rock-Wall/
