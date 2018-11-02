@@ -10,38 +10,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Metal-->
-        <scene sceneID="yDF-D9-qSF">
-            <objects>
-                <navigationController id="y0h-90-Q1Q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Metal" id="kKa-B9-n2f"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ygr-ZP-LOD">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="BV1-FR-VrT" kind="relationship" relationship="rootViewController" id="Sqa-xQ-tlg"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZdV-ul-1fm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1807" y="257"/>
-        </scene>
         <!--Graphics-->
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController storyboardIdentifier="Graphics" title="Graphics" id="BV1-FR-VrT" customClass="GameViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
-                    <sceneKitView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                    <sceneKitView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="rockWall.scn" id="3se-qz-xqx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </sceneKitView>
                     <tabBarItem key="tabBarItem" title="Metal" id="jwM-4X-ejJ"/>
-                    <navigationItem key="navigationItem" id="bvV-9h-dr8"/>
+                    <navigationItem key="navigationItem" id="bvV-9h-dr8">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="XaR-uj-TTk">
+                            <connections>
+                                <action selector="saveButtonPress:" destination="BV1-FR-VrT" id="t3c-C4-I1R"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="XaR-uj-TTk" id="Osk-Xb-Ib3"/>
+                        <segue destination="T2B-7j-oE7" kind="show" identifier="saveScene" id="SW5-ua-9Bb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1007" y="257"/>
+            <point key="canvasLocation" x="777" y="-2700"/>
         </scene>
         <!--UserProfile-->
         <scene sceneID="Xzz-hY-cyy">
@@ -282,7 +275,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="3gK-n8-lQT" kind="relationship" relationship="viewControllers" id="Ice-rU-u7a"/>
-                        <segue destination="y0h-90-Q1Q" kind="relationship" relationship="viewControllers" id="Ufw-Jh-Ya0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVI-WN-3VT" sceneMemberID="firstResponder"/>
@@ -541,7 +533,7 @@
                     <navigationItem key="navigationItem" title="Routes" id="Kmy-rE-Urj">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="BV9-cp-cFd">
                             <connections>
-                                <segue destination="T2B-7j-oE7" kind="show" id="eVb-Rt-wyl"/>
+                                <segue destination="BV1-FR-VrT" kind="show" id="WGB-ED-jSg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -686,7 +678,7 @@
                                 <rect key="frame" x="16" y="192" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
-                                    <action selector="submitButtonPress:" destination="T2B-7j-oE7" eventType="touchUpInside" id="dms-6m-HyY"/>
+                                    <action selector="submitButtonPress:" destination="T2B-7j-oE7" eventType="touchUpInside" id="93l-uF-pp1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -712,15 +704,16 @@
                         <outlet property="routeDescription" destination="N04-dF-04q" id="vYp-nC-NuU"/>
                         <outlet property="routeDifficulty" destination="0Eh-CP-Z6Y" id="Ug3-cj-niP"/>
                         <outlet property="routeName" destination="gE9-cx-niT" id="Rqe-bl-dE1"/>
+                        <outlet property="submitButton" destination="acQ-kX-C5H" id="2fP-yy-uWq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4hV-30-9fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="776.79999999999995" y="-2722.4887556221893"/>
+            <point key="canvasLocation" x="1713" y="-2700"/>
         </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="600" height="600"/>
+        <image name="climbingClub" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="boS-76-aO4"/>

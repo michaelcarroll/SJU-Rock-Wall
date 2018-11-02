@@ -11,6 +11,10 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    var serialScene: String!
+    
     var scnView: SCNView!
     var scnScene: SCNScene!
     var cameraOrbit: SCNNode!
@@ -39,13 +43,11 @@ class GameViewController: UIViewController {
         setupView()
         setupScene()
         setupCamera()
-        spawnShape()
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
-        // retrieve the text node
-        text = scnScene.rootNode.childNode(withName: "text", recursively: true)!
+
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -58,6 +60,19 @@ class GameViewController: UIViewController {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: Selector(("handlePinch:")))
         scnView.addGestureRecognizer(pinchGesture)
     }
+    
+    @IBAction func saveButtonPress(_ sender: Any) {
+        let serializer = SceneSerializer.init(scene: scnScene)
+        serialScene = serializer.serializeScene()
+        
+        self.performSegue(withIdentifier:"saveScene", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var descScene = segue.destination as! CreateRouteViewController
+        descScene.serialScene = serialScene
+    }
+    
     
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer)
@@ -76,9 +91,17 @@ class GameViewController: UIViewController {
                     {
                         if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
                         {
+                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+                        }
+                        else if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow))
+                        {
+                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.orange
+                        }
+                        else if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange))
+                        {
                             result.node.geometry!.firstMaterial!.emission.contents = UIColor.black
                         }
-                    
+                            
                         else
                         {
                             result.node.geometry!.firstMaterial!.emission.contents = UIColor.red
@@ -155,7 +178,7 @@ class GameViewController: UIViewController {
         return true
     }
     func setupView() {
-        scnView = self.view as! SCNView
+        scnView = self.view as? SCNView
         // 1
         scnView.showsStatistics = true
         // 2
@@ -164,7 +187,14 @@ class GameViewController: UIViewController {
         scnView.autoenablesDefaultLighting = true
     }
     func setupScene() {
-        scnScene = SCNScene(named: "rockWall.scn")
+        scnScene = SCNScene(named: "rockWall-2.scn")
+        
+        let serializer = SceneSerializer.init(scene: scnScene)
+        let serialScene = serializer.serializeScene()
+        let unserialScene = serializer.unserializeScene(serialScene: serialScene)
+        
+        scnScene = unserialScene
+        
         scnView.scene = scnScene
         scnView.backgroundColor = UIColor.white
     }
@@ -192,24 +222,4 @@ class GameViewController: UIViewController {
 
     }
     
-    func spawnShape() {
-        // 1
-        /*var geometry:SCNGeometry
-        // 2
-        switch ShapeType.random() {
-        case .Box:
-            geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 1.0)
-        case .Sphere:
-            geometry = SCNSphere(radius: 0.5)
-        case .Pyramid:
-            geometry = SCNPyramid(width: 1.0, height: 1.0, length: 1.0)
-        default:
-            // 3
-            geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
-        }
-         //
-        let geometryNode = SCNNode(geometry: geometry)
-        // 5
-        scnScene.rootNode.addChildNode(geometryNode)*/
-    }
 }
