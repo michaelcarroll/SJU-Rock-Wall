@@ -5,24 +5,19 @@ $response = array();
  
 set_include_path(get_include_path() . PATH_SEPARATOR . 'C:\xampp\htdocs');
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	$inputJSON = file_get_contents('php://input');
-	$input = json_decode($inputJSON, TRUE);
-	ob_start();                    // start buffer capture
-    var_dump($input);           // dump the values
-    $contents = ob_get_contents(); // put the buffer into a variable
-    ob_end_clean();                // end capture
-    error_log('Error:'. $contents );
+    $inputJSON = file_get_contents('php://input');
+    $input = json_decode($inputJSON, TRUE);
     //getting values
-	if(isset($input['username'])){
-		$username = $input['username'];
+	if(isset($input['id'])){
+		$id = $input['id'];
 		//including the db operation file
-		require_once 'DbOperations.php';
+		require_once 'DbOperation.php';
 	 
 		$db = new DbOperation();
-		$id = $db->getUser($username);
-		if(!empty($id)){
+		$user = $db->getUser($id);
+		if(!empty($user)){
 			$response['error']=0;
-			$response['message']=$id;
+			$response['message']=$user;
 		}else{
 			$response['error']=3;
 			$response['message']='Not valid username';

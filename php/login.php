@@ -2,22 +2,16 @@
 header('Content-Type: application/json');
 
 $response = array();
- 
-set_include_path(get_include_path() . PATH_SEPARATOR . 'C:\xampp\htdocs');
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	$inputJSON = file_get_contents('php://input');
-	$input = json_decode($inputJSON, TRUE);
-	ob_start();                    // start buffer capture
-    var_dump($input);           // dump the values
-    $contents = ob_get_contents(); // put the buffer into a variable
-    ob_end_clean();                // end capture
-    error_log('Error:'. $contents );
+    $inputJSON = file_get_contents('php://input');
+    $input = json_decode($inputJSON, TRUE);
     //getting values
 	if(isset($input['email']) && isset($input['password'])){
 		$email = $input['email'];
 		$password = $input['password'];
 		//including the db operation file
-		require_once 'DbOperations.php';
+		require_once 'DbOperation.php';
 	 
 		$db = new DbOperation();
 		$id = $db->login($email,$password);
@@ -30,7 +24,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		}
 	} else {
 		$response['error']=2;
-        $response['message']='Login variables not set';
+                $response['message']='Login variables not set';
 	}
  
 }else{
