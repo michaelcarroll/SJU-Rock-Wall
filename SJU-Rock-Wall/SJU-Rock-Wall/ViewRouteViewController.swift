@@ -88,7 +88,7 @@ class ViewRouteViewController: UIViewController {
         }
         
         func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            let descScene = segue.destination as! GameViewController
+            let descScene = segue.destination as! ViewGameViewController
             descScene.scnScene = self.scene
         }
         
