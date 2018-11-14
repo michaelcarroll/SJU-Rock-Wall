@@ -51,13 +51,13 @@ class GameViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
-        
+
         // add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         scnView.addGestureRecognizer(panGesture)
-        
+
         // add a pinch gesture recognizer
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         scnView.addGestureRecognizer(pinchGesture)
     }
     
@@ -75,7 +75,7 @@ class GameViewController: UIViewController {
     
     
     @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer)
+    func handleTap(_ gestureRecognize: UITapGestureRecognizer)
     {
         let p = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(p, options: [:])
@@ -87,8 +87,6 @@ class GameViewController: UIViewController {
             {
                 if(result.node.name != "wall")
                 {
-                    if(result.node.name != "text")
-                    {
                         if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
                         {
                             result.node.geometry!.firstMaterial!.emission.contents = UIColor.yellow
@@ -106,7 +104,6 @@ class GameViewController: UIViewController {
                         {
                             result.node.geometry!.firstMaterial!.emission.contents = UIColor.red
                         }
-                    }
                 }
             }
         }
@@ -122,26 +119,30 @@ class GameViewController: UIViewController {
             
             WidthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio
             HeightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
+            print(WidthRatio)
+            print(HeightRatio)
             
             //  HEIGHT constraints
-            if (HeightRatio >= maxHeightRatioXUp ) {
-                HeightRatio = maxHeightRatioXUp
-            }
-            if (HeightRatio <= maxHeightRatioXDown ) {
-                HeightRatio = maxHeightRatioXDown
-            }
+//            if (HeightRatio >= maxHeightRatioXUp ) {
+//                HeightRatio = maxHeightRatioXUp
+//            }
+//            if (HeightRatio <= maxHeightRatioXDown ) {
+//                HeightRatio = maxHeightRatioXDown
+//            }
             
             
             //  WIDTH constraints
-            if(WidthRatio >= maxWidthRatioRight) {
-                WidthRatio = maxWidthRatioRight
-            }
-            if(WidthRatio <= maxWidthRatioLeft) {
-                WidthRatio = maxWidthRatioLeft
-            }
+//            if(WidthRatio >= maxWidthRatioRight) {
+//                WidthRatio = maxWidthRatioRight
+//            }
+//            if(WidthRatio <= maxWidthRatioLeft) {
+//                WidthRatio = maxWidthRatioLeft
+//            }
             
-            self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
-            self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * HeightRatio
+//            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
+//            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
+            self.cameraNode.position.x = -(Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio)
+            self.cameraNode.position.y = -(Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio)
             
             //for final check on fingers number
             lastFingersNumber = fingersNeededToPan
@@ -153,22 +154,29 @@ class GameViewController: UIViewController {
             lastWidthRatio = WidthRatio
             lastHeightRatio = HeightRatio
         }
+        scnView.showsStatistics = true
     }
     
     @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
         let pinchVelocity = Double.init(gestureRecognize.velocity)
         //print("PinchVelocity \(pinchVelocity)")
-        
-        camera.orthographicScale -= (pinchVelocity/pinchAttenuation)
-        
-        if camera.orthographicScale <= 0.5 {
-            camera.orthographicScale = 0.5
+        if(camera.usesOrthographicProjection){
+            print(camera.usesOrthographicProjection)
+            camera.orthographicScale -= (pinchVelocity/pinchAttenuation)
+            
+            if camera.orthographicScale <= 0.5 {
+                camera.orthographicScale = 0.5
+            }
+            
+            if camera.orthographicScale >= 10.0 {
+                camera.orthographicScale = 10.0
+            }
         }
-        
-        if camera.orthographicScale >= 10.0 {
-            camera.orthographicScale = 10.0
+        else{
+            cameraNode.position.z = cameraNode.position.z - Float(pinchVelocity/pinchAttenuation)
+            print(cameraNode.position.z)
         }
-        
+        scnView.showsStatistics = true
     }
     func shouldAutorotate() -> Bool {
         return true
@@ -179,12 +187,14 @@ class GameViewController: UIViewController {
     }
     func setupView() {
         scnView = self.view as? SCNView
+        scnView.scene = scnScene
         // 1
         scnView.showsStatistics = true
         // 2
         scnView.allowsCameraControl = true
         // 3
         scnView.autoenablesDefaultLighting = true
+        //scnView.defaultCameraController
     }
     
     func setupScene() {
@@ -196,20 +206,24 @@ class GameViewController: UIViewController {
     
     func setupCamera() {
         // 1
-        cameraNode = SCNNode()
-        // 2
-        // 3
-        camera = SCNCamera()
-        camera.usesOrthographicProjection = true
-        camera.orthographicScale = 9
-        camera.zNear = 1
-        camera.zFar = 100
-        cameraNode.camera = camera
-        //scnScene.rootNode.addChildNode(cameraNode)
-        cameraOrbit=SCNNode()
-        //camera = SCNCamera()
-        cameraOrbit.addChildNode(cameraNode)
-        scnScene.rootNode.addChildNode(cameraOrbit)
+        cameraNode = scnScene.rootNode.childNode(withName: "cameraNode", recursively: false)
+        cameraNode.movabilityHint = SCNMovabilityHint.movable
+        print(cameraNode)
+        camera = cameraNode.camera
+//        // 2
+//        // 3
+//
+//        // 4
+//        //scnScene.rootNode.addChildNode(cameraNode)
+//        cameraOrbit=SCNNode()
+//        cameraOrbit.movabilityHint = SCNMovabilityHint.movable
+//        //camera = SCNCamera()
+//        cameraOrbit.addChildNode(cameraNode)
+//        scnScene.rootNode.addChildNode(cameraOrbit)
+//
+//        self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
+//        self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
+
     }
     
 }
