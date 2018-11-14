@@ -5,7 +5,6 @@
 //  Created by Carroll, Michael G on 10/25/18.
 //  Copyright © 2018 Carroll, Michael G. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import SceneKit
@@ -35,12 +34,17 @@ class ViewRouteViewController: UIViewController {
     @IBOutlet weak var routeCreationDate: UITextView!
     @IBOutlet weak var routeRating: UITextView!
     @IBOutlet weak var routeDescription: UITextView!
+    @IBOutlet weak var wallState: SCNView!
     
     var serialScene: String!
     var scene: SCNScene!
+    var scnView: SCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
+        setupScene()
         
         let json: [String: Any] = ["id": selectedRoute!]
         print(selectedRoute)
@@ -66,33 +70,41 @@ class ViewRouteViewController: UIViewController {
                 let model = try JSONDecoder().decode(JSONResponse.self, from: dataResponse) //Decode JSON Response Data
                 print(model)
                 
+                //self.serialScene = model.message.wallState
+                //print(self.serialScene)
+                //let serializer = SceneSerializer.init(scene: self.scene)
+                //self.scene = serializer.unserializeScene(serialScene: self.serialScene)
+                //print(self.scene)
+                
                 DispatchQueue.main.async {
                     self.routeName.text = model.message.name
                     self.routeUsername.text = "@\(model.message.username)"
                     self.routeCreationDate.text = "Created: \(model.message.creationDate)"
                     self.routeRating.text = "Rating: \(model.message.rating)"
                     self.routeDescription.text = "Description: \(model.message.description)"
+                    self.wallState = self.scnView
                 }
                 
-                self.serialScene = model.message.wallState
-                print(self.serialScene)
+               
             }
             catch let parsingError {
                 print("Error", parsingError)
             }
-            
-            self.scene = SCNScene(named: "rockWall-2.scn")
-            let serializer = SceneSerializer.init(scene: self.scene)
-            self.scene = serializer.unserializeScene(serialScene: self.serialScene)
-            print(self.scene)
         }
-        
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            let descScene = segue.destination as! ViewGameViewController
-            descScene.scnScene = self.scene
-        }
-        
         task.resume()
+    }
+    
+    func setupView() {
+        scnView = self.view as? SCNView
+        //scnView.showsStatistics = true
+        //scnView.allowsCameraControl = true
+        //scnView.autoenablesDefaultLighting = true
+    }
+    
+    func setupScene() {
+        scene = SCNScene(named: "rockWall-2.scn")
+        //scnView.scene = scene
+        //scnView.backgroundColor = UIColor.white
     }
 }
 

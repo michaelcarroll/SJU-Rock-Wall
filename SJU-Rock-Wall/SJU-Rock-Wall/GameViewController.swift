@@ -186,14 +186,9 @@ class GameViewController: UIViewController {
         // 3
         scnView.autoenablesDefaultLighting = true
     }
+    
     func setupScene() {
         scnScene = SCNScene(named: "rockWall-2.scn")
-        
-        let serializer = SceneSerializer.init(scene: scnScene)
-        let serialScene = serializer.serializeScene()
-        let unserialScene = serializer.unserializeScene(serialScene: serialScene)
-        
-        scnScene = unserialScene
         
         scnView.scene = scnScene
         scnView.backgroundColor = UIColor.white
