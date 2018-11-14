@@ -205,16 +205,11 @@ class GameViewController: UIViewController {
         camera.zNear = 1
         camera.zFar = 100
         cameraNode.camera = camera
-        // 4
         //scnScene.rootNode.addChildNode(cameraNode)
         cameraOrbit=SCNNode()
         //camera = SCNCamera()
         cameraOrbit.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cameraOrbit)
-
-        self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
-        self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
-
     }
     
 }

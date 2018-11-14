@@ -507,7 +507,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="MC6-s4-Mlc">
+                        <searchBar key="tableHeaderView" contentMode="redraw" misplaced="YES" id="MC6-s4-Mlc">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -596,12 +596,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" sceneName="rockWall-2.scn" preferredRenderingAPI="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qit-rW-kvD">
-                                <rect key="frame" x="22" y="376" width="330" height="236"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Qit-rW-kvD" secondAttribute="height" multiplier="294:205" id="PBz-kM-jqR"/>
-                                </constraints>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-X1-rFS">
+                                <rect key="frame" x="16" y="383" width="343" height="226"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -632,7 +629,6 @@
                         <outlet property="routeName" destination="Qsl-WJ-Ad3" id="L0k-xD-Ww0"/>
                         <outlet property="routeRating" destination="ake-du-Qzl" id="1bZ-Pr-Mkb"/>
                         <outlet property="routeUsername" destination="8dp-H0-LCw" id="PKp-2W-ncA"/>
-                        <outlet property="wallState" destination="Qit-rW-kvD" id="Ugz-F2-wAQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYM-29-0Yk" userLabel="First Responder" sceneMemberID="firstResponder"/>

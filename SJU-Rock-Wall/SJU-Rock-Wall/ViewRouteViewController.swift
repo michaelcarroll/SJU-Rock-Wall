@@ -34,17 +34,9 @@ class ViewRouteViewController: UIViewController {
     @IBOutlet weak var routeCreationDate: UITextView!
     @IBOutlet weak var routeRating: UITextView!
     @IBOutlet weak var routeDescription: UITextView!
-    @IBOutlet weak var wallState: SCNView!
-    
-    var serialScene: String!
-    var scene: SCNScene!
-    var scnView: SCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupView()
-        setupScene()
         
         let json: [String: Any] = ["id": selectedRoute!]
         print(selectedRoute)
@@ -82,10 +74,7 @@ class ViewRouteViewController: UIViewController {
                     self.routeCreationDate.text = "Created: \(model.message.creationDate)"
                     self.routeRating.text = "Rating: \(model.message.rating)"
                     self.routeDescription.text = "Description: \(model.message.description)"
-                    self.wallState = self.scnView
                 }
-                
-               
             }
             catch let parsingError {
                 print("Error", parsingError)
@@ -93,18 +82,4 @@ class ViewRouteViewController: UIViewController {
         }
         task.resume()
     }
-    
-    func setupView() {
-        scnView = self.view as? SCNView
-        //scnView.showsStatistics = true
-        //scnView.allowsCameraControl = true
-        //scnView.autoenablesDefaultLighting = true
-    }
-    
-    func setupScene() {
-        scene = SCNScene(named: "rockWall-2.scn")
-        //scnView.scene = scene
-        //scnView.backgroundColor = UIColor.white
-    }
 }
-

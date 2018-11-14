@@ -10,19 +10,19 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class ViewGameViewController: UIViewController {
+class ViewGameViewController: UIView {
+    
+    
     
     var serialScene: String!
     var sceneName: String!
     var scnView: SCNView!
     var scnScene: SCNScene!
-   
-    //var wall: SCNNode!
-    //var wedge: SCNNode!
     
     var cameraOrbit: SCNNode!
     var cameraNode: SCNNode!
     var camera: SCNCamera!
+    
     //HANDLE PAN CAMERA
     var lastWidthRatio: Float = 0
     var lastHeightRatio: Float = 0.2
@@ -43,11 +43,6 @@ class ViewGameViewController: UIViewController {
         setupView()
         setupScene()
         setupCamera()
-        // retrieve the wall node
-        //wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
-        // retrieve the wedge node
-        //wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
-        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -157,11 +152,6 @@ class ViewGameViewController: UIViewController {
         //camera = SCNCamera()
         cameraOrbit.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cameraOrbit)
-        
-        //self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
-        //self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
-        
     }
-    
 }
 
