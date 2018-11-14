@@ -57,7 +57,7 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(panGesture)
         
         // add a pinch gesture recognizer
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: Selector(("handlePinch:")))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         scnView.addGestureRecognizer(pinchGesture)
     }
     
@@ -155,7 +155,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    func handlePinch(gestureRecognize: UIPinchGestureRecognizer) {
+    @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
         let pinchVelocity = Double.init(gestureRecognize.velocity)
         //print("PinchVelocity \(pinchVelocity)")
         
