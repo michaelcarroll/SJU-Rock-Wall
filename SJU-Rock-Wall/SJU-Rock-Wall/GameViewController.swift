@@ -75,7 +75,7 @@ class GameViewController: UIViewController {
     
     
     @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer)
+    func handleTap(_ gestureRecognize: UITapGestureRecognizer)
     {
         let p = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(p, options: [:])
@@ -87,8 +87,6 @@ class GameViewController: UIViewController {
             {
                 if(result.node.name != "wall")
                 {
-                    if(result.node.name != "text")
-                    {
                         if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
                         {
                             result.node.geometry!.firstMaterial!.emission.contents = UIColor.yellow
@@ -106,7 +104,6 @@ class GameViewController: UIViewController {
                         {
                             result.node.geometry!.firstMaterial!.emission.contents = UIColor.red
                         }
-                    }
                 }
             }
         }
@@ -135,12 +132,12 @@ class GameViewController: UIViewController {
             
             
             //  WIDTH constraints
-            if(WidthRatio >= maxWidthRatioRight) {
-                WidthRatio = maxWidthRatioRight
-            }
-            if(WidthRatio <= maxWidthRatioLeft) {
-                WidthRatio = maxWidthRatioLeft
-            }
+//            if(WidthRatio >= maxWidthRatioRight) {
+//                WidthRatio = maxWidthRatioRight
+//            }
+//            if(WidthRatio <= maxWidthRatioLeft) {
+//                WidthRatio = maxWidthRatioLeft
+//            }
             
 //            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
 //            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
@@ -157,6 +154,7 @@ class GameViewController: UIViewController {
             lastWidthRatio = WidthRatio
             lastHeightRatio = HeightRatio
         }
+        scnView.showsStatistics = true
     }
     
     @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
@@ -175,8 +173,10 @@ class GameViewController: UIViewController {
             }
         }
         else{
-            //cameraNode.position.z = cameraNode.position.z - (pinchVelocity/pinchAttenuation)
+            cameraNode.position.z = cameraNode.position.z - Float(pinchVelocity/pinchAttenuation)
+            print(cameraNode.position.z)
         }
+        scnView.showsStatistics = true
     }
     func shouldAutorotate() -> Bool {
         return true
