@@ -11,19 +11,17 @@ import QuartzCore
 import SceneKit
 
 class ViewGameViewController: UIViewController {
-    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var serialScene: String!
-    
     var sceneName: String!
-    
     var scnView: SCNView!
     var scnScene: SCNScene!
+   
+    //var wall: SCNNode!
+    //var wedge: SCNNode!
+    
     var cameraOrbit: SCNNode!
     var cameraNode: SCNNode!
-    var wall: SCNNode!
-    var wedge: SCNNode!
-    var text: SCNNode!
     var camera: SCNCamera!
     //HANDLE PAN CAMERA
     var lastWidthRatio: Float = 0
@@ -46,9 +44,9 @@ class ViewGameViewController: UIViewController {
         setupScene()
         setupCamera()
         // retrieve the wall node
-        wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
+        //wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
-        wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
+        //wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
         
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -136,42 +134,32 @@ class ViewGameViewController: UIViewController {
     }
     func setupView() {
         scnView = self.view as? SCNView
-        // 1
         scnView.showsStatistics = true
-        // 2
         scnView.allowsCameraControl = true
-        // 3
         scnView.autoenablesDefaultLighting = true
     }
     func setupScene() {
         scnScene = SCNScene(named: sceneName)
-        
-        scnScene = unserialScene
-        
         scnView.scene = scnScene
         scnView.backgroundColor = UIColor.white
     }
     
     func setupCamera() {
-        // 1
         cameraNode = SCNNode()
-        // 2
-        // 3
         camera = SCNCamera()
         camera.usesOrthographicProjection = true
         camera.orthographicScale = 9
         camera.zNear = 1
         camera.zFar = 100
         cameraNode.camera = camera
-        // 4
-        //scnScene.rootNode.addChildNode(cameraNode)
+        scnScene.rootNode.addChildNode(cameraNode)
         cameraOrbit=SCNNode()
         //camera = SCNCamera()
         cameraOrbit.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cameraOrbit)
         
-        self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
-        self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
+        //self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
+        //self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
         
     }
     

@@ -596,6 +596,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" sceneName="rockWall-2.scn" preferredRenderingAPI="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qit-rW-kvD">
+                                <rect key="frame" x="22" y="376" width="330" height="236"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Qit-rW-kvD" secondAttribute="height" multiplier="294:205" id="PBz-kM-jqR"/>
+                                </constraints>
+                            </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -625,6 +632,7 @@
                         <outlet property="routeName" destination="Qsl-WJ-Ad3" id="L0k-xD-Ww0"/>
                         <outlet property="routeRating" destination="ake-du-Qzl" id="1bZ-Pr-Mkb"/>
                         <outlet property="routeUsername" destination="8dp-H0-LCw" id="PKp-2W-ncA"/>
+                        <outlet property="wallState" destination="Qit-rW-kvD" id="Ugz-F2-wAQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYM-29-0Yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
