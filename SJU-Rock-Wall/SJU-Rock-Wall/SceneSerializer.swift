@@ -15,17 +15,13 @@ class SceneSerializer {
     public func serializeScene() -> String {
         let serial = NSKeyedArchiver.archivedData(withRootObject: theScene).base64EncodedString()
         return serial
-        
-        
     }
     
     // function to unserialize a data file back into a .scn
     public func unserializeScene(serialScene: String) -> SCNScene {
         
         let data = NSData(base64Encoded: serialScene, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters)
-        
-        
-        
+    
         if let loadedScene = NSKeyedUnarchiver.unarchiveObject(with: data! as Data) as? SCNScene{
              theScene = loadedScene
         }

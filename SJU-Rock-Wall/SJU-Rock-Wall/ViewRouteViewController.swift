@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SceneKit
 
 struct JSONResponse: Codable {
     let error: Int
@@ -34,6 +35,9 @@ class ViewRouteViewController: UIViewController {
     @IBOutlet weak var routeCreationDate: UITextView!
     @IBOutlet weak var routeRating: UITextView!
     @IBOutlet weak var routeDescription: UITextView!
+    
+    var serialScene: String!
+    var scene: SCNScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,10 +74,24 @@ class ViewRouteViewController: UIViewController {
                     self.routeDescription.text = "Description: \(model.message.description)"
                 }
                 
-            } catch let parsingError {
+                self.serialScene = model.message.wallState
+                print(self.serialScene)
+            }
+            catch let parsingError {
                 print("Error", parsingError)
             }
+            
+            self.scene = SCNScene(named: "rockWall-2.scn")
+            let serializer = SceneSerializer.init(scene: self.scene)
+            self.scene = serializer.unserializeScene(serialScene: self.serialScene)
+            print(self.scene)
         }
+        
+        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let descScene = segue.destination as! ViewGameViewController
+            descScene.scnScene = self.scene
+        }
+        
         task.resume()
     }
 }

@@ -1,8 +1,8 @@
 //
-//  GameViewController.swift
+//  ViewGameViewController.swift
 //  SJU-Rock-Wall
 //
-//  Created by Tran, Anh B on 9/24/18.
+//  Created by Alseth, Colton D on 11/13/18.
 //  Copyright © 2018 Tran, Anh B. All rights reserved.
 //
 
@@ -10,10 +10,12 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class GameViewController: UIViewController {
+class ViewGameViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var serialScene: String!
+    
+    var sceneName: String!
     
     var scnView: SCNView!
     var scnScene: SCNScene!
@@ -33,11 +35,11 @@ class GameViewController: UIViewController {
     var maxWidthRatioLeft: Float = -0.2
     var maxHeightRatioXDown: Float = 0.02
     var maxHeightRatioXUp: Float = 0.4
-
+    
     //HANDLE PINCH CAMERA
     var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
     var lastFingersNumber = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -47,7 +49,7 @@ class GameViewController: UIViewController {
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
-
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -57,59 +59,14 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(panGesture)
         
         // add a pinch gesture recognizer
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: Selector(("handlePinch:")))
         scnView.addGestureRecognizer(pinchGesture)
     }
     
-    @IBAction func saveButtonPress(_ sender: Any) {
-        let serializer = SceneSerializer.init(scene: scnScene)
-        serialScene = serializer.serializeScene()
-        
-        self.performSegue(withIdentifier:"saveScene", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var descScene = segue.destination as! CreateRouteViewController
-        descScene.serialScene = serialScene
-    }
-    
-    
-    @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer)
+    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer)
     {
         let p = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(p, options: [:])
-        
-        if hitResults.count > 0 {
-            let result = hitResults[0]
-            
-            if(result.node.name != "wedge")
-            {
-                if(result.node.name != "wall")
-                {
-                    if(result.node.name != "text")
-                    {
-                        if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.yellow
-                        }
-                        else if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.orange
-                        }
-                        else if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.black
-                        }
-                            
-                        else
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.red
-                        }
-                    }
-                }
-            }
-        }
     }
     
     @objc func handlePan(_ gestureRecognize: UIPanGestureRecognizer) {
@@ -155,7 +112,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
+    func handlePinch(gestureRecognize: UIPinchGestureRecognizer) {
         let pinchVelocity = Double.init(gestureRecognize.velocity)
         //print("PinchVelocity \(pinchVelocity)")
         
@@ -187,11 +144,7 @@ class GameViewController: UIViewController {
         scnView.autoenablesDefaultLighting = true
     }
     func setupScene() {
-        scnScene = SCNScene(named: "rockWall-2.scn")
-        
-        let serializer = SceneSerializer.init(scene: scnScene)
-        let serialScene = serializer.serializeScene()
-        let unserialScene = serializer.unserializeScene(serialScene: serialScene)
+        scnScene = SCNScene(named: sceneName)
         
         scnScene = unserialScene
         
@@ -216,10 +169,11 @@ class GameViewController: UIViewController {
         //camera = SCNCamera()
         cameraOrbit.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cameraOrbit)
-
+        
         self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
         self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
-
+        
     }
     
 }
+
