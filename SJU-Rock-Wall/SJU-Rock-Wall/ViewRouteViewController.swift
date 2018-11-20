@@ -34,13 +34,18 @@ class ViewRouteViewController: UIViewController {
     @IBOutlet weak var routeCreationDate: UITextView!
     @IBOutlet weak var routeRating: UITextView!
     @IBOutlet weak var routeDescription: UITextView!
+    @IBOutlet weak var routeScene: SCNView!
+    
+    var scene: SCNScene!
+    var serialScene: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.scene = SCNScene(named: "rockWall-2.scn")
+        
         let json: [String: Any] = ["id": selectedRoute!]
         print(selectedRoute)
-        
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         // create post request
@@ -50,7 +55,6 @@ class ViewRouteViewController: UIViewController {
         
         // insert json data to the request
         request.httpBody = jsonData
-        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let dataResponse = data,
                 error == nil else {
@@ -62,11 +66,15 @@ class ViewRouteViewController: UIViewController {
                 let model = try JSONDecoder().decode(JSONResponse.self, from: dataResponse) //Decode JSON Response Data
                 print(model)
                 
-                //self.serialScene = model.message.wallState
-                //print(self.serialScene)
-                //let serializer = SceneSerializer.init(scene: self.scene)
-                //self.scene = serializer.unserializeScene(serialScene: self.serialScene)
-                //print(self.scene)
+                self.serialScene = model.message.wallState
+                let serializer = SceneSerializer.init(scene: self.scene)
+                self.scene = serializer.unserializeScene(serialScene: self.serialScene)
+                
+                //self.routeScene = self.view as? SCNView
+                //scnView.showsStatistics = true
+                //scnView.allowsCameraControl = true
+                //scnView.autoenablesDefaultLighting = true
+                
                 
                 DispatchQueue.main.async {
                     self.routeName.text = model.message.name
@@ -74,7 +82,11 @@ class ViewRouteViewController: UIViewController {
                     self.routeCreationDate.text = "Created: \(model.message.creationDate)"
                     self.routeRating.text = "Rating: \(model.message.rating)"
                     self.routeDescription.text = "Description: \(model.message.description)"
+                    //self.routeScene.scene = self.scene
                 }
+                
+                
+                
             }
             catch let parsingError {
                 print("Error", parsingError)
