@@ -36,16 +36,18 @@ class ViewRouteViewController: UIViewController {
     @IBOutlet weak var routeDescription: UITextView!
     @IBOutlet weak var routeScene: SCNView!
     
+    var scnView: SCNView!
     var scene: SCNScene!
     var serialScene: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //give scene an intial value
         self.scene = SCNScene(named: "rockWall-2.scn")
         
         let json: [String: Any] = ["id": selectedRoute!]
-        print(selectedRoute)
+        //print(selectedRoute)
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
         // create post request
@@ -60,21 +62,22 @@ class ViewRouteViewController: UIViewController {
                 error == nil else {
                     print(error?.localizedDescription ?? "Response Error")
                     return }
-            print("JSON String: \(String(data: dataResponse, encoding: .utf8))")
+            //print("JSON String: \(String(data: dataResponse, encoding: .utf8))")
             do {
                 //here dataResponse received from a network request
                 let model = try JSONDecoder().decode(JSONResponse.self, from: dataResponse) //Decode JSON Response Data
-                print(model)
+                //print(model)
                 
                 self.serialScene = model.message.wallState
                 let serializer = SceneSerializer.init(scene: self.scene)
-                self.scene = serializer.unserializeScene(serialScene: self.serialScene)
+                //self.scene = serializer.unserializeScene(serialScene: self.serialScene)
                 
-                //self.routeScene = self.view as? SCNView
+                self.scnView = SCNView.init()
+                self.scnView.scene = self.scene
                 //scnView.showsStatistics = true
                 //scnView.allowsCameraControl = true
                 //scnView.autoenablesDefaultLighting = true
-                
+                self.routeScene = self.scnView
                 
                 DispatchQueue.main.async {
                     self.routeName.text = model.message.name
@@ -82,7 +85,6 @@ class ViewRouteViewController: UIViewController {
                     self.routeCreationDate.text = "Created: \(model.message.creationDate)"
                     self.routeRating.text = "Rating: \(model.message.rating)"
                     self.routeDescription.text = "Description: \(model.message.description)"
-                    //self.routeScene.scene = self.scene
                 }
                 
                 
