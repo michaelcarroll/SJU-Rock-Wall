@@ -39,6 +39,7 @@ class ViewRouteViewController: UIViewController {
     var scnView: SCNView!
     var scene: SCNScene!
     var serialScene: String!
+    var cameraNode: SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,14 +71,7 @@ class ViewRouteViewController: UIViewController {
                 
                 self.serialScene = model.message.wallState
                 let serializer = SceneSerializer.init(scene: self.scene)
-                //self.scene = serializer.unserializeScene(serialScene: self.serialScene)
-                
-                self.scnView = SCNView.init()
-                self.scnView.scene = self.scene
-                //scnView.showsStatistics = true
-                //scnView.allowsCameraControl = true
-                //scnView.autoenablesDefaultLighting = true
-                self.routeScene = self.scnView
+                self.scene = serializer.unserializeScene(serialScene: self.serialScene)
                 
                 DispatchQueue.main.async {
                     self.routeName.text = model.message.name
@@ -85,9 +79,8 @@ class ViewRouteViewController: UIViewController {
                     self.routeCreationDate.text = "Created: \(model.message.creationDate)"
                     self.routeRating.text = "Rating: \(model.message.rating)"
                     self.routeDescription.text = "Description: \(model.message.description)"
+                    self.routeScene.scene = self.scene
                 }
-                
-                
                 
             }
             catch let parsingError {

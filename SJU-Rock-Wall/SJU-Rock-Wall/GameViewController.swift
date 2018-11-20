@@ -185,6 +185,7 @@ class GameViewController: UIViewController {
     func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
     func setupView() {
         scnView = self.view as? SCNView
         scnView.scene = scnScene
