@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32EA5130219BAD1500E956B0 /* ViewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA512F219BAD1500E956B0 /* ViewGameViewController.swift */; };
 		32F43FF721837C2500591B41 /* SceneSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F43FF621837C2500591B41 /* SceneSerializer.swift */; };
 		32F43FF921837D5D00591B41 /* SerialTest.scn in Resources */ = {isa = PBXBuildFile; fileRef = 32F43FF821837D5D00591B41 /* SerialTest.scn */; };
 		660F298A218D0C5E00038BE0 /* rockWall-2.scn in Resources */ = {isa = PBXBuildFile; fileRef = 660F2989218D0C5E00038BE0 /* rockWall-2.scn */; };
@@ -48,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32EA512F219BAD1500E956B0 /* ViewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGameViewController.swift; sourceTree = "<group>"; };
 		32F43FF621837C2500591B41 /* SceneSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneSerializer.swift; sourceTree = "<group>"; };
 		32F43FF821837D5D00591B41 /* SerialTest.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = SerialTest.scn; sourceTree = "<group>"; };
 		660F2989218D0C5E00038BE0 /* rockWall-2.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "rockWall-2.scn"; path = "Assets.xcassets/rockWall-2.scn"; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				660F2989218D0C5E00038BE0 /* rockWall-2.scn */,
 				FE7CD1512159ACB700777664 /* AppDelegate.swift */,
 				FE7CD1552159ACB700777664 /* GameViewController.swift */,
-				32EA512F219BAD1500E956B0 /* ViewGameViewController.swift */,
 				FE7CD1572159ACB700777664 /* Main.storyboard */,
 				66A35AF1218294BD008F2B8C /* ViewRouteViewController.swift */,
 				66A35AEF218292FB008F2B8C /* RoutesTableViewController.swift */,
@@ -316,7 +313,6 @@
 				32F43FF721837C2500591B41 /* SceneSerializer.swift in Sources */,
 				9B28463121671CA60009ACD4 /* CreateRouteViewController.swift in Sources */,
 				FE7CD1522159ACB700777664 /* AppDelegate.swift in Sources */,
-				32EA5130219BAD1500E956B0 /* ViewGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
