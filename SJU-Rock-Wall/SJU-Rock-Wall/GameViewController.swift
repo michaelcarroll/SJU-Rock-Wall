@@ -57,8 +57,9 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(panGesture)
 
         // add a pinch gesture recognizer
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        scnView.addGestureRecognizer(pinchGesture)
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
+        scnView.addGestureRecognizer(pinchRecognizer)
     }
     
     @IBAction func saveButtonPress(_ sender: Any) {
@@ -78,34 +79,22 @@ class GameViewController: UIViewController {
     func handleTap(_ gestureRecognize: UITapGestureRecognizer)
     {
         let p = gestureRecognize.location(in: scnView)
-        let hitResults = scnView.hitTest(p, options: [:])
-        
-        if hitResults.count > 0 {
-            let result = hitResults[0]
-            
-            if(result.node.name != "wedge")
-            {
-                if(result.node.name != "wall")
-                {
-                        if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.yellow
-                        }
-                        else if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.orange
-                        }
-                        else if((result.node.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange))
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.black
-                        }
-                            
-                        else
-                        {
-                            result.node.geometry!.firstMaterial!.emission.contents = UIColor.red
-                        }
-                }
-            }
+        let result = nodeNearPoint(container: scnScene, point: p)
+        if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
+        {
+            result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+        }
+        else if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow))
+        {
+            result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+        }
+        else if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange))
+        {
+            result.geometry!.firstMaterial!.emission.contents = UIColor.black
+        }
+        else
+        {
+            result.geometry!.firstMaterial!.emission.contents = UIColor.red
         }
     }
     
@@ -157,24 +146,33 @@ class GameViewController: UIViewController {
         scnView.showsStatistics = true
     }
     
-    @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
-        let pinchVelocity = Double.init(gestureRecognize.velocity)
-        //print("PinchVelocity \(pinchVelocity)")
-        if(camera.usesOrthographicProjection){
-            print(camera.usesOrthographicProjection)
-            camera.orthographicScale -= (pinchVelocity/pinchAttenuation)
-            
-            if camera.orthographicScale <= 0.5 {
-                camera.orthographicScale = 0.5
+    @objc func handlePinch(_ recognizer: UIPinchGestureRecognizer) {
+        // Set zoom properties
+        let minVelocity = CGFloat(0.10)
+        let zoomDelta = 0.5
+        
+        // Only zoom when gesture changing and when velocity exceeds <minVelocity>
+        if recognizer.state == .changed {
+            // Ignore gesture on tiny movements
+            if abs(recognizer.velocity) <= minVelocity {
+                return
             }
             
-            if camera.orthographicScale >= 10.0 {
-                camera.orthographicScale = 10.0
+            // If here, zoom in or out based on velocity
+            let deltaFov = recognizer.velocity > 0 ? -zoomDelta : zoomDelta
+            var newFov = camera.fieldOfView + CGFloat(deltaFov)
+            
+            // Make sure FOV remains within min and max values
+            //if newFov <= minXFov {
+              //  newFov = minXFov
+            //} else if newFov >= maxXFov {
+              //  newFov = maxXFov
+            //}
+            
+            // Update FOV?
+            if camera.fieldOfView != newFov {
+                camera.fieldOfView = newFov
             }
-        }
-        else{
-            cameraNode.position.z = cameraNode.position.z - Float(pinchVelocity/pinchAttenuation)
-            print(cameraNode.position.z)
         }
         scnView.showsStatistics = true
     }
@@ -207,24 +205,40 @@ class GameViewController: UIViewController {
     
     func setupCamera() {
         // 1
-        cameraNode = scnScene.rootNode.childNode(withName: "cameraNode", recursively: false)
-        cameraNode.movabilityHint = SCNMovabilityHint.movable
-        print(cameraNode)
+        cameraNode = scnScene.rootNode.childNode(withName: "cameraNode", recursively: true)
+        // 2
+        // 3
         camera = cameraNode.camera
-//        // 2
-//        // 3
-//
-//        // 4
-//        //scnScene.rootNode.addChildNode(cameraNode)
-//        cameraOrbit=SCNNode()
-//        cameraOrbit.movabilityHint = SCNMovabilityHint.movable
-//        //camera = SCNCamera()
-//        cameraOrbit.addChildNode(cameraNode)
-//        scnScene.rootNode.addChildNode(cameraOrbit)
-//
-//        self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
-//        self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
+        camera.automaticallyAdjustsZRange = true
+        // 4
+        //scnScene.rootNode.addChildNode(cameraNode)
+        cameraOrbit=SCNNode()
+        //camera = SCNCamera()
+        cameraOrbit.addChildNode(cameraNode)
+        scnScene.rootNode.addChildNode(cameraOrbit)
 
+        self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
+        self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
     }
     
+    func nodeNearPoint(container:SCNScene, point:CGPoint) -> SCNNode {
+        var result:SCNNode!
+        var maxDistance = CGFloat.greatestFiniteMagnitude
+        for node in container.rootNode.childNodes {
+            if node.geometry is SCNSphere {
+                let renderPos = scnView.projectPoint(node.position)
+                let dx = point.x - CGFloat(renderPos.x)
+                let dy = point.y - CGFloat(renderPos.y)
+                print(renderPos.x)
+                print(point.x)
+                let distance = sqrt(dx*dx + dy*dy)
+                if (distance <= maxDistance) {
+                    maxDistance = distance
+                    result = node
+                    
+                }
+            }
+        }
+        return result
+    }
 }
