@@ -9,6 +9,7 @@
 import UIKit
 import QuartzCore
 import SceneKit
+import SpriteKit
 
 class GameViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -33,6 +34,7 @@ class GameViewController: UIViewController {
     var maxWidthRatioLeft: Float = -0.2
     var maxHeightRatioXDown: Float = 0.02
     var maxHeightRatioXUp: Float = 0.4
+    var spriteScene: OverlayScene!
 
     //HANDLE PINCH CAMERA
     var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
@@ -43,14 +45,21 @@ class GameViewController: UIViewController {
         setupView()
         setupScene()
         setupCamera()
+        self.spriteScene = OverlayScene(size: self.view.bounds.size)
+        self.spriteScene.isUserInteractionEnabled = true
+        print(spriteScene.footButton.isUserInteractionEnabled)
+       
+         self.scnView.overlaySKScene = self.spriteScene
+        print(spriteScene.handButton.position)
+        //self.view.addSubview(self.scnView)
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
 
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.addGestureRecognizer(tapGesture)
+        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        //scnView.addGestureRecognizer(tapGesture)
 
         // add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -75,26 +84,29 @@ class GameViewController: UIViewController {
     }
     
     
-    @objc
-    func handleTap(_ gestureRecognize: UITapGestureRecognizer)
-    {
-        let p = gestureRecognize.location(in: scnView)
-        let result = nodeNearPoint(container: scnScene, point: p)
-        if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red))
+     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let p = touches.first?.location(in: scnView)
+        print(p)
+        print(spriteScene.bothButton.contains(p!))
+        if spriteScene.bothButton.contains(p!){
+            print("contain")
+        }
+        let result = nodeNearPoint(container: scnScene, point: p!)
+        if(spriteScene.tapFoot)
         {
             result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
         }
-        else if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow))
+        else if(spriteScene.tapBoth)
         {
             result.geometry!.firstMaterial!.emission.contents = UIColor.orange
         }
-        else if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange))
+        else if(spriteScene.tapHand)
         {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.black
+            result.geometry!.firstMaterial!.emission.contents = UIColor.red
         }
         else
         {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.red
+            result.geometry!.firstMaterial!.emission.contents = UIColor.black
         }
     }
     
@@ -108,8 +120,6 @@ class GameViewController: UIViewController {
             
             WidthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio
             HeightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
-            print(WidthRatio)
-            print(HeightRatio)
             
             //  HEIGHT constraints
 //            if (HeightRatio >= maxHeightRatioXUp ) {
@@ -229,8 +239,6 @@ class GameViewController: UIViewController {
                 let renderPos = scnView.projectPoint(node.position)
                 let dx = point.x - CGFloat(renderPos.x)
                 let dy = point.y - CGFloat(renderPos.y)
-                print(renderPos.x)
-                print(point.x)
                 let distance = sqrt(dx*dx + dy*dy)
                 if (distance <= maxDistance) {
                     maxDistance = distance
