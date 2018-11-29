@@ -15,6 +15,7 @@ class OverlayScene: SKScene{
     let footButton = SKSpriteNode(imageNamed: "footButton")
     let handButton = SKSpriteNode(imageNamed: "handButton")
     let bothButton = SKSpriteNode(imageNamed: "bothButton")
+    let resetButton = SKSpriteNode(imageNamed: "resetButton")
     var tapHand = false
     var tapFoot = false
     var tapBoth = false
@@ -48,6 +49,12 @@ class OverlayScene: SKScene{
         bothButton.position = CGPoint(x: 260, y: 150)
         bothButton.isUserInteractionEnabled = true
         bothButton.setScale(0.15)
+        
+        resetButton.name="resetButton"
+        self.addChild(resetButton)
+        resetButton.position = CGPoint(x: 360, y: 150)
+        resetButton.isUserInteractionEnabled = true
+        resethButton.setScale(0.15)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
