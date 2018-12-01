@@ -16,19 +16,45 @@ class SJU_Rock_WallTests: XCTestCase
     {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
+        let json_User: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
         
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        let jsonData_User = try? JSONSerialization.data(withJSONObject: json_User)
         
         // create post request
-        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        let url_User = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request_User = URLRequest(url: url_User)
+        request_User.httpMethod = "POST"
         
         // insert json data to the request
-        request.httpBody = jsonData
+        request_User.httpBody = jsonData_User
         
-        let task = URLSession.shared.dataTask(with: request)
+        let userTask = URLSession.shared.dataTask(with: request_User)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+            }
+        }
+        
+        let json_Route: [String: Any] = ["uid": 0, "name": "Test Route", "difficulty" : "1", "description": "This route is for testing purposes only", "wallState" : "test"]
+        
+        let jsonData_Route = try? JSONSerialization.data(withJSONObject: json_Route)
+        
+        // create post request
+        let url_Route = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request_Route = URLRequest(url: url_Route)
+        request_Route.httpMethod = "POST"
+        
+        // insert json data to the request
+        request_Route.httpBody = jsonData_Route
+        
+        let task = URLSession.shared.dataTask(with: request_Route)
         {
             data, response, error in
             guard let data = data, error == nil else
@@ -46,7 +72,7 @@ class SJU_Rock_WallTests: XCTestCase
     {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        let uid: String
+        var theData: Any = [1] as Any
          let json: [String: Any] = ["email": "jdoe@example.com", "password": "ThisIsATest"]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
@@ -70,19 +96,15 @@ class SJU_Rock_WallTests: XCTestCase
             
             if let responseJSON = responseJSON as? [String: Any]
             {
-                print(responseJSON)
-                
-                let error = responseJSON["error"] as! Int
-                
-                
-                uid = responseJSON["message"]
+
+                theData = responseJSON["message"] as! Any
                 
                 
             }
             
         }
        
-        let json2: [String: Any] = ["id": uid!]
+        let json2: [String: Any] = ["id": theData]
         let jsonData2 = try? JSONSerialization.data(withJSONObject: json2)
         
          let url2 = URL(string: "http://sjurockwall.atwebpages.com/deleteUser.php")!
@@ -103,14 +125,7 @@ class SJU_Rock_WallTests: XCTestCase
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any]
             {
-                print(responseJSON)
-                
-                let error = responseJSON["error"] as! Int
-                
-                
-                let Id = responseJSON["message"] as! Int
-                
-                
+               
             }
             
         }
@@ -264,14 +279,99 @@ class SJU_Rock_WallTests: XCTestCase
         }
     }
         
-    
-    func testPerformanceExample()
+    func testCreateUserFailsForDuplicateUser()
     {
-        // This is an example of a performance test case.
-        self.measure
+        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
         {
-            // Put the code you want to measure the time of here.
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
+ 
+    func testCreateUserFailsForEmptyVariables()
+    {
+        let json: [String: Any] = ["fName": "", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
         }
     }
     
+    func testCreateRouteFailsForDuplicateRoute()
+    {
+        let json: [String: Any] = ["uid": 0, "name": "Test Route", "difficulty" : "1", "description": "This route is for testing purposes only", "wallState" : "test"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
 }
