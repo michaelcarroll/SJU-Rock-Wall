@@ -42,7 +42,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupScene()
-        setupCamera()
+        //setupCamera()
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
@@ -53,13 +53,13 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(tapGesture)
         
         // add a tap gesture recognizer
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        scnView.addGestureRecognizer(panGesture)
+        //let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        //scnView.addGestureRecognizer(panGesture)
         
         // add a pinch gesture recognizer
-        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
-        scnView.addGestureRecognizer(pinchRecognizer)
+        //let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        //pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
+        //scnView.addGestureRecognizer(pinchRecognizer)
     }
     
     @IBAction func saveButtonPress(_ sender: Any) {
