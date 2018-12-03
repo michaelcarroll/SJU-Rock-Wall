@@ -491,6 +491,262 @@ class SJU_Rock_WallTests: XCTestCase
         }
     }
     
+    func testCreateUserFailsForInvalidEmailAddress()
+    {
+        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoeexample.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForInvalidEmailAddressNoWebExtension()
+    {
+        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoe@example", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForFirstNameIsASpace()
+    {
+        let json: [String: Any] = ["fName": " ", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForLastNameIsSpace()
+    {
+        let json: [String: Any] = ["fName": "John", "lName": " ", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForUsernameIsSpace()
+    {
+        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": " ", "email": "jdoe@example.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForEmailIsSpace()
+    {
+        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": " ", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForPasswordIsSpace()
+    {
+        let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": " "]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
+    func testCreateUserFailsForPasswordShorterThanEightCharacters()
+    {
+        let json: [String: Any] = ["fName": "Laura", "lName": "Doe", "username": "ldoe", "email": "Ldoe@example.com", "password": "ToShort"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createUser.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+            }
+        }
+    }
+    
     func testCreateRouteFailsForDuplicateRoute()
     {
         let json: [String: Any] = ["uid": 0, "name": "Test Route", "difficulty" : "1", "description": "This route is for testing purposes only", "wallState" : "test"]
