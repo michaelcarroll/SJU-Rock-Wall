@@ -168,7 +168,7 @@ class SJU_Rock_WallTests: XCTestCase
         }
     }
     
-    func testLoginFailInvalidUsername()
+    func testLoginFailsUsernameContainsTypo()
     {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -205,11 +205,85 @@ class SJU_Rock_WallTests: XCTestCase
         }
     }
     
-    func testLoginFailsInvalidPassword()
+    func testLoginFailsClearlyInvalidUsername()
     {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let json: [String: Any] = ["email": "jdoe@example.com", "password": "ThisIsNotATest"]
+        let json: [String: Any] = ["email": "wrong@failure.com", "password": "ThisIsATest"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/login.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+                
+                
+            }
+        }
+    }
+    
+    func testLoginFailsPasswordContainsTypo()
+    {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let json: [String: Any] = ["email": "jdoe@example.com", "password": "ThisIsATests"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/login.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+                
+                
+            }
+        }
+    }
+    
+    func testLoginFailsPasswordClearlyWrong()
+    {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let json: [String: Any] = ["email": "jdoe@example.com", "password": "TestsAreDumb"]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
@@ -278,7 +352,81 @@ class SJU_Rock_WallTests: XCTestCase
             }
         }
     }
+    
+    func testLoginUsernameNotSet()
+    {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let json: [String: Any] = ["email": "", "password": "ThisIsATest"]
         
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/login.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+                
+                
+            }
+        }
+    }
+    
+    func testLoginPasswordNotSet()
+    {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let json: [String: Any] = ["email": "jdoe@example.com", "password": ""]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/login.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 2)
+                
+                
+            }
+        }
+    }
+    
     func testCreateUserFailsForDuplicateUser()
     {
         let json: [String: Any] = ["fName": "John", "lName": "Doe", "username": "jdoe", "email": "jdoe@example.com", "password": "ThisIsATest"]
