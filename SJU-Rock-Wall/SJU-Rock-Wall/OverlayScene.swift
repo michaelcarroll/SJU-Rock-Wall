@@ -33,28 +33,29 @@ class OverlayScene: SKScene{
     
     func setupButtons(){
         footButton.name="footButton"
-        self.addChild(footButton)
         footButton.position = CGPoint(x: 160, y: 150)
-        footButton.isUserInteractionEnabled = true
+        footButton.isUserInteractionEnabled = false
         footButton.setScale(0.15)
         
         handButton.name="handButton"
-        self.addChild(handButton)
         handButton.position = CGPoint(x: 60, y: 150)
-        handButton.isUserInteractionEnabled = true
+        handButton.isUserInteractionEnabled = false
         handButton.setScale(0.15)
         
         bothButton.name="bothButton"
-        self.addChild(bothButton)
         bothButton.position = CGPoint(x: 260, y: 150)
-        bothButton.isUserInteractionEnabled = true
+        bothButton.isUserInteractionEnabled = false
         bothButton.setScale(0.15)
         
         resetButton.name="resetButton"
-        self.addChild(resetButton)
         resetButton.position = CGPoint(x: 360, y: 150)
-        resetButton.isUserInteractionEnabled = true
-        resethButton.setScale(0.15)
+        resetButton.isUserInteractionEnabled = false
+        resetButton.setScale(0.15)
+        
+        self.addChild(footButton)
+        self.addChild(handButton)
+        self.addChild(bothButton)
+        self.addChild(resetButton)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

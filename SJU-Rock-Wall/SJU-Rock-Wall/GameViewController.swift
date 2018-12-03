@@ -5,7 +5,6 @@
 //  Created by Tran, Anh B on 9/24/18.
 //  Copyright © 2018 Tran, Anh B. All rights reserved.
 //
-
 import UIKit
 import QuartzCore
 import SceneKit
@@ -24,6 +23,9 @@ class GameViewController: UIViewController {
     var wedge: SCNNode!
     var text: SCNNode!
     var camera: SCNCamera!
+    var tapHand = false
+    var tapFoot = false
+    var tapBoth = false
     //HANDLE PAN CAMERA
     var lastWidthRatio: Float = 0
     var lastHeightRatio: Float = 0.2
@@ -35,40 +37,40 @@ class GameViewController: UIViewController {
     var maxHeightRatioXDown: Float = 0.02
     var maxHeightRatioXUp: Float = 0.4
     var spriteScene: OverlayScene!
-
+    
     //HANDLE PINCH CAMERA
     var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
     var lastFingersNumber = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupScene()
         setupCamera()
         self.spriteScene = OverlayScene(size: self.view.bounds.size)
-        self.spriteScene.isUserInteractionEnabled = true
+        self.spriteScene.isUserInteractionEnabled = false
+        //spriteScene.bothButton.isUserInteractionEnabled = true
         print(spriteScene.footButton.isUserInteractionEnabled)
-       
-         self.scnView.overlaySKScene = self.spriteScene
+        
+        self.scnView.overlaySKScene = self.spriteScene
         print(spriteScene.handButton.position)
         //self.view.addSubview(self.scnView)
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
-
+        
         
         //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         //scnView.addGestureRecognizer(tapGesture)
-
         // add a tap gesture recognizer
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        scnView.addGestureRecognizer(panGesture)
-
+        //let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        //scnView.addGestureRecognizer(panGesture)
+        
         // add a pinch gesture recognizer
-        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
-        scnView.addGestureRecognizer(pinchRecognizer)
+        //let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        //pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
+        //scnView.addGestureRecognizer(pinchRecognizer)
     }
     
     @IBAction func saveButtonPress(_ sender: Any) {
@@ -84,29 +86,84 @@ class GameViewController: UIViewController {
     }
     
     
-     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let p = touches.first?.location(in: scnView)
-        print(p)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        var p = touches.first?.location(in: spriteScene)
+        print(p!)
         print(spriteScene.bothButton.contains(p!))
-        if spriteScene.bothButton.contains(p!){
-            print("contain")
+        if spriteScene.handButton.contains(p!) {
+            print("taphand")
+            if (tapHand==false) {
+                spriteScene.handButton.texture = SKTexture(imageNamed: "tapHand")
+                spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
+                tapHand=true
+                tapBoth=false
+                tapFoot=false
+            }
+            else {
+                spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
+                tapHand=false
+            }
         }
-        let result = nodeNearPoint(container: scnScene, point: p!)
-        if(spriteScene.tapFoot)
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+        
+        else if spriteScene.footButton.contains(p!) {
+            if (tapFoot==false) {
+                print("tapfoot")
+                spriteScene.footButton.texture = SKTexture(imageNamed: "tapFoot")
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
+                spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
+                tapFoot=true
+                tapHand=false
+                tapBoth=false
+            }
+            else {
+                spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
+                tapFoot = false
+            }
         }
-        else if(spriteScene.tapBoth)
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+        
+        else if spriteScene.bothButton.contains(p!) {
+            if (tapBoth==false){
+                print("tapboth")
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothTap")
+                spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
+                spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
+                tapBoth = true
+                tapHand = false
+                tapFoot = false
+            }
+            else {
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
+                tapBoth = false
+            }
         }
-        else if(spriteScene.tapHand)
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.red
+            
+        else if spriteScene.resetButton.contains(p!){
+            for node in scnScene.rootNode.childNodes{
+                if node.geometry is SCNSphere{
+                    node.geometry!.firstMaterial!.emission.contents=UIColor.black
+                }
+            }
         }
-        else
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.black
+        else{
+            p = touches.first?.location(in: scnView)
+            let result = nodeNearPoint(container: scnScene, point: p!)
+            if(tapFoot)
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+            }
+            else if(tapBoth)
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+            }
+            else if(tapHand)
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.red
+            }
+            else
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.black
+            }
         }
     }
     
@@ -122,24 +179,24 @@ class GameViewController: UIViewController {
             HeightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
             
             //  HEIGHT constraints
-//            if (HeightRatio >= maxHeightRatioXUp ) {
-//                HeightRatio = maxHeightRatioXUp
-//            }
-//            if (HeightRatio <= maxHeightRatioXDown ) {
-//                HeightRatio = maxHeightRatioXDown
-//            }
+            //            if (HeightRatio >= maxHeightRatioXUp ) {
+            //                HeightRatio = maxHeightRatioXUp
+            //            }
+            //            if (HeightRatio <= maxHeightRatioXDown ) {
+            //                HeightRatio = maxHeightRatioXDown
+            //            }
             
             
             //  WIDTH constraints
-//            if(WidthRatio >= maxWidthRatioRight) {
-//                WidthRatio = maxWidthRatioRight
-//            }
-//            if(WidthRatio <= maxWidthRatioLeft) {
-//                WidthRatio = maxWidthRatioLeft
-//            }
+            //            if(WidthRatio >= maxWidthRatioRight) {
+            //                WidthRatio = maxWidthRatioRight
+            //            }
+            //            if(WidthRatio <= maxWidthRatioLeft) {
+            //                WidthRatio = maxWidthRatioLeft
+            //            }
             
-//            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
-//            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
+            //            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
+            //            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
             self.cameraNode.position.x = -(Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio)
             self.cameraNode.position.y = -(Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio)
             
@@ -174,9 +231,9 @@ class GameViewController: UIViewController {
             
             // Make sure FOV remains within min and max values
             //if newFov <= minXFov {
-              //  newFov = minXFov
+            //  newFov = minXFov
             //} else if newFov >= maxXFov {
-              //  newFov = maxXFov
+            //  newFov = maxXFov
             //}
             
             // Update FOV?
@@ -203,7 +260,7 @@ class GameViewController: UIViewController {
         scnView.allowsCameraControl = true
         // 3
         scnView.autoenablesDefaultLighting = true
-        //scnView.defaultCameraController
+        scnView.defaultCameraController
     }
     
     func setupScene() {
@@ -226,7 +283,7 @@ class GameViewController: UIViewController {
         //camera = SCNCamera()
         cameraOrbit.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cameraOrbit)
-
+        
         self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
         self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
     }
