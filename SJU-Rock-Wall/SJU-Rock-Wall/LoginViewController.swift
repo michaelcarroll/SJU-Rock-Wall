@@ -61,13 +61,7 @@ class LoginViewController: UIViewController {
                     self.setDefaults(uid: uid)
 
                     DispatchQueue.main.async {
-                        let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertController.Style.alert)
-
-                       loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
-                            self.performSegue(withIdentifier:"LoggedInSegue", sender: nil)
-                        }))
-                        
-                        self.present(loginAlert, animated: true, completion: nil)
+                        self.performSegue(withIdentifier:"LoggedInSegue", sender: nil)
                     }
                 }
                 else if (error == 3) {

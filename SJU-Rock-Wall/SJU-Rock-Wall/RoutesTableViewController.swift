@@ -16,11 +16,17 @@ class RoutesTableViewController: UITableViewController {
     
     struct Message: Codable {
         let rid: Int
+        let rating: Int
         let username, name: String
     }
     
     var routeNames = [String]()
+    var routeAuthors = [String]()
+    var routeRating = [Int]()
     var routeArrayOfDictionary = [Message]()
+    
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    var ratingPreference = "All"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +47,8 @@ class RoutesTableViewController: UITableViewController {
         // reset arrays to empty
         
         routeNames = [String]()
+        routeAuthors = [String]()
+        routeRating = [Int]()
         routeArrayOfDictionary = [Message]()
         
         guard let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php") else {return}
@@ -59,7 +67,32 @@ class RoutesTableViewController: UITableViewController {
                 
                 var iterator = model.message.makeIterator()
                 while let route = iterator.next() {
-                    self.routeNames.append(route.name)
+                    if (self.ratingPreference == "All") {
+                        self.routeNames.append(route.name)
+                        self.routeAuthors.append(route.username)
+                        self.routeRating.append(route.rating)
+                    }
+                    if (self.ratingPreference == "Beginner") {
+                        if (route.rating <= 3) {
+                            self.routeNames.append(route.name)
+                            self.routeAuthors.append(route.username)
+                            self.routeRating.append(route.rating)
+                        }
+                    }
+                    if (self.ratingPreference == "Intermediate") {
+                        if (route.rating > 3 && route.rating < 7) {
+                            self.routeNames.append(route.name)
+                            self.routeAuthors.append(route.username)
+                            self.routeRating.append(route.rating)
+                        }
+                    }
+                    if (self.ratingPreference == "Expert") {
+                        if (route.rating > 7) {
+                            self.routeNames.append(route.name)
+                            self.routeAuthors.append(route.username)
+                            self.routeRating.append(route.rating)
+                        }
+                    }
                 }
                 
                 self.routeArrayOfDictionary = model.message
@@ -92,11 +125,74 @@ class RoutesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        let currentString = routeNames[indexPath.row]
-        cell.textLabel?.text = currentString
+        let currentRoute = routeNames[indexPath.row]
+        let currentAuthor = routeAuthors[indexPath.row]
+        let currentRating = routeRating[indexPath.row]
+        
+        cell.textLabel?.text = currentRoute
+        cell.detailTextLabel?.text = currentAuthor
 
         return cell
     }
+    
+    @IBAction func filterButtonPressed(_ sender: Any) {
+        let actionSheet = UIAlertController.init(title: "Filter routes", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction.init(title: "All", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "All")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Beginner", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "Beginner")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Intermediate", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "Intermediate")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Expert", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "Expert")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { (action) in
+            // self.dismissViewControllerAnimated(true, completion: nil) is not needed, this is handled automatically,
+            //Plus whatever method you define here, gets called,
+            //If you tap outside the UIAlertController action buttons area, then also this handler gets called.
+        }))
+        //Present the controller
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func filter(rating: String){
+        if rating == "Beginner" {
+            self.ratingPreference = "Beginner"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+        
+        if rating == "Intermediate" {
+            self.ratingPreference = "Intermediate"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+        
+        if rating == "Expert" {
+            self.ratingPreference = "Expert"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+        
+        if rating == "All" {
+            self.ratingPreference = "All"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+    }
+    //searching https://github.com/codepath/ios_guides/wiki/Search-Bar-Guide
+    
 
     /*
     // Override to support conditional editing of the table view.
