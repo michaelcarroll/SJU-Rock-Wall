@@ -54,7 +54,7 @@ class OverlayScene: SKScene{
         self.addChild(resetButton)
         resetButton.position = CGPoint(x: 360, y: 150)
         resetButton.isUserInteractionEnabled = true
-        resethButton.setScale(0.15)
+        resetButton.setScale(0.15)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
