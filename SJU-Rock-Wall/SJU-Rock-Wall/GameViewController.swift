@@ -5,7 +5,6 @@
 //  Created by Tran, Anh B on 9/24/18.
 //  Copyright © 2018 Tran, Anh B. All rights reserved.
 //
-
 import UIKit
 import QuartzCore
 import SceneKit
@@ -35,11 +34,11 @@ class GameViewController: UIViewController {
     var maxHeightRatioXDown: Float = 0.02
     var maxHeightRatioXUp: Float = 0.4
     var spriteScene: OverlayScene!
-
+    
     //HANDLE PINCH CAMERA
     var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
     var lastFingersNumber = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -48,23 +47,22 @@ class GameViewController: UIViewController {
         self.spriteScene = OverlayScene(size: self.view.bounds.size)
         self.spriteScene.isUserInteractionEnabled = true
         print(spriteScene.footButton.isUserInteractionEnabled)
-       
-         self.scnView.overlaySKScene = self.spriteScene
+        
+        self.scnView.overlaySKScene = self.spriteScene
         print(spriteScene.handButton.position)
         //self.view.addSubview(self.scnView)
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
         // retrieve the wedge node
         wedge = scnScene.rootNode.childNode(withName: "wedge", recursively: true)!
-
+        
         
         //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         //scnView.addGestureRecognizer(tapGesture)
-
         // add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         scnView.addGestureRecognizer(panGesture)
-
+        
         // add a pinch gesture recognizer
         let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
@@ -84,7 +82,7 @@ class GameViewController: UIViewController {
     }
     
     
-     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let p = touches.first?.location(in: scnView)
         print(p)
         print(spriteScene.bothButton.contains(p!))
@@ -122,24 +120,24 @@ class GameViewController: UIViewController {
             HeightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
             
             //  HEIGHT constraints
-//            if (HeightRatio >= maxHeightRatioXUp ) {
-//                HeightRatio = maxHeightRatioXUp
-//            }
-//            if (HeightRatio <= maxHeightRatioXDown ) {
-//                HeightRatio = maxHeightRatioXDown
-//            }
+            //            if (HeightRatio >= maxHeightRatioXUp ) {
+            //                HeightRatio = maxHeightRatioXUp
+            //            }
+            //            if (HeightRatio <= maxHeightRatioXDown ) {
+            //                HeightRatio = maxHeightRatioXDown
+            //            }
             
             
             //  WIDTH constraints
-//            if(WidthRatio >= maxWidthRatioRight) {
-//                WidthRatio = maxWidthRatioRight
-//            }
-//            if(WidthRatio <= maxWidthRatioLeft) {
-//                WidthRatio = maxWidthRatioLeft
-//            }
+            //            if(WidthRatio >= maxWidthRatioRight) {
+            //                WidthRatio = maxWidthRatioRight
+            //            }
+            //            if(WidthRatio <= maxWidthRatioLeft) {
+            //                WidthRatio = maxWidthRatioLeft
+            //            }
             
-//            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
-//            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
+            //            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
+            //            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
             self.cameraNode.position.x = -(Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio)
             self.cameraNode.position.y = -(Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio)
             
@@ -174,9 +172,9 @@ class GameViewController: UIViewController {
             
             // Make sure FOV remains within min and max values
             //if newFov <= minXFov {
-              //  newFov = minXFov
+            //  newFov = minXFov
             //} else if newFov >= maxXFov {
-              //  newFov = maxXFov
+            //  newFov = maxXFov
             //}
             
             // Update FOV?
@@ -226,7 +224,7 @@ class GameViewController: UIViewController {
         //camera = SCNCamera()
         cameraOrbit.addChildNode(cameraNode)
         scnScene.rootNode.addChildNode(cameraOrbit)
-
+        
         self.cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * lastWidthRatio
         self.cameraOrbit.eulerAngles.x = Float(-Double.pi) * lastHeightRatio
     }
