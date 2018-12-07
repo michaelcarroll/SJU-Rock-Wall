@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoutesTableViewController: UITableViewController {
+class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
     struct JSONResponse: Codable {
         let error: Int
         let message: [Message]
@@ -28,14 +28,39 @@ class RoutesTableViewController: UITableViewController {
     @IBOutlet weak var filterButton: UIBarButtonItem!
     var ratingPreference = "All"
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    var filteredData: [String]!
+    var searching = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(self.downloadData), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
+        searchBar.delegate = self
         
         self.downloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searching = true
+        self.filteredData = self.routeNames
+        filteredData = filteredData.filter({$0.prefix(searchText.count).lowercased() == searchText.lowercased()})
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        self.downloadData()
+        self.tableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searching = false
+        self.downloadData()
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +69,7 @@ class RoutesTableViewController: UITableViewController {
     }
     
     @objc func downloadData() {
+        self.searching = false
         // reset arrays to empty
         
         routeNames = [String]()
@@ -119,12 +145,24 @@ class RoutesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if searching {
+            return filteredData.count
+        }
+        else {
         return routeNames.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as UITableViewCell
+        
+        if searching {
+            let currentRoute = filteredData[indexPath.row]
+            cell.textLabel?.text = currentRoute
+            cell.detailTextLabel?.text = "" // not sure how to add author to search result cell, index is off in filted array
+            return cell
+        }
+        
         let currentRoute = routeNames[indexPath.row]
         let currentAuthor = routeAuthors[indexPath.row]
         let currentRating = routeRating[indexPath.row]
