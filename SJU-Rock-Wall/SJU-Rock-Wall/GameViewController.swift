@@ -23,6 +23,9 @@ class GameViewController: UIViewController {
     var wedge: SCNNode!
     var text: SCNNode!
     var camera: SCNCamera!
+    var tapHand = false
+    var tapFoot = false
+    var tapBoth = false
     //HANDLE PAN CAMERA
     var lastWidthRatio: Float = 0
     var lastHeightRatio: Float = 0.2
@@ -45,7 +48,8 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         self.spriteScene = OverlayScene(size: self.view.bounds.size)
-        self.spriteScene.isUserInteractionEnabled = true
+        self.spriteScene.isUserInteractionEnabled = false
+        //spriteScene.bothButton.isUserInteractionEnabled = true
         print(spriteScene.footButton.isUserInteractionEnabled)
         
         self.scnView.overlaySKScene = self.spriteScene
@@ -60,13 +64,13 @@ class GameViewController: UIViewController {
         //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         //scnView.addGestureRecognizer(tapGesture)
         // add a tap gesture recognizer
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        scnView.addGestureRecognizer(panGesture)
+        //let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        //scnView.addGestureRecognizer(panGesture)
         
         // add a pinch gesture recognizer
-        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
-        scnView.addGestureRecognizer(pinchRecognizer)
+        //let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        //pinchRecognizer.delegate = self as? UIGestureRecognizerDelegate
+        //scnView.addGestureRecognizer(pinchRecognizer)
     }
     
     @IBAction func saveButtonPress(_ sender: Any) {
@@ -83,28 +87,83 @@ class GameViewController: UIViewController {
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let p = touches.first?.location(in: scnView)
-        print(p)
+        var p = touches.first?.location(in: spriteScene)
+        print(p!)
         print(spriteScene.bothButton.contains(p!))
-        if spriteScene.bothButton.contains(p!){
-            print("contain")
+        if spriteScene.handButton.contains(p!) {
+            print("taphand")
+            if (tapHand==false) {
+                spriteScene.handButton.texture = SKTexture(imageNamed: "tapHand")
+                spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
+                tapHand=true
+                tapBoth=false
+                tapFoot=false
+            }
+            else {
+                spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
+                tapHand=false
+            }
         }
-        let result = nodeNearPoint(container: scnScene, point: p!)
-        if(spriteScene.tapFoot)
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+        
+        else if spriteScene.footButton.contains(p!) {
+            if (tapFoot==false) {
+                print("tapfoot")
+                spriteScene.footButton.texture = SKTexture(imageNamed: "tapFoot")
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
+                spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
+                tapFoot=true
+                tapHand=false
+                tapBoth=false
+            }
+            else {
+                spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
+                tapFoot = false
+            }
         }
-        else if(spriteScene.tapBoth)
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+        
+        else if spriteScene.bothButton.contains(p!) {
+            if (tapBoth==false){
+                print("tapboth")
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothTap")
+                spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
+                spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
+                tapBoth = true
+                tapHand = false
+                tapFoot = false
+            }
+            else {
+                spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
+                tapBoth = false
+            }
         }
-        else if(spriteScene.tapHand)
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.red
+            
+        else if spriteScene.resetButton.contains(p!){
+            for node in scnScene.rootNode.childNodes{
+                if node.geometry is SCNSphere{
+                    node.geometry!.firstMaterial!.emission.contents=UIColor.black
+                }
+            }
         }
-        else
-        {
-            result.geometry!.firstMaterial!.emission.contents = UIColor.black
+        else{
+            p = touches.first?.location(in: scnView)
+            let result = nodeNearPoint(container: scnScene, point: p!)
+            if(tapFoot)
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+            }
+            else if(tapBoth)
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+            }
+            else if(tapHand)
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.red
+            }
+            else
+            {
+                result.geometry!.firstMaterial!.emission.contents = UIColor.black
+            }
         }
     }
     
@@ -201,7 +260,7 @@ class GameViewController: UIViewController {
         scnView.allowsCameraControl = true
         // 3
         scnView.autoenablesDefaultLighting = true
-        //scnView.defaultCameraController
+        scnView.defaultCameraController
     }
     
     func setupScene() {
