@@ -47,20 +47,26 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         searching = true
         self.filteredData = self.routeNames
         filteredData = filteredData.filter({$0.prefix(searchText.count).lowercased() == searchText.lowercased()})
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData();
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
         searchBar.text = ""
         self.downloadData()
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData();
+        }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searching = false
         self.downloadData()
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData();
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
