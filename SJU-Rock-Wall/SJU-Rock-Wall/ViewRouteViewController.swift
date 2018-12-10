@@ -28,12 +28,12 @@ struct Message: Codable {
 class ViewRouteViewController: UIViewController {
     var selectedRoute : Int?
     
-    @IBOutlet weak var routeName: UITextView!
-    @IBOutlet weak var routeUsername: UITextView!
-    @IBOutlet weak var routeCreationDate: UITextView!
-    @IBOutlet weak var routeRating: UITextView!
-    @IBOutlet weak var cRating: UITextView!
-    @IBOutlet weak var routeDescription: UITextView!
+    @IBOutlet weak var routeName: UILabel!
+    @IBOutlet weak var routeUsername: UILabel!
+    @IBOutlet weak var routeCreationDate: UILabel!
+    @IBOutlet weak var routeRating: UILabel!
+    @IBOutlet weak var cRating: UILabel!
+    @IBOutlet weak var routeDescription: UILabel!
     
     let ratings = ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V10+"]
     var serialScene = "{"
@@ -74,10 +74,10 @@ class ViewRouteViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.routeName.text = model.message.name
                     self.routeUsername.text = "@\(model.message.username)"
-                    self.routeCreationDate.text = "Created: \(model.message.creationDate)"
-                    self.routeRating.text = "Rating: \(self.ratings[Int(model.message.rating)])"
+                    self.routeCreationDate.text = String((model.message.creationDate).prefix(10))
+                    self.routeRating.text = (self.ratings[Int(model.message.rating)])
                     
-                    var cRatingDouble = Double(model.message.cRating)!
+                    let cRatingDouble = Double(model.message.cRating)!
                     
                     var cRatingText = "V1-2"
                     if (cRatingDouble > 0.0 && cRatingDouble < 1.0){
@@ -114,8 +114,8 @@ class ViewRouteViewController: UIViewController {
                         cRatingText = String(self.ratings[Int(cRatingDouble)])
                     }
                     
-                    self.cRating.text = "Community Rating: " + cRatingText
-                    self.routeDescription.text = "Description: \(model.message.description)"
+                    self.cRating.text = cRatingText
+                    self.routeDescription.text = (model.message.description)
                 }
                 
             }
