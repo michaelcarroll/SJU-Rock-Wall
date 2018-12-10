@@ -23,12 +23,12 @@ class CreateRouteViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.pickerRow = row
         return ratings[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         routeDifficulty.text = ratings[row]
+        self.pickerRow = row
     }
     
     

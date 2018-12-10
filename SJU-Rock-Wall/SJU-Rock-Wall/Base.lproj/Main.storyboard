@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hht-87-PrG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hht-87-PrG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -561,7 +561,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rw2-Y0-EHi" userLabel="routeDescription">
-                                <rect key="frame" x="16" y="292" width="343" height="84"/>
+                                <rect key="frame" x="16" y="291.5" width="343" height="84"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="84" id="zSe-fa-gU6"/>
@@ -570,16 +570,24 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PPH-aS-wAm" userLabel="cRating">
-                                <rect key="frame" x="16" y="248" width="343" height="34"/>
+                                <rect key="frame" x="16" y="248" width="343" height="33.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u64-4d-vkH">
-                                <rect key="frame" x="16" y="396" width="117" height="30"/>
+                                <rect key="frame" x="16" y="395.5" width="117" height="30.5"/>
                                 <state key="normal" title="View Route in 3D"/>
                                 <connections>
                                     <segue destination="Ngb-9X-D0n" kind="show" identifier="viewScene" id="Rrt-05-Zl3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAW-OC-E2J">
+                                <rect key="frame" x="16" y="421" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Rate"/>
+                                <connections>
+                                    <segue destination="mfh-R0-Mvy" kind="show" identifier="rateRoute" id="QhQ-vh-ZE5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -739,9 +747,84 @@
             </objects>
             <point key="canvasLocation" x="1838" y="-1974"/>
         </scene>
+        <!--Rate Route View Controller-->
+        <scene sceneID="zeV-MD-VfV">
+            <objects>
+                <viewController id="mfh-R0-Mvy" customClass="RateRouteViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HuK-0Q-04w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you've completed a route, you can rate its " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQF-TM-ihl">
+                                <rect key="frame" x="16" y="81" width="338" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="difficulty to help other users of the rock wall." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AME-gX-8Jh">
+                                <rect key="frame" x="14" y="102" width="340" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Bi-e0-mxR">
+                                <rect key="frame" x="91" y="155" width="268" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Difficulty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBM-ZZ-XS8">
+                                <rect key="frame" x="14" y="159" width="69" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSA-Pj-ghu">
+                                <rect key="frame" x="0.0" y="456" width="375" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="93h-R0-rj8"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8T-QM-kG6">
+                                <rect key="frame" x="13" y="206" width="49" height="30"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButtonPress:" destination="mfh-R0-Mvy" eventType="touchUpInside" id="2ix-kd-bhu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AQF-TM-ihl" firstAttribute="top" secondItem="33H-24-RJ1" secondAttribute="top" constant="17" id="3SL-ID-UHy"/>
+                            <constraint firstItem="AME-gX-8Jh" firstAttribute="top" secondItem="AQF-TM-ihl" secondAttribute="bottom" id="5to-2h-wsc"/>
+                            <constraint firstItem="AQF-TM-ihl" firstAttribute="trailing" secondItem="AME-gX-8Jh" secondAttribute="trailing" id="8yX-oK-GvE"/>
+                            <constraint firstItem="AME-gX-8Jh" firstAttribute="leading" secondItem="IBM-ZZ-XS8" secondAttribute="leading" id="Csk-Cg-xdz"/>
+                            <constraint firstItem="X8T-QM-kG6" firstAttribute="top" secondItem="IBM-ZZ-XS8" secondAttribute="bottom" constant="26" id="GBf-2d-stL"/>
+                            <constraint firstItem="IBM-ZZ-XS8" firstAttribute="top" secondItem="AME-gX-8Jh" secondAttribute="bottom" constant="36" id="K42-Jz-dKP"/>
+                            <constraint firstItem="6Bi-e0-mxR" firstAttribute="top" secondItem="AME-gX-8Jh" secondAttribute="bottom" constant="32" id="dBI-Im-bs7"/>
+                            <constraint firstItem="AQF-TM-ihl" firstAttribute="leading" secondItem="HuK-0Q-04w" secondAttribute="leadingMargin" id="e14-Wt-pOg"/>
+                            <constraint firstItem="X8T-QM-kG6" firstAttribute="leading" secondItem="33H-24-RJ1" secondAttribute="leading" constant="13" id="e6I-FW-PIa"/>
+                            <constraint firstItem="eSA-Pj-ghu" firstAttribute="bottom" secondItem="33H-24-RJ1" secondAttribute="bottom" id="hPf-nM-n6X"/>
+                            <constraint firstItem="6Bi-e0-mxR" firstAttribute="trailing" secondItem="HuK-0Q-04w" secondAttribute="trailingMargin" id="nIO-Do-e7h"/>
+                            <constraint firstItem="6Bi-e0-mxR" firstAttribute="leading" secondItem="IBM-ZZ-XS8" secondAttribute="trailing" constant="8" symbolic="YES" id="oph-5a-B9j"/>
+                            <constraint firstItem="eSA-Pj-ghu" firstAttribute="leading" secondItem="HuK-0Q-04w" secondAttribute="leading" id="rYj-pZ-6V5"/>
+                            <constraint firstItem="IBM-ZZ-XS8" firstAttribute="centerY" secondItem="6Bi-e0-mxR" secondAttribute="centerY" id="se8-AC-wC0"/>
+                            <constraint firstAttribute="trailing" secondItem="eSA-Pj-ghu" secondAttribute="trailing" id="svn-t2-QBO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="33H-24-RJ1"/>
+                    </view>
+                    <connections>
+                        <outlet property="routeDifficulty" destination="6Bi-e0-mxR" id="ZPw-2r-h1v"/>
+                        <outlet property="submitButton" destination="X8T-QM-kG6" id="b6f-3c-aXo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6A8-Ke-mu5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000.8" y="-1208.5457271364319"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="300" height="300"/>
+        <image name="climbingClub" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gcV-6F-Cxq"/>

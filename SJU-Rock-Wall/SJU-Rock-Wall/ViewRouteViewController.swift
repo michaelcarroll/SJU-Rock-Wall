@@ -38,6 +38,10 @@ class ViewRouteViewController: UIViewController {
     let ratings = ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V10+"]
     var serialScene = "{"
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.viewDidLoad()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,7 +67,7 @@ class ViewRouteViewController: UIViewController {
             do {
                 //here dataResponse received from a network request
                 let model = try JSONDecoder().decode(JSONResponse.self, from: dataResponse) //Decode JSON Response Data
-                print(model)
+                //print(model)
                 
                 self.serialScene = model.message.wallState!
                 
@@ -117,7 +121,7 @@ class ViewRouteViewController: UIViewController {
             }
             catch let parsingError {
                 print("Error", parsingError)
-                print("Raw JSON String: \(String(describing: String(data: dataResponse, encoding: .utf8)))")
+                //print("Raw JSON String: \(String(describing: String(data: dataResponse, encoding: .utf8)))")
             }
         }
         task.resume()
@@ -126,9 +130,17 @@ class ViewRouteViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        guard segue.identifier == "viewScene" else {return}
-        var descScene = segue.destination as! ViewRouteSceneController
-        // Pass the selected object to the new view controller.
-         descScene.serialScene = self.serialScene
+        if (segue.identifier == "viewScene") {
+            var descScene = segue.destination as! ViewRouteSceneController
+            // Pass the selected object to the new view controller.
+            descScene.serialScene = self.serialScene
+        }
+        else if (segue.identifier == "rateRoute"){
+            var descScene = segue.destination as! RateRouteViewController
+            descScene.rid = self.selectedRoute!
+        }
+        else {
+            return
+        }
     }
 }
