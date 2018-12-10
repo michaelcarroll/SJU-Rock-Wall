@@ -14,10 +14,10 @@ class UserProfileController: UIViewController {
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    @IBOutlet weak var username: UITextView!
-    @IBOutlet weak var email: UITextView!
-    @IBOutlet weak var fName: UITextView!
-    @IBOutlet weak var lName: UITextView!
+
+    @IBOutlet weak var email: UILabel!
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var name: UILabel!
     
     override func viewDidLoad() {
         let username = UserDefaults.standard.string(forKey: "username")
@@ -25,11 +25,10 @@ class UserProfileController: UIViewController {
         let fName = UserDefaults.standard.string(forKey: "fName")
         let lName = UserDefaults.standard.string(forKey: "lName")
         
-        navigationBar.title = username
+        navigationBar.title = "Profile"
         self.username.text = username
         self.email.text = email
-        self.fName.text = fName
-        self.lName.text = lName
+        self.name.text = fName! + " " + lName!
         
     }
 

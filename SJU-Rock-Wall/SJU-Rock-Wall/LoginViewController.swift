@@ -15,15 +15,19 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBAction func returnButtonPressed(_ sender: Any) {
+        self.loginButtonPressed(self)
+        
+    }
     @IBAction func keyboardReturnButtonPressed(_ sender: Any) {
         self.loginButtonPressed(self)
+        
     }
-    
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email = emailField.text
         let password = passwordField.text
         
-        if (email == nil || password == nil) {
+        if (email == "" || password == "") {
             let loginAlert = UIAlertController(title: "Error", message: "Both username and password required.", preferredStyle: UIAlertController.Style.alert)
             
             loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
