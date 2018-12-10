@@ -18,6 +18,14 @@
 		66FA5115216443B70064EDAE /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA5114216443B70064EDAE /* CreateAccountViewController.swift */; };
 		9B21B23021670752006B29EF /* MemberHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B21B22F21670752006B29EF /* MemberHomeViewController.swift */; };
 		9B28463121671CA60009ACD4 /* CreateRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */; };
+		9B86554821BAC8F90054BEF9 /* handButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554121BAC8F80054BEF9 /* handButton.png */; };
+		9B86554921BAC8F90054BEF9 /* tapHand.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554221BAC8F80054BEF9 /* tapHand.png */; };
+		9B86554A21BAC8F90054BEF9 /* footButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554321BAC8F80054BEF9 /* footButton.png */; };
+		9B86554B21BAC8F90054BEF9 /* bothTap.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554421BAC8F90054BEF9 /* bothTap.png */; };
+		9B86554C21BAC8F90054BEF9 /* bothButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554521BAC8F90054BEF9 /* bothButton.png */; };
+		9B86554D21BAC8F90054BEF9 /* tapFoot.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554621BAC8F90054BEF9 /* tapFoot.png */; };
+		9B86554E21BAC8F90054BEF9 /* resetButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554721BAC8F90054BEF9 /* resetButton.png */; };
+		9BBA7F4821BDEA4600F3309E /* ViewRouteSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA7F4721BDEA4600F3309E /* ViewRouteSceneController.swift */; };
 		D48BAF1E2180B12700E1F93B /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BAF1D2180B12700E1F93B /* UserProfileController.swift */; };
 		FE7CD1522159ACB700777664 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1512159ACB700777664 /* AppDelegate.swift */; };
 		FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CD1552159ACB700777664 /* GameViewController.swift */; };
@@ -59,6 +67,14 @@
 		66FA5114216443B70064EDAE /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		9B21B22F21670752006B29EF /* MemberHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberHomeViewController.swift; sourceTree = "<group>"; };
 		9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRouteViewController.swift; sourceTree = "<group>"; };
+		9B86554121BAC8F80054BEF9 /* handButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handButton.png; path = Assets.xcassets/handButton.png; sourceTree = "<group>"; };
+		9B86554221BAC8F80054BEF9 /* tapHand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tapHand.png; path = Assets.xcassets/tapHand.png; sourceTree = "<group>"; };
+		9B86554321BAC8F80054BEF9 /* footButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footButton.png; path = Assets.xcassets/footButton.png; sourceTree = "<group>"; };
+		9B86554421BAC8F90054BEF9 /* bothTap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bothTap.png; path = Assets.xcassets/bothTap.png; sourceTree = "<group>"; };
+		9B86554521BAC8F90054BEF9 /* bothButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bothButton.png; path = Assets.xcassets/bothButton.png; sourceTree = "<group>"; };
+		9B86554621BAC8F90054BEF9 /* tapFoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tapFoot.png; path = Assets.xcassets/tapFoot.png; sourceTree = "<group>"; };
+		9B86554721BAC8F90054BEF9 /* resetButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = resetButton.png; path = Assets.xcassets/resetButton.png; sourceTree = "<group>"; };
+		9BBA7F4721BDEA4600F3309E /* ViewRouteSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouteSceneController.swift; sourceTree = "<group>"; };
 		D48BAF1D2180B12700E1F93B /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		FE7CD14E2159ACB700777664 /* SJU-Rock-Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SJU-Rock-Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7CD1512159ACB700777664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +146,7 @@
 				FE7CD1512159ACB700777664 /* AppDelegate.swift */,
 				FE7CD1552159ACB700777664 /* GameViewController.swift */,
 				FE7CD1572159ACB700777664 /* Main.storyboard */,
+				9BBA7F4721BDEA4600F3309E /* ViewRouteSceneController.swift */,
 				66A35AF1218294BD008F2B8C /* ViewRouteViewController.swift */,
 				66A35AEF218292FB008F2B8C /* RoutesTableViewController.swift */,
 				D48BAF1D2180B12700E1F93B /* UserProfileController.swift */,
@@ -140,6 +157,13 @@
 				9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */,
 				32F43FF621837C2500591B41 /* SceneSerializer.swift */,
 				FE7CD15A2159ACB800777664 /* Assets.xcassets */,
+				9B86554521BAC8F90054BEF9 /* bothButton.png */,
+				9B86554421BAC8F90054BEF9 /* bothTap.png */,
+				9B86554321BAC8F80054BEF9 /* footButton.png */,
+				9B86554121BAC8F80054BEF9 /* handButton.png */,
+				9B86554721BAC8F90054BEF9 /* resetButton.png */,
+				9B86554621BAC8F90054BEF9 /* tapFoot.png */,
+				9B86554221BAC8F80054BEF9 /* tapHand.png */,
 				32F43FF821837D5D00591B41 /* SerialTest.scn */,
 				FE7CD15C2159ACB800777664 /* LaunchScreen.storyboard */,
 				FE7CD15F2159ACB800777664 /* Info.plist */,
@@ -274,10 +298,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B86554921BAC8F90054BEF9 /* tapHand.png in Resources */,
+				9B86554B21BAC8F90054BEF9 /* bothTap.png in Resources */,
 				660F298A218D0C5E00038BE0 /* rockWall-2.scn in Resources */,
 				FE7CD15E2159ACB800777664 /* LaunchScreen.storyboard in Resources */,
 				FE7CD15B2159ACB800777664 /* Assets.xcassets in Resources */,
+				9B86554E21BAC8F90054BEF9 /* resetButton.png in Resources */,
 				FE7CD1592159ACB700777664 /* Main.storyboard in Resources */,
+				9B86554A21BAC8F90054BEF9 /* footButton.png in Resources */,
+				9B86554821BAC8F90054BEF9 /* handButton.png in Resources */,
+				9B86554C21BAC8F90054BEF9 /* bothButton.png in Resources */,
+				9B86554D21BAC8F90054BEF9 /* tapFoot.png in Resources */,
 				32F43FF921837D5D00591B41 /* SerialTest.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +342,7 @@
 				FE7CD1832159B35400777664 /* ShapeType.swift in Sources */,
 				66A35AF2218294BD008F2B8C /* ViewRouteViewController.swift in Sources */,
 				D48BAF1E2180B12700E1F93B /* UserProfileController.swift in Sources */,
+				9BBA7F4821BDEA4600F3309E /* ViewRouteSceneController.swift in Sources */,
 				9B21B23021670752006B29EF /* MemberHomeViewController.swift in Sources */,
 				666396032162FB2300474CBF /* LoginViewController.swift in Sources */,
 				662C072F2166E45600559225 /* HomeViewController.swift in Sources */,

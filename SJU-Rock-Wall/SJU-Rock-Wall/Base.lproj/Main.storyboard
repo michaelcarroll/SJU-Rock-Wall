@@ -546,7 +546,7 @@
                                 <rect key="frame" x="16" y="125" width="343" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="4VL-ts-NTk"/>
+                                    <constraint firstAttribute="height" constant="33" id="4Rm-Kh-xEr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -555,7 +555,7 @@
                                 <rect key="frame" x="16" y="166" width="343" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="OyN-YT-URB"/>
+                                    <constraint firstAttribute="height" constant="33" id="bBx-pg-5tu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -564,56 +564,74 @@
                                 <rect key="frame" x="16" y="207" width="343" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="9zD-8F-hZA"/>
+                                    <constraint firstAttribute="height" constant="33" id="lUG-05-MUq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rw2-Y0-EHi" userLabel="routeDescription">
-                                <rect key="frame" x="16" y="248" width="343" height="127"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rw2-Y0-EHi" userLabel="routeDescription">
+                                <rect key="frame" x="16" y="292" width="343" height="84"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="zSe-fa-gU6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PPH-aS-wAm" userLabel="cRating">
+                                <rect key="frame" x="16" y="248" width="343" height="34"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-X1-rFS">
-                                <rect key="frame" x="16" y="383" width="343" height="226"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u64-4d-vkH">
+                                <rect key="frame" x="16" y="396" width="117" height="30"/>
+                                <state key="normal" title="View Route in 3D"/>
+                                <connections>
+                                    <segue destination="Ngb-9X-D0n" kind="show" identifier="viewScene" id="Rrt-05-Zl3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8dp-H0-LCw" firstAttribute="trailing" secondItem="HNx-nh-fjE" secondAttribute="trailing" id="2MN-GK-SDi"/>
-                            <constraint firstItem="ake-du-Qzl" firstAttribute="leading" secondItem="Rw2-Y0-EHi" secondAttribute="leading" id="78O-4v-Ilj"/>
-                            <constraint firstItem="ake-du-Qzl" firstAttribute="trailing" secondItem="Rw2-Y0-EHi" secondAttribute="trailing" id="7Gy-5D-QQJ"/>
-                            <constraint firstItem="Rw2-Y0-EHi" firstAttribute="top" secondItem="ake-du-Qzl" secondAttribute="bottom" constant="8" symbolic="YES" id="KJp-W9-KS3"/>
-                            <constraint firstItem="HNx-nh-fjE" firstAttribute="leading" secondItem="ake-du-Qzl" secondAttribute="leading" id="Lmt-e2-fxW"/>
-                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="top" secondItem="O2Y-an-PNt" secondAttribute="top" constant="13" id="aYk-gJ-RsS"/>
-                            <constraint firstItem="HNx-nh-fjE" firstAttribute="top" secondItem="Qsl-WJ-Ad3" secondAttribute="bottom" constant="33" id="cIv-Ew-YFC"/>
-                            <constraint firstItem="8dp-H0-LCw" firstAttribute="top" secondItem="O2Y-an-PNt" secondAttribute="top" constant="61" id="fO1-gn-b6S"/>
-                            <constraint firstItem="O2Y-an-PNt" firstAttribute="bottom" secondItem="Rw2-Y0-EHi" secondAttribute="bottom" constant="27" id="gcO-Np-4yp"/>
-                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="trailing" secondItem="8ci-kJ-cg1" secondAttribute="trailingMargin" id="kp9-5Y-xfX"/>
-                            <constraint firstItem="HNx-nh-fjE" firstAttribute="trailing" secondItem="ake-du-Qzl" secondAttribute="trailing" id="nWh-ae-agr"/>
-                            <constraint firstItem="8dp-H0-LCw" firstAttribute="leading" secondItem="HNx-nh-fjE" secondAttribute="leading" id="qIC-DA-RUQ"/>
-                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="leading" secondItem="8dp-H0-LCw" secondAttribute="leading" id="qer-12-Ahv"/>
-                            <constraint firstItem="HNx-nh-fjE" firstAttribute="top" secondItem="8dp-H0-LCw" secondAttribute="bottom" constant="8" symbolic="YES" id="uzo-DR-Hfe"/>
-                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="leading" secondItem="8ci-kJ-cg1" secondAttribute="leadingMargin" id="yQN-TK-tnS"/>
-                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="trailing" secondItem="8dp-H0-LCw" secondAttribute="trailing" id="yuZ-ML-0i4"/>
-                            <constraint firstItem="ake-du-Qzl" firstAttribute="top" secondItem="HNx-nh-fjE" secondAttribute="bottom" constant="8" symbolic="YES" id="zn2-94-bu2"/>
+                            <constraint firstItem="HNx-nh-fjE" firstAttribute="top" secondItem="Qsl-WJ-Ad3" secondAttribute="bottom" constant="33" id="0c4-qU-LWr"/>
+                            <constraint firstItem="ake-du-Qzl" firstAttribute="trailing" secondItem="PPH-aS-wAm" secondAttribute="trailing" id="2aX-P6-njg"/>
+                            <constraint firstItem="HNx-nh-fjE" firstAttribute="trailing" secondItem="ake-du-Qzl" secondAttribute="trailing" id="7ts-C3-cFC"/>
+                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="top" secondItem="O2Y-an-PNt" secondAttribute="top" constant="13" id="8Md-bg-QbM"/>
+                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="trailing" secondItem="8ci-kJ-cg1" secondAttribute="trailingMargin" id="9Ta-UQ-fVk"/>
+                            <constraint firstItem="8dp-H0-LCw" firstAttribute="trailing" secondItem="HNx-nh-fjE" secondAttribute="trailing" id="B3g-Ps-7LU"/>
+                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="leading" secondItem="8ci-kJ-cg1" secondAttribute="leadingMargin" id="LfR-55-3bv"/>
+                            <constraint firstItem="Rw2-Y0-EHi" firstAttribute="top" secondItem="PPH-aS-wAm" secondAttribute="bottom" constant="10" id="Oge-i5-bnA"/>
+                            <constraint firstItem="Rw2-Y0-EHi" firstAttribute="centerY" secondItem="8ci-kJ-cg1" secondAttribute="centerY" id="PSl-jR-Ifl"/>
+                            <constraint firstItem="PPH-aS-wAm" firstAttribute="top" secondItem="ake-du-Qzl" secondAttribute="bottom" constant="8" symbolic="YES" id="PgE-Cq-Mhq"/>
+                            <constraint firstItem="O2Y-an-PNt" firstAttribute="bottom" secondItem="u64-4d-vkH" secondAttribute="bottom" constant="192" id="T4p-h6-AwT"/>
+                            <constraint firstItem="PPH-aS-wAm" firstAttribute="leading" secondItem="Rw2-Y0-EHi" secondAttribute="leading" id="UBh-Jk-3Ay"/>
+                            <constraint firstItem="ake-du-Qzl" firstAttribute="top" secondItem="HNx-nh-fjE" secondAttribute="bottom" constant="8" symbolic="YES" id="WWu-AS-gh6"/>
+                            <constraint firstItem="ake-du-Qzl" firstAttribute="leading" secondItem="PPH-aS-wAm" secondAttribute="leading" id="d2s-NG-YLJ"/>
+                            <constraint firstItem="Rw2-Y0-EHi" firstAttribute="leading" secondItem="u64-4d-vkH" secondAttribute="leading" id="f7C-CU-nnM"/>
+                            <constraint firstItem="8dp-H0-LCw" firstAttribute="leading" secondItem="HNx-nh-fjE" secondAttribute="leading" id="mxA-bi-Co2"/>
+                            <constraint firstItem="u64-4d-vkH" firstAttribute="top" secondItem="Rw2-Y0-EHi" secondAttribute="bottom" constant="20" id="o7N-oO-DIt"/>
+                            <constraint firstItem="HNx-nh-fjE" firstAttribute="leading" secondItem="ake-du-Qzl" secondAttribute="leading" id="oyT-5M-mrM"/>
+                            <constraint firstItem="8dp-H0-LCw" firstAttribute="top" secondItem="O2Y-an-PNt" secondAttribute="top" constant="61" id="rly-BR-76P"/>
+                            <constraint firstItem="HNx-nh-fjE" firstAttribute="top" secondItem="8dp-H0-LCw" secondAttribute="bottom" constant="8" symbolic="YES" id="tta-V6-QLZ"/>
+                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="trailing" secondItem="8dp-H0-LCw" secondAttribute="trailing" id="u86-cN-dUV"/>
+                            <constraint firstItem="PPH-aS-wAm" firstAttribute="trailing" secondItem="Rw2-Y0-EHi" secondAttribute="trailing" id="vGx-yf-WhQ"/>
+                            <constraint firstItem="Qsl-WJ-Ad3" firstAttribute="leading" secondItem="8dp-H0-LCw" secondAttribute="leading" id="zDi-Rf-prg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O2Y-an-PNt"/>
                     </view>
                     <connections>
+                        <outlet property="cRating" destination="PPH-aS-wAm" id="ncH-Ii-a9P"/>
                         <outlet property="routeCreationDate" destination="HNx-nh-fjE" id="oUh-Oo-8md"/>
                         <outlet property="routeDescription" destination="Rw2-Y0-EHi" id="Hx6-te-zLU"/>
                         <outlet property="routeName" destination="Qsl-WJ-Ad3" id="L0k-xD-Ww0"/>
-                        <outlet property="routeRating" destination="ake-du-Qzl" id="1bZ-Pr-Mkb"/>
-                        <outlet property="routeScene" destination="UMx-X1-rFS" id="itB-iy-LWD"/>
+                        <outlet property="routeRating" destination="ake-du-Qzl" id="ci6-jk-aBt"/>
                         <outlet property="routeUsername" destination="8dp-H0-LCw" id="PKp-2W-ncA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYM-29-0Yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1001" y="-1974"/>
+            <point key="canvasLocation" x="1000.8" y="-1974.0629685157423"/>
         </scene>
         <!--Routes-->
         <scene sceneID="Heu-Qp-WC8">
@@ -665,6 +683,10 @@
                                     <action selector="submitButtonPress:" destination="T2B-7j-oE7" eventType="touchUpInside" id="93l-uF-pp1"/>
                                 </connections>
                             </button>
+                            <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4HQ-8y-4en">
+                                <rect key="frame" x="0.0" y="402" width="375" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <accessibility key="accessibilityConfiguration" label="Home"/>
@@ -688,6 +710,7 @@
                         <outlet property="routeDescription" destination="N04-dF-04q" id="vYp-nC-NuU"/>
                         <outlet property="routeDifficulty" destination="0Eh-CP-Z6Y" id="Ug3-cj-niP"/>
                         <outlet property="routeName" destination="gE9-cx-niT" id="Rqe-bl-dE1"/>
+                        <outlet property="routeRating" destination="4HQ-8y-4en" id="j4W-AC-2tf"/>
                         <outlet property="submitButton" destination="acQ-kX-C5H" id="2fP-yy-uWq"/>
                     </connections>
                 </viewController>
@@ -695,11 +718,41 @@
             </objects>
             <point key="canvasLocation" x="1001" y="-2722"/>
         </scene>
+        <!--View Route Scene Controller-->
+        <scene sceneID="fHB-sP-e0Q">
+            <objects>
+                <viewController id="Ngb-9X-D0n" customClass="ViewRouteSceneController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fk2-6h-nK9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="JrK-z2-Qa9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </sceneKitView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MJD-rs-6F9" firstAttribute="trailing" secondItem="JrK-z2-Qa9" secondAttribute="trailing" id="7dO-Wx-hFQ"/>
+                            <constraint firstItem="JrK-z2-Qa9" firstAttribute="top" secondItem="MJD-rs-6F9" secondAttribute="top" id="Afk-OJ-1VW"/>
+                            <constraint firstItem="JrK-z2-Qa9" firstAttribute="top" secondItem="MJD-rs-6F9" secondAttribute="top" id="Mjr-E6-Pni"/>
+                            <constraint firstItem="MJD-rs-6F9" firstAttribute="bottom" secondItem="JrK-z2-Qa9" secondAttribute="bottom" id="UAY-lY-9Mu"/>
+                            <constraint firstItem="JrK-z2-Qa9" firstAttribute="leading" secondItem="MJD-rs-6F9" secondAttribute="leading" id="e9n-RV-Jab"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MJD-rs-6F9"/>
+                    </view>
+                    <connections>
+                        <outlet property="routeScene" destination="JrK-z2-Qa9" id="blL-4X-9l7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JQg-xj-drC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1838" y="-1974"/>
+        </scene>
     </scenes>
     <resources>
         <image name="climbingClub" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6tS-4T-SYu"/>
+        <segue reference="gcV-6F-Cxq"/>
     </inferredMetricsTieBreakers>
 </document>
