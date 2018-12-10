@@ -150,36 +150,37 @@ class GameViewController: UIViewController {
             let result = nodeNearPoint(container: scnScene, point: p!)
             if(tapFoot)
             {
-                if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow)){
-                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                if((result.geometry!.firstMaterial?.diffuse.contents! as AnyObject).isEqual(UIColor.yellow)){
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
                 }
                 else{
-                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.yellow
                 }
             }
             else if(tapBoth)
             {
-                if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange)){
-                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                if((result.geometry!.firstMaterial?.diffuse.contents! as AnyObject).isEqual(UIColor.orange)){
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
                 }
                 else{
-                    result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.orange
+                    //result.geometry!.firstMaterial!.emission.contents = UIColor.orange
                 }
                 
             }
             else if(tapHand)
             {
-                if(result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red){
-                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                if(result.geometry!.firstMaterial?.diffuse.contents! as AnyObject).isEqual(UIColor.red){
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
                 }
                 else{
-                    result.geometry!.firstMaterial!.emission.contents = UIColor.red
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.red
                 }
                 
             }
             else
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
             }
         }
     }
