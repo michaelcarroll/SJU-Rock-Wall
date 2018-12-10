@@ -49,11 +49,8 @@ class GameViewController: UIViewController {
         setupCamera()
         self.spriteScene = OverlayScene(size: self.view.bounds.size)
         self.spriteScene.isUserInteractionEnabled = false
-        //spriteScene.bothButton.isUserInteractionEnabled = true
-        print(spriteScene.footButton.isUserInteractionEnabled)
         
         self.scnView.overlaySKScene = self.spriteScene
-        print(spriteScene.handButton.position)
         //self.view.addSubview(self.scnView)
         // retrieve the wall node
         wall = scnScene.rootNode.childNode(withName: "wall", recursively: true)!
@@ -88,10 +85,7 @@ class GameViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         var p = touches.first?.location(in: spriteScene)
-        print(p!)
-        print(spriteScene.bothButton.contains(p!))
         if spriteScene.handButton.contains(p!) {
-            print("taphand")
             if (tapHand==false) {
                 spriteScene.handButton.texture = SKTexture(imageNamed: "tapHand")
                 spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
@@ -108,7 +102,6 @@ class GameViewController: UIViewController {
         
         else if spriteScene.footButton.contains(p!) {
             if (tapFoot==false) {
-                print("tapfoot")
                 spriteScene.footButton.texture = SKTexture(imageNamed: "tapFoot")
                 spriteScene.bothButton.texture = SKTexture(imageNamed: "bothButton")
                 spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
@@ -124,7 +117,6 @@ class GameViewController: UIViewController {
         
         else if spriteScene.bothButton.contains(p!) {
             if (tapBoth==false){
-                print("tapboth")
                 spriteScene.bothButton.texture = SKTexture(imageNamed: "bothTap")
                 spriteScene.footButton.texture = SKTexture(imageNamed: "footButton")
                 spriteScene.handButton.texture = SKTexture(imageNamed: "handButton")
@@ -185,82 +177,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    @objc func handlePan(_ gestureRecognize: UIPanGestureRecognizer) {
-        
-        let numberOfTouches = gestureRecognize.numberOfTouches
-        
-        let translation = gestureRecognize.translation(in: gestureRecognize.view!)
-        
-        if (numberOfTouches==fingersNeededToPan) {
-            
-            WidthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio
-            HeightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
-            
-            //  HEIGHT constraints
-            //            if (HeightRatio >= maxHeightRatioXUp ) {
-            //                HeightRatio = maxHeightRatioXUp
-            //            }
-            //            if (HeightRatio <= maxHeightRatioXDown ) {
-            //                HeightRatio = maxHeightRatioXDown
-            //            }
-            
-            
-            //  WIDTH constraints
-            //            if(WidthRatio >= maxWidthRatioRight) {
-            //                WidthRatio = maxWidthRatioRight
-            //            }
-            //            if(WidthRatio <= maxWidthRatioLeft) {
-            //                WidthRatio = maxWidthRatioLeft
-            //            }
-            
-            //            self.cameraNode.eulerAngles.y = Float(-2 * Double.pi) * WidthRatio
-            //            self.cameraNode.eulerAngles.x = Float(-Double.pi) * HeightRatio
-            self.cameraNode.position.x = -(Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio)
-            self.cameraNode.position.y = -(Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio)
-            
-            //for final check on fingers number
-            lastFingersNumber = fingersNeededToPan
-        }
-        
-        lastFingersNumber = (numberOfTouches>0 ? numberOfTouches : lastFingersNumber)
-        
-        if (gestureRecognize.state == .ended && lastFingersNumber==fingersNeededToPan) {
-            lastWidthRatio = WidthRatio
-            lastHeightRatio = HeightRatio
-        }
-        scnView.showsStatistics = true
-    }
     
-    @objc func handlePinch(_ recognizer: UIPinchGestureRecognizer) {
-        // Set zoom properties
-        let minVelocity = CGFloat(0.10)
-        let zoomDelta = 0.5
-        
-        // Only zoom when gesture changing and when velocity exceeds <minVelocity>
-        if recognizer.state == .changed {
-            // Ignore gesture on tiny movements
-            if abs(recognizer.velocity) <= minVelocity {
-                return
-            }
-            
-            // If here, zoom in or out based on velocity
-            let deltaFov = recognizer.velocity > 0 ? -zoomDelta : zoomDelta
-            var newFov = camera.fieldOfView + CGFloat(deltaFov)
-            
-            // Make sure FOV remains within min and max values
-            //if newFov <= minXFov {
-            //  newFov = minXFov
-            //} else if newFov >= maxXFov {
-            //  newFov = maxXFov
-            //}
-            
-            // Update FOV?
-            if camera.fieldOfView != newFov {
-                camera.fieldOfView = newFov
-            }
-        }
-        scnView.showsStatistics = true
-    }
     func shouldAutorotate() -> Bool {
         return true
     }
