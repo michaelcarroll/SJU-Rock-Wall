@@ -150,19 +150,37 @@ class GameViewController: UIViewController {
             let result = nodeNearPoint(container: scnScene, point: p!)
             if(tapFoot)
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+                if((result.geometry!.firstMaterial?.diffuse.contents! as AnyObject).isEqual(UIColor.yellow)){
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
+                }
+                else{
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.yellow
+                }
             }
             else if(tapBoth)
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+                if((result.geometry!.firstMaterial?.diffuse.contents! as AnyObject).isEqual(UIColor.orange)){
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
+                }
+                else{
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.orange
+                    //result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+                }
+                
             }
             else if(tapHand)
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.red
+                if(result.geometry!.firstMaterial?.diffuse.contents! as AnyObject).isEqual(UIColor.red){
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
+                }
+                else{
+                    result.geometry!.firstMaterial!.diffuse.contents = UIColor.red
+                }
+                
             }
             else
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                result.geometry!.firstMaterial!.diffuse.contents = UIColor.white
             }
         }
     }
