@@ -36,7 +36,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:  #selector(self.downloadData), for: UIControl.Event.valueChanged)
+        refreshControl.addTarget(self, action:  #selector(self.downloadData), for: .valueChanged)
         self.refreshControl = refreshControl
         searchBar.delegate = self
         
@@ -56,17 +56,6 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         self.downloadData()
-        DispatchQueue.main.async {
-            self.tableView.reloadData();
-        }
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searching = false
-        self.downloadData()
-        DispatchQueue.main.async {
-            self.tableView.reloadData();
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +71,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         routeAuthors = [String]()
         routeRating = [Int]()
         routeArrayOfDictionary = [Message]()
+        filteredData = [String]()
         
         guard let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php") else {return}
         var request = URLRequest(url: url)
@@ -104,21 +94,21 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
                         self.routeAuthors.append(route.username)
                         self.routeRating.append(route.rating)
                     }
-                    if (self.ratingPreference == "Beginner") {
+                    else if (self.ratingPreference == "Beginner") {
                         if (route.rating <= 3) {
                             self.routeNames.append(route.name)
                             self.routeAuthors.append(route.username)
                             self.routeRating.append(route.rating)
                         }
                     }
-                    if (self.ratingPreference == "Intermediate") {
+                    else if (self.ratingPreference == "Intermediate") {
                         if (route.rating > 3 && route.rating < 7) {
                             self.routeNames.append(route.name)
                             self.routeAuthors.append(route.username)
                             self.routeRating.append(route.rating)
                         }
                     }
-                    if (self.ratingPreference == "Expert") {
+                    else if (self.ratingPreference == "Expert") {
                         if (route.rating > 7) {
                             self.routeNames.append(route.name)
                             self.routeAuthors.append(route.username)
@@ -131,7 +121,10 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData();
-                    self.refreshControl?.endRefreshing()
+                    if (self.refreshControl!.isRefreshing) {
+                        self.refreshControl?.endRefreshing()
+                    }
+                    
                 }
                 
             } catch let parsingError {
@@ -154,8 +147,9 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         if searching {
             return filteredData.count
         }
+            
         else {
-        return routeNames.count
+            return routeNames.count
         }
     }
 
@@ -168,13 +162,14 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
             cell.detailTextLabel?.text = "" // not sure how to add author to search result cell, index is off in filted array
             return cell
         }
+        else {
+            let currentRoute = routeNames[indexPath.row]
+            let currentAuthor = routeAuthors[indexPath.row]
+            let currentRating = routeRating[indexPath.row]
         
-        let currentRoute = routeNames[indexPath.row]
-        let currentAuthor = routeAuthors[indexPath.row]
-        let currentRating = routeRating[indexPath.row]
-        
-        cell.textLabel?.text = currentRoute
-        cell.detailTextLabel?.text = currentAuthor
+            cell.textLabel?.text = currentRoute
+            cell.detailTextLabel?.text = currentAuthor
+        }
 
         return cell
     }
@@ -206,33 +201,21 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         if rating == "Beginner" {
             self.ratingPreference = "Beginner"
             self.downloadData()
-            DispatchQueue.main.async {
-                self.tableView.reloadData();
-            }
         }
         
         if rating == "Intermediate" {
             self.ratingPreference = "Intermediate"
             self.downloadData()
-            DispatchQueue.main.async {
-                self.tableView.reloadData();
-            }
         }
         
         if rating == "Expert" {
             self.ratingPreference = "Expert"
             self.downloadData()
-            DispatchQueue.main.async {
-                self.tableView.reloadData();
-            }
         }
         
         if rating == "All" {
             self.ratingPreference = "All"
             self.downloadData()
-            DispatchQueue.main.async {
-                self.tableView.reloadData();
-            }
         }
     }
     //searching https://github.com/codepath/ios_guides/wiki/Search-Bar-Guide
