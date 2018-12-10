@@ -46,7 +46,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupScene()
-        setupCamera()
+        //setupCamera()
         self.spriteScene = OverlayScene(size: self.view.bounds.size)
         self.spriteScene.isUserInteractionEnabled = false
         
@@ -190,12 +190,11 @@ class GameViewController: UIViewController {
         scnView = self.view as? SCNView
         scnView.scene = scnScene
         // 1
-        scnView.showsStatistics = true
+        //scnView.showsStatistics = true
         // 2
         scnView.allowsCameraControl = true
         // 3
         scnView.autoenablesDefaultLighting = true
-        scnView.defaultCameraController
     }
     
     func setupScene() {
