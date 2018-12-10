@@ -141,7 +141,7 @@ class GameViewController: UIViewController {
         else if spriteScene.resetButton.contains(p!){
             for node in scnScene.rootNode.childNodes{
                 if node.geometry is SCNSphere{
-                    node.geometry!.firstMaterial!.emission.contents=UIColor.black
+                    node.geometry!.firstMaterial!.diffuse.contents=UIColor.white
                 }
             }
         }
