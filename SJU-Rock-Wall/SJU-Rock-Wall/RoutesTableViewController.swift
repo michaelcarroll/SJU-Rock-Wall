@@ -56,6 +56,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         self.downloadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

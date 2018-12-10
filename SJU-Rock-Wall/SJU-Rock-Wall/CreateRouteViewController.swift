@@ -59,6 +59,8 @@ class CreateRouteViewController: UIViewController, UIPickerViewDelegate, UIPicke
         let name = routeName.text
         let difficulty = pickerRow
         let description = routeDescription.text
+        
+        serialScene = ""
 
         let json: [String: Any] = ["uid": uid!, "name": name!, "difficulty" : difficulty, "description": description!, "wallState" : serialScene!]
         
@@ -68,6 +70,7 @@ class CreateRouteViewController: UIViewController, UIPickerViewDelegate, UIPicke
         let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        print(serialScene)
         
         // insert json data to the request
         request.httpBody = jsonData
@@ -80,6 +83,7 @@ class CreateRouteViewController: UIViewController, UIPickerViewDelegate, UIPicke
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 print(responseJSON)
+                print("made it here")
                 
                 let error = responseJSON["error"] as! Int
                 if (error == 0) {
