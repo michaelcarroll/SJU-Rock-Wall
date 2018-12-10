@@ -15,6 +15,7 @@
 		66A35AF2218294BD008F2B8C /* ViewRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A35AF1218294BD008F2B8C /* ViewRouteViewController.swift */; };
 		66BB491421B8E3070005079C /* OverlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BB491321B8E3070005079C /* OverlayScene.swift */; };
 		66FA5115216443B70064EDAE /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA5114216443B70064EDAE /* CreateAccountViewController.swift */; };
+		9B1C4B6E21BE020A00D82841 /* RateRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1C4B6D21BE020A00D82841 /* RateRouteViewController.swift */; };
 		9B21B23021670752006B29EF /* MemberHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B21B22F21670752006B29EF /* MemberHomeViewController.swift */; };
 		9B28463121671CA60009ACD4 /* CreateRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */; };
 		9B86554821BAC8F90054BEF9 /* handButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86554121BAC8F80054BEF9 /* handButton.png */; };
@@ -64,6 +65,7 @@
 		66A35AF1218294BD008F2B8C /* ViewRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouteViewController.swift; sourceTree = "<group>"; };
 		66BB491321B8E3070005079C /* OverlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayScene.swift; sourceTree = "<group>"; };
 		66FA5114216443B70064EDAE /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		9B1C4B6D21BE020A00D82841 /* RateRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateRouteViewController.swift; sourceTree = "<group>"; };
 		9B21B22F21670752006B29EF /* MemberHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberHomeViewController.swift; sourceTree = "<group>"; };
 		9B28463021671CA60009ACD4 /* CreateRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRouteViewController.swift; sourceTree = "<group>"; };
 		9B86554121BAC8F80054BEF9 /* handButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handButton.png; path = Assets.xcassets/handButton.png; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		FE7CD1502159ACB700777664 /* SJU-Rock-Wall */ = {
 			isa = PBXGroup;
 			children = (
+				9B1C4B6D21BE020A00D82841 /* RateRouteViewController.swift */,
 				66BB491321B8E3070005079C /* OverlayScene.swift */,
 				BD5EB06C21BE3426006BC550 /* rockWall-2.scn */,
 				FE7CD1512159ACB700777664 /* AppDelegate.swift */,
@@ -336,6 +339,7 @@
 			files = (
 				66FA5115216443B70064EDAE /* CreateAccountViewController.swift in Sources */,
 				66A35AF0218292FB008F2B8C /* RoutesTableViewController.swift in Sources */,
+				9B1C4B6E21BE020A00D82841 /* RateRouteViewController.swift in Sources */,
 				FED8A8F12162843E00A91B20 /* Wedgewall.metal in Sources */,
 				66BB491421B8E3070005079C /* OverlayScene.swift in Sources */,
 				FE7CD1562159ACB700777664 /* GameViewController.swift in Sources */,

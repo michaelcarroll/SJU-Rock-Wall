@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hht-87-PrG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hht-87-PrG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -732,10 +732,29 @@
                                     <segue destination="Ngb-9X-D0n" kind="show" identifier="viewScene" id="Rrt-05-Zl3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fr6-kO-JGx">
+                                <rect key="frame" x="104" y="515" width="167" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="JEY-62-vs7"/>
+                                </constraints>
+                                <state key="normal" title="Rate Route">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="LYj-Ag-m1h" kind="show" identifier="rateRoute" id="rJL-jp-1Da"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98113665800000005" green="0.98113665800000005" blue="0.98113665800000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="YeF-dy-Dj9" firstAttribute="trailing" secondItem="sWP-Tq-opw" secondAttribute="trailing" id="0Yc-GF-2Du"/>
+                            <constraint firstItem="fr6-kO-JGx" firstAttribute="top" secondItem="u64-4d-vkH" secondAttribute="bottom" constant="8" symbolic="YES" id="2p4-qG-Fj3"/>
                             <constraint firstItem="FO7-oE-MuF" firstAttribute="leading" secondItem="YeF-dy-Dj9" secondAttribute="leading" id="4nB-f3-B55"/>
                             <constraint firstItem="6uv-qf-iCy" firstAttribute="top" secondItem="w8y-3u-hxP" secondAttribute="top" id="55c-tg-YAz"/>
                             <constraint firstItem="pby-p4-daf" firstAttribute="leading" secondItem="DFT-A4-lmI" secondAttribute="leading" id="5Yd-yu-WNW"/>
@@ -763,9 +782,11 @@
                             <constraint firstItem="YeF-dy-Dj9" firstAttribute="top" secondItem="Z4n-Xv-ltz" secondAttribute="bottom" constant="7" id="Rns-hw-1NX"/>
                             <constraint firstItem="ac1-4e-D4f" firstAttribute="trailing" secondItem="Z4n-Xv-ltz" secondAttribute="trailing" id="SHk-Fd-rK4"/>
                             <constraint firstItem="kfz-HW-Av8" firstAttribute="top" secondItem="Zdg-OK-Eij" secondAttribute="bottom" constant="19" id="Uus-PC-19B"/>
+                            <constraint firstItem="fr6-kO-JGx" firstAttribute="leading" secondItem="u64-4d-vkH" secondAttribute="leading" id="VcR-Mi-xlQ"/>
                             <constraint firstItem="E6i-JI-PEw" firstAttribute="leading" secondItem="FO7-oE-MuF" secondAttribute="leading" id="VoW-B1-40l"/>
                             <constraint firstItem="E6i-JI-PEw" firstAttribute="trailing" secondItem="FO7-oE-MuF" secondAttribute="trailing" id="X7c-Vh-7Iw"/>
                             <constraint firstItem="Lj9-wQ-PC3" firstAttribute="centerX" secondItem="6uv-qf-iCy" secondAttribute="centerX" id="ahZ-VV-DiR"/>
+                            <constraint firstItem="fr6-kO-JGx" firstAttribute="trailing" secondItem="u64-4d-vkH" secondAttribute="trailing" id="ajw-1v-EJU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="w8y-3u-hxP" secondAttribute="trailing" constant="-21" id="bbe-m9-WHU"/>
                             <constraint firstItem="u64-4d-vkH" firstAttribute="top" secondItem="MgZ-wA-IWS" secondAttribute="bottom" constant="10" id="c63-7F-Rw8"/>
                             <constraint firstItem="csg-cu-DVX" firstAttribute="leading" secondItem="8ci-kJ-cg1" secondAttribute="leadingMargin" id="cVW-k9-SKX"/>
@@ -808,6 +829,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYM-29-0Yk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1000.8" y="-1974.0629685157423"/>
+        </scene>
+        <!--Rate-->
+        <scene sceneID="9Wf-MV-mal">
+            <objects>
+                <viewController title="Rate" id="LYj-Ag-m1h" customClass="RateRouteViewController" customModule="SJU_Rock_Wall" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W6d-PQ-qLX" customClass="RateRouteV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UY5-Yq-zbq">
+                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="If you have completed a route, you can rate it" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgQ-zx-4Ye">
+                                <rect key="frame" x="16" y="78" width="344" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to help other users of the rock wall." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqV-I7-CJD">
+                                <rect key="frame" x="16" y="97" width="270" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2C-A9-6A7">
+                                <rect key="frame" x="16" y="143" width="69" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qwr-54-kMR">
+                                <rect key="frame" x="93" y="138" width="266" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hol-hM-JFU">
+                                <rect key="frame" x="16" y="192" width="78" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submitButtonPress:" destination="LYj-Ag-m1h" eventType="touchUpInside" id="1cZ-lT-3z4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="UY5-Yq-zbq" secondAttribute="trailing" id="2G1-BU-0Ie"/>
+                            <constraint firstAttribute="bottom" secondItem="UY5-Yq-zbq" secondAttribute="bottom" id="3w5-L3-Rov"/>
+                            <constraint firstItem="qwr-54-kMR" firstAttribute="leading" secondItem="e2C-A9-6A7" secondAttribute="trailing" constant="8" symbolic="YES" id="4Ir-OW-Hpn"/>
+                            <constraint firstItem="KqV-I7-CJD" firstAttribute="top" secondItem="CW8-zG-sQy" secondAttribute="top" constant="33" id="B7y-8j-wsy"/>
+                            <constraint firstItem="UY5-Yq-zbq" firstAttribute="leading" secondItem="W6d-PQ-qLX" secondAttribute="leading" id="CA5-08-bgn"/>
+                            <constraint firstItem="CW8-zG-sQy" firstAttribute="trailing" secondItem="hol-hM-JFU" secondAttribute="trailing" constant="281" id="DEG-ME-XBO"/>
+                            <constraint firstItem="AgQ-zx-4Ye" firstAttribute="leading" secondItem="KqV-I7-CJD" secondAttribute="leading" id="DW8-ut-g7c"/>
+                            <constraint firstItem="AgQ-zx-4Ye" firstAttribute="top" secondItem="CW8-zG-sQy" secondAttribute="top" constant="14" id="LwH-Pm-m4Z"/>
+                            <constraint firstItem="AgQ-zx-4Ye" firstAttribute="centerX" secondItem="UY5-Yq-zbq" secondAttribute="centerX" id="bxE-38-Y25"/>
+                            <constraint firstItem="qwr-54-kMR" firstAttribute="trailing" secondItem="W6d-PQ-qLX" secondAttribute="trailingMargin" id="keb-Ga-RYG"/>
+                            <constraint firstItem="e2C-A9-6A7" firstAttribute="leading" secondItem="hol-hM-JFU" secondAttribute="leading" id="lvu-EW-VwI"/>
+                            <constraint firstItem="qwr-54-kMR" firstAttribute="top" secondItem="KqV-I7-CJD" secondAttribute="bottom" constant="20" id="oyD-T1-yEP"/>
+                            <constraint firstItem="e2C-A9-6A7" firstAttribute="top" secondItem="KqV-I7-CJD" secondAttribute="bottom" constant="25" id="rXW-rc-7kb"/>
+                            <constraint firstItem="e2C-A9-6A7" firstAttribute="centerY" secondItem="qwr-54-kMR" secondAttribute="centerY" id="tDc-7o-tbz"/>
+                            <constraint firstItem="AgQ-zx-4Ye" firstAttribute="leading" secondItem="W6d-PQ-qLX" secondAttribute="leadingMargin" id="wxD-ZW-PsM"/>
+                            <constraint firstItem="hol-hM-JFU" firstAttribute="top" secondItem="e2C-A9-6A7" secondAttribute="bottom" constant="28" id="zfN-17-2Ph"/>
+                            <constraint firstItem="KqV-I7-CJD" firstAttribute="leading" secondItem="e2C-A9-6A7" secondAttribute="leading" id="zhP-XY-Xhz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CW8-zG-sQy"/>
+                    </view>
+                    <connections>
+                        <outlet property="routeDifficulty" destination="qwr-54-kMR" id="FES-vG-pEH"/>
+                        <outlet property="submitButton" destination="hol-hM-JFU" id="Ny0-0J-Ken"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dby-8p-EUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000.8" y="-1217.5412293853074"/>
         </scene>
         <!--Routes-->
         <scene sceneID="Heu-Qp-WC8">
@@ -926,7 +1029,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="climbingClub" width="300" height="300"/>
+        <image name="climbingClub" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gcV-6F-Cxq"/>
