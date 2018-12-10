@@ -150,15 +150,32 @@ class GameViewController: UIViewController {
             let result = nodeNearPoint(container: scnScene, point: p!)
             if(tapFoot)
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.yellow
+                if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.yellow)){
+                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                }
+                else{
+                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                }
             }
             else if(tapBoth)
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+                if((result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.orange)){
+                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                }
+                else{
+                    result.geometry!.firstMaterial!.emission.contents = UIColor.orange
+                }
+                
             }
             else if(tapHand)
             {
-                result.geometry!.firstMaterial!.emission.contents = UIColor.red
+                if(result.geometry!.firstMaterial?.emission.contents! as AnyObject).isEqual(UIColor.red){
+                    result.geometry!.firstMaterial!.emission.contents = UIColor.black
+                }
+                else{
+                    result.geometry!.firstMaterial!.emission.contents = UIColor.red
+                }
+                
             }
             else
             {
