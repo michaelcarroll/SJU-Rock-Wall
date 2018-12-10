@@ -778,4 +778,164 @@ class SJU_Rock_WallTests: XCTestCase
             }
         }
     }
+    
+    func testCreateRouteFailsForEmptyUserID()
+    {
+        let json: [String: Any] = ["uid": "", "name": "Test Route", "difficulty" : "1", "description": "This route is for testing purposes only", "wallState" : "test"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
+    
+    func testCreateRouteFailsForEmptyName()
+    {
+        let json: [String: Any] = ["uid": 0, "name": "Test Route", "" : "1", "description": "This route is for testing purposes only", "wallState" : "test"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
+    
+    func testCreateRouteFailsForEmptyDifficulty()
+    {
+        let json: [String: Any] = ["uid": 0, "name": "Test Route", "difficulty" : "", "description": "This route is for testing purposes only", "wallState" : "test"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
+    
+    func testCreateRouteFailsForEmptyDescription()
+    {
+        let json: [String: Any] = ["uid": 0, "name": "Test Route", "difficulty" : "1", "description": "", "wallState" : "test"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
+    
+    func testCreateRouteFailsForEmptyWallState()
+    {
+        let json: [String: Any] = ["uid": 0, "name": "Test Route", "difficulty" : "1", "description": "This route is for testing purposes only", "wallState" : ""]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        // create post request
+        let url = URL(string: "http://sjurockwall.atwebpages.com/createRoute.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // insert json data to the request
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request)
+        {
+            data, response, error in
+            guard let data = data, error == nil else
+            {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any]
+            {
+                let error = responseJSON["error"] as! Int
+                
+                XCTAssertTrue(error == 3)
+            }
+        }
+    }
 }
