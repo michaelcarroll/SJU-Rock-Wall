@@ -5,7 +5,6 @@
 //  Created by Kalsow, Brandan D on 10/1/18.
 //  Copyright © 2018 Tran, Anh B. All rights reserved.
 //
-
 import Foundation
 import UIKit
 
@@ -26,7 +25,7 @@ class CreateAccountViewController: UIViewController {
         let email = emailField.text
         let password = passwordField.text
         let confirmPassword = confirmPasswordField.text
-
+        
         if(password != confirmPassword) {
             let passwordMatchAlert = UIAlertController(title: "Error", message: "Passwords don't match. Please try again.", preferredStyle: UIAlertController.Style.alert)
             
@@ -54,25 +53,25 @@ class CreateAccountViewController: UIViewController {
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJSON = responseJSON as? [String: Any] {
                     print(responseJSON)
-
+                    
                     let error = responseJSON["error"] as! Int
                     if (error == 0) {
                         DispatchQueue.main.async {
                             let createAccountAlert = UIAlertController(title: "Success", message: "Account created successfully.", preferredStyle: UIAlertController.Style.alert)
-                        
+                            
                             createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
-                            self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
+                                self.performSegue(withIdentifier:"CreatedAccountSegue", sender: nil)
                             }))
-                        
+                            
                             self.present(createAccountAlert, animated: true, completion: nil)
                         }
                     }
                     else if (error == 3) {
                         DispatchQueue.main.async {
                             let createAccountAlert = UIAlertController(title: "Error", message: "Account not created. Please try again.", preferredStyle: UIAlertController.Style.alert)
-                        
+                            
                             createAccountAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                        
+                            
                             self.present(createAccountAlert, animated: true, completion: nil)
                         }
                     }
@@ -83,4 +82,3 @@ class CreateAccountViewController: UIViewController {
         }
     }
 }
-
