@@ -15,15 +15,19 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBAction func returnButtonPressed(_ sender: Any) {
+        self.loginButtonPressed(self)
+        
+    }
     @IBAction func keyboardReturnButtonPressed(_ sender: Any) {
         self.loginButtonPressed(self)
+        
     }
-    
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email = emailField.text
         let password = passwordField.text
         
-        if (email == nil || password == nil) {
+        if (email == "" || password == "") {
             let loginAlert = UIAlertController(title: "Error", message: "Both username and password required.", preferredStyle: UIAlertController.Style.alert)
             
             loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
@@ -61,13 +65,7 @@ class LoginViewController: UIViewController {
                     self.setDefaults(uid: uid)
 
                     DispatchQueue.main.async {
-                        let loginAlert = UIAlertController(title: "Success", message: "Logged in successfully.", preferredStyle: UIAlertController.Style.alert)
-
-                       loginAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
-                            self.performSegue(withIdentifier:"LoggedInSegue", sender: nil)
-                        }))
-                        
-                        self.present(loginAlert, animated: true, completion: nil)
+                        self.performSegue(withIdentifier:"LoggedInSegue", sender: nil)
                     }
                 }
                 else if (error == 3) {

@@ -10,12 +10,33 @@ import Foundation
 import UIKit
 import SceneKit
 
-class CreateRouteViewController: UIViewController {
+class CreateRouteViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    let ratings = ["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V10+"]
+    let databaseRatings = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    var pickerRow: Int = 0
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return ratings.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.pickerRow = row
+        return ratings[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        routeDifficulty.text = ratings[row]
+    }
+    
     
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var routeName: UITextField!
     @IBOutlet weak var routeDifficulty: UITextField!
     @IBOutlet weak var routeDescription: UITextField!
+    @IBOutlet weak var routeRating: UIPickerView!
     
     var serialScene: String!
     
@@ -28,14 +49,18 @@ class CreateRouteViewController: UIViewController {
         if (uid != nil) {
             // something
         }
+        
+        let routeRating = UIPickerView()
+        routeRating.delegate = self
+        routeDifficulty.inputView = routeRating
     }
     
     @IBAction func submitButtonPress(_ sender: Any) {
         let name = routeName.text
-        let difficulty = routeDifficulty.text
+        let difficulty = pickerRow
         let description = routeDescription.text
 
-        let json: [String: Any] = ["uid": uid!, "name": name!, "difficulty" : difficulty!, "description": description!, "wallState" : serialScene!]
+        let json: [String: Any] = ["uid": uid!, "name": name!, "difficulty" : difficulty, "description": description!, "wallState" : serialScene!]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         

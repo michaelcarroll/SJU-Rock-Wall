@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoutesTableViewController: UITableViewController {
+class RoutesTableViewController: UITableViewController, UISearchBarDelegate {
     struct JSONResponse: Codable {
         let error: Int
         let message: [Message]
@@ -16,11 +16,21 @@ class RoutesTableViewController: UITableViewController {
     
     struct Message: Codable {
         let rid: Int
+        let rating: Int
         let username, name: String
     }
     
     var routeNames = [String]()
+    var routeAuthors = [String]()
+    var routeRating = [Int]()
     var routeArrayOfDictionary = [Message]()
+    
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    var ratingPreference = "All"
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var filteredData: [String]!
+    var searching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +38,29 @@ class RoutesTableViewController: UITableViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(self.downloadData), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
+        searchBar.delegate = self
         
         self.downloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searching = true
+        self.filteredData = self.routeNames
+        filteredData = filteredData.filter({$0.prefix(searchText.count).lowercased() == searchText.lowercased()})
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        self.downloadData()
+        self.tableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searching = false
+        self.downloadData()
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +69,12 @@ class RoutesTableViewController: UITableViewController {
     }
     
     @objc func downloadData() {
+        self.searching = false
         // reset arrays to empty
         
         routeNames = [String]()
+        routeAuthors = [String]()
+        routeRating = [Int]()
         routeArrayOfDictionary = [Message]()
         
         guard let url = URL(string: "http://sjurockwall.atwebpages.com/getRoutes.php") else {return}
@@ -59,7 +93,32 @@ class RoutesTableViewController: UITableViewController {
                 
                 var iterator = model.message.makeIterator()
                 while let route = iterator.next() {
-                    self.routeNames.append(route.name)
+                    if (self.ratingPreference == "All") {
+                        self.routeNames.append(route.name)
+                        self.routeAuthors.append(route.username)
+                        self.routeRating.append(route.rating)
+                    }
+                    if (self.ratingPreference == "Beginner") {
+                        if (route.rating <= 3) {
+                            self.routeNames.append(route.name)
+                            self.routeAuthors.append(route.username)
+                            self.routeRating.append(route.rating)
+                        }
+                    }
+                    if (self.ratingPreference == "Intermediate") {
+                        if (route.rating > 3 && route.rating < 7) {
+                            self.routeNames.append(route.name)
+                            self.routeAuthors.append(route.username)
+                            self.routeRating.append(route.rating)
+                        }
+                    }
+                    if (self.ratingPreference == "Expert") {
+                        if (route.rating > 7) {
+                            self.routeNames.append(route.name)
+                            self.routeAuthors.append(route.username)
+                            self.routeRating.append(route.rating)
+                        }
+                    }
                 }
                 
                 self.routeArrayOfDictionary = model.message
@@ -86,17 +145,92 @@ class RoutesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if searching {
+            return filteredData.count
+        }
+        else {
         return routeNames.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        let currentString = routeNames[indexPath.row]
-        cell.textLabel?.text = currentString
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as UITableViewCell
+        
+        if searching {
+            let currentRoute = filteredData[indexPath.row]
+            cell.textLabel?.text = currentRoute
+            cell.detailTextLabel?.text = "" // not sure how to add author to search result cell, index is off in filted array
+            return cell
+        }
+        
+        let currentRoute = routeNames[indexPath.row]
+        let currentAuthor = routeAuthors[indexPath.row]
+        let currentRating = routeRating[indexPath.row]
+        
+        cell.textLabel?.text = currentRoute
+        cell.detailTextLabel?.text = currentAuthor
 
         return cell
     }
+    
+    @IBAction func filterButtonPressed(_ sender: Any) {
+        let actionSheet = UIAlertController.init(title: "Filter routes", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction.init(title: "All", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "All")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Beginner", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "Beginner")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Intermediate", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "Intermediate")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Expert", style: UIAlertAction.Style.default, handler: { (action) in
+            self.filter(rating: "Expert")
+        }))
+        actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { (action) in
+            // self.dismissViewControllerAnimated(true, completion: nil) is not needed, this is handled automatically,
+            //Plus whatever method you define here, gets called,
+            //If you tap outside the UIAlertController action buttons area, then also this handler gets called.
+        }))
+        //Present the controller
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func filter(rating: String){
+        if rating == "Beginner" {
+            self.ratingPreference = "Beginner"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+        
+        if rating == "Intermediate" {
+            self.ratingPreference = "Intermediate"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+        
+        if rating == "Expert" {
+            self.ratingPreference = "Expert"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+        
+        if rating == "All" {
+            self.ratingPreference = "All"
+            self.downloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
+            }
+        }
+    }
+    //searching https://github.com/codepath/ios_guides/wiki/Search-Bar-Guide
+    
 
     /*
     // Override to support conditional editing of the table view.
