@@ -21,36 +21,38 @@ class OverlayScene: SKScene{
     var tapBoth = false
     var score = 0
 
+
     override init(size: CGSize) {
         super.init(size: size)
         setupButtons()
     }
     
     required init?(coder aDecoder: NSCoder) {
+
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
     
     func setupButtons(){
         footButton.name="footButton"
-        footButton.position = CGPoint(x: 160, y: 150)
+        footButton.position = CGPoint(x: UIScreen.main.bounds.width/2.57, y: UIScreen.main.bounds.height/5)
         footButton.isUserInteractionEnabled = false
-        footButton.setScale(0.15)
+        footButton.setScale(0.12)
         
         handButton.name="handButton"
-        handButton.position = CGPoint(x: 60, y: 150)
+        handButton.position = CGPoint(x: UIScreen.main.bounds.width/6.5, y: UIScreen.main.bounds.height/5)
         handButton.isUserInteractionEnabled = false
-        handButton.setScale(0.15)
+        handButton.setScale(0.12)
         
         bothButton.name="bothButton"
-        bothButton.position = CGPoint(x: 260, y: 150)
+        bothButton.position = CGPoint(x:UIScreen.main.bounds.width/1.62, y: UIScreen.main.bounds.height/5)
         bothButton.isUserInteractionEnabled = false
-        bothButton.setScale(0.15)
+        bothButton.setScale(0.12)
         
         resetButton.name="resetButton"
-        resetButton.position = CGPoint(x: 360, y: 150)
+        resetButton.position = CGPoint(x: UIScreen.main.bounds.width/1.18, y: UIScreen.main.bounds.height/5)
         resetButton.isUserInteractionEnabled = false
-        resetButton.setScale(0.15)
+        resetButton.setScale(0.12)
         
         self.addChild(footButton)
         self.addChild(handButton)
