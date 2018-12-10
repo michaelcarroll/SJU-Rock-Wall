@@ -11,7 +11,6 @@ import UIKit
 import SceneKit
 
 class ViewRouteSceneController: UIViewController {
-    var scnView: SCNView!
     var scene: SCNScene!
     var serialScene: String!
     var cameraNode: SCNNode!
@@ -25,6 +24,8 @@ class ViewRouteSceneController: UIViewController {
         self.scene = serializer.unserializeScene(serialScene: self.serialScene)
         
         self.routeScene.scene = self.scene
-}
+        self.routeScene.allowsCameraControl = true
+
+    }
 }
 
